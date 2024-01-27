@@ -180,8 +180,8 @@ class TarotReading(commands.Cog):
 
         embed.timestamp = ctx.message.created_at
         embed.set_author(name=user.name, icon_url=user.display_avatar)
-        #embed.set_image(url=card.card_img)
-        embed.set_thumbnail(url=card.card_img)
+        embed.set_image(url=card.card_img)
+        #embed.set_thumbnail(url=card.card_img)
         await ctx.send(embed=embed)
 
     @_card.autocomplete("tarot_card")
