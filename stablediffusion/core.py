@@ -127,7 +127,7 @@ class StableDiffusion(commands.Cog):
             checks += 1
             await asyncio.sleep(2)
 
-    @commands.hybrid_command(name="stablediffusion", aliases=["dream", "diffusion"])
+    @commands.hybrid_command(name="dream", aliases=["diffusion"])
     async def _stable_diffusion(self, ctx: commands.Context, *, prompt: str) -> None:
         """
         Generate art using Replicate Stable Diffusion.
@@ -138,14 +138,14 @@ class StableDiffusion(commands.Cog):
             images: List[str] = await self._get_job(job_id)
         except DiffusionError as e:
             await ctx.send(
-                f"Uh Oh! Something went wrong...\n{e}",
+                f"Whoopsies... something went wrong...\n{e}",
                 reference=ctx.message.to_reference(fail_if_not_exists=False),
                 allowed_mentions=discord.AllowedMentions(replied_user=False),
             )
             return
         except aiohttp.ClientResponseError as e:
             await ctx.send(
-                f"Uh Oh! Recieved status code: `{e.status}`\n{e.message}",
+                f"Whoopsies! Recieved status code: `{e.status}`\n{e.message}",
                 reference=ctx.message.to_reference(fail_if_not_exists=False),
                 allowed_mentions=discord.AllowedMentions(replied_user=False),
             )
