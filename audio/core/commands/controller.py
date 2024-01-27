@@ -299,7 +299,7 @@ class PlayerControllerCommands(MixinMeta, metaclass=CompositeMetaClass):
             embed = discord.Embed(title=_("Replaying Track"), description=description)
             await self.send_embed_msg(ctx, embed=embed)
 
-    @commands.hybrid_command(name="seek")
+    @commands(name="seek")
     @commands.guild_only()
     @commands.bot_has_permissions(embed_links=True)
     async def command_seek(self, ctx: commands.Context, seconds: Union[int, str]):
