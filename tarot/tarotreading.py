@@ -171,11 +171,12 @@ class TarotReading(commands.Cog):
         embed = discord.Embed(
             title=card.card_name,
             url=card.card_url,
-            description=card.card_meaning,
+            #description=card.card_meaning,
         )
 
         embed.add_field(name="Upright", value="upright desc", inline="false")
         embed.add_field(name="Upside down", value="upside down desc", inline="false")
+        embed.add_field(name="Card Description", value="card description", inline="false")
 
         embed.timestamp = ctx.message.created_at
         embed.set_author(name=user.name, icon_url=user.display_avatar)
