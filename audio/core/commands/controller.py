@@ -784,7 +784,7 @@ class PlayerControllerCommands(MixinMeta, metaclass=CompositeMetaClass):
         if self._player_check(ctx):
             await self.set_player_settings(ctx)
 
-    @commands.hybrid_command(name="remove")
+    @commands.command(name="remove")
     @commands.guild_only()
     @commands.bot_has_permissions(embed_links=True)
     async def command_remove(self, ctx: commands.Context, index_or_url: Union[int, str]):
