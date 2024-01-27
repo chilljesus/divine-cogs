@@ -100,7 +100,7 @@ class Bible(commands.Cog):
         [p]bible gen1:5 --version NKJV
         [p]bible test
         """
-        version = "NIV"
+        version = "NRSVUE"
         if ver_match := self.ver_re.search(verses):
             version = ver_match.group(1)
             verses = self.ver_re.sub("", verses).strip()
