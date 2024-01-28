@@ -36,7 +36,7 @@ class TarotReading(commands.Cog):
                       colour=0xffc0cb,
                       timestamp=datetime.now())
 
-        embed.set_author(name=f"Reading for: {user.display_name}", icon_url=user.displayavatar)
+        embed.set_author(name=f"Reading for: {user.display_name}", icon_url=user.display_avatar)
         embed.add_field(name="Card Description", value=card['card_meaning'], inline=True)
         embed.add_field(name="Upright Meaning", value=card['upright_meaning'], inline=True)
         embed.set_image(url=card['card_image'])
