@@ -88,24 +88,20 @@ class Bible(commands.Cog):
         return pages
 
     @commands.hybrid_command()
-    async def bible(self, ctx, *, verses):
+    async def bible(self, ctx, search: str, version: str = "NRSVUE"):
         """
-        Pull up bible verses or reverse search by querying a word and get all it's references
+        Pull up bible verses or reverse search by querying a word and get all its references
 
-        Now supports version as well, look up to this site for available versions: https://www.biblegateway.com/versions
-
-        Example:
-        [p]bible revelation 1:1
-        [p]bible gen 1:1 -v KJV
-        [p]bible gen1:5 --version NKJV
-        [p]bible test
+        Now supports specifying a version directly.
+        Default version is NRSVUE.
+        Examples:
+        [p]bible "revelation 1:1" NRSVUE
+        [p]bible "test" KJV
         """
-        version = "NRSVUE"
-        if ver_match := self.ver_re.search(verses):
-            version = ver_match.group(1)
-            verses = self.ver_re.sub("", verses).strip()
+        # Removed the regex search for version as it's now a separate argument
 
-        if re.match(r"\w+(?: ?)\d+:\d+", verses):
+        # Updated URL construction to use 'search' and 'version'
+        if re.match(r"\w+(?: ?)\d+:\d+", search):
             url = "/passage/?search="
         else:
             url = "/quicksearch/?quicksearch="
@@ -113,7 +109,7 @@ class Bible(commands.Cog):
         async with ctx.typing():
             async with aiohttp.ClientSession() as session:
                 async with session.get(
-                    self.BASE_URL + url + verses + f"&version={version}"
+                    self.BASE_URL + url + search + f"&version={version}"
                 ) as resp:
                     soup = bs4.BeautifulSoup(await resp.text(), "html.parser")
 

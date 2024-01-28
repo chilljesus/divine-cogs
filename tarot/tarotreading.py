@@ -30,17 +30,20 @@ class TarotReading(commands.Cog):
             deck = random.choice(self.list_decks())
         deck = deck or random.choice(self.list_decks())
         card = await self.get_random_card(deck)
-        position = random.choice(['upright', 'reversed'])        
+        position = random.choice(['upright', 'reversed'])  
+        deck_encoded = urllib.parse.quote(deck)
+        card_name_encoded = urllib.parse.quote(card['card_name'])
+        url = f'https://jesus.sh/api/tarot/{deck_encoded}/{card_name_encoded}/{position}.jpg'
+              
         embed = discord.Embed(title=card['card_name'],
                       url=card['card_url'],
                       colour=0xffc0cb,
                       timestamp=datetime.now())
-
         embed.set_author(name=f"Reading for {user.display_name}", icon_url=user.display_avatar)
         embed.add_field(name="Card Description", value=card['card_meaning'], inline=True)
         embed.add_field(name=f"{position.capitalize()} Meaning", value=card[f"{position}_meaning"], inline=True)
-        embed.set_thumbnail(url=card['card_image'])
-        embed.set_footer(text=f"Deck: {deck}", icon_url="https://nekoism.co/images/logo-small.png")
+        embed.set_thumbnail(url=url)
+        embed.set_footer(text=f"Deck: {deck}", icon_url="https://cdn.discordapp.com/icons/1087516688691507250/f6049b9b7559f50d3179d39a722a5af3.png")
         
         await ctx.send(embed=embed)
 
