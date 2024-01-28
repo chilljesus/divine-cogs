@@ -130,8 +130,8 @@ class Bible(commands.Cog):
                 else:
                     return await ctx.send(
                         "**No results found**\n"
-                        "1) Kindly make sure the verse exists\n"
-                        "2) Use the format of `book chapter:verse-range`"
+                        "1) Kindly make sure the verse exists, or\n"
+                        "2) This text wasnt found in the requested version."
                     )
             if len(pages) > 1:
                 await SimpleMenu(pages, timeout=600).start(ctx)
