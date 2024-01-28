@@ -1,4 +1,4 @@
-<h5 align="center">divine-cogs</h1>
+# Divine Cogs
 
 <img src="https://jesus.sh/assets/images/bg/neko-1.gif" width="100%">
 
