@@ -1,11 +1,10 @@
-from redbot.core import commands
-import discord
-from discord.ext.commands import BadArgument
-import random
-import json
 import os
-from datetime import datetime
+import json
+import random
+import discord
 from typing import Optional
+from datetime import datetime
+from redbot.core import commands
 
 class TarotReading(commands.Cog):
     """Tarot card reading cog"""
@@ -24,33 +23,14 @@ class TarotReading(commands.Cog):
         return [f.replace('.json', '') for f in os.listdir(cards_path) if f.endswith('.json')]
 
     @commands.hybrid_command(name="tarot", description="Perform a tarot reading")
-    #async def _tarot(self, ctx, *, arg=None):
-    #    user = ctx.author
-    #    deck = random.choice(self.list_decks())
-    #    if arg:
-    #        args = arg.split()
-    #        for a in args:
-    #            try:
-    #                # Attempt to convert each argument to a Discord member
-    #                potential_user = await commands.MemberConverter().convert(ctx, a)
-    #                user = potential_user
-    #            except BadArgument:
-    #                # If not a user, check if it's a deck name
-    #                if a in self.list_decks():
-    #                    deck = a
-    #    else:
-    #        deck = random.choice(self.list_decks())
-    #    user = user or ctx.author
-    #    card = await self.get_random_card(deck)
     async def _tarot(self, ctx, deck: Optional[str] = None, user: Optional[discord.Member] = None):
         """Performs a tarot reading. Optionally specify a deck and a user."""
         user = user or ctx.author
         if deck and deck not in self.list_decks():
             deck = random.choice(self.list_decks())
-
         deck = deck or random.choice(self.list_decks())
         card = await self.get_random_card(deck)
-        
+        position = random.choice(['upright', 'reversed'])        
         embed = discord.Embed(title=card['card_name'],
                       url=card['card_url'],
                       colour=0xffc0cb,
@@ -58,7 +38,7 @@ class TarotReading(commands.Cog):
 
         embed.set_author(name=f"Reading for {user.display_name}", icon_url=user.display_avatar)
         embed.add_field(name="Card Description", value=card['upright_meaning'], inline=True)
-        embed.add_field(name="Upright Meaning", value=card['card_meaning'], inline=True)
+        embed.add_field(name=f"{position} Meaning", value=card['reversed_meaning'], inline=True)
         embed.set_thumbnail(url=card['card_image'])
         embed.set_footer(text=f"Deck: {deck}", icon_url="https://nekoism.co/images/logo-small.png")
         
