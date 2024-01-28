@@ -87,7 +87,15 @@ class Bible(commands.Cog):
             pages.append(emb)
         return pages
 
-    @commands.hybrid_command()
+    @commands.hybrid_command(
+        name="bible",
+        description="Pull up bible verses or search by text. Supports specifying a version.")
+    @commands.option(
+        name="search",
+        description="The verse to look up or the text to search for.")
+    @commands.option(
+        name="version",
+        description="Bible version to use for the search. Defaults to NRSVUE if not specified.")
     async def bible(self, ctx, search: str, version: str = "NRSVUE"):
         """
         Pull up bible verses or reverse search by querying a word and get all its references
