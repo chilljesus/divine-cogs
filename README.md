@@ -1,4 +1,4 @@
-![divine-cogs banner](https://jesus.sh/assets/images/bg/neko-1.gif)
+<img src="https://jesus.sh/assets/images/bg/neko-1.gif" width="100%">
 
 <h1 align="center">divine-cogs</h1>
 
