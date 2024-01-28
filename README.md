@@ -1,13 +1,9 @@
-# Divine Cogs
+<h1 align="center">divine-cogs</h1>
 
 <img src="https://jesus.sh/assets/images/bg/neko-1.gif" width="100%">
 
 <p align="center">
   Some lightly modified, completely modified, built from scratch and broken cogs for the <a href="https://github.com/Cog-Creators/Red-DiscordBot">Red Discord Bot</a>.
-</p>
-
-<p align="center">
-  <strong>To start using it for your Red Discord Bot, type:</strong>
 </p>
 
 ```
@@ -23,7 +19,7 @@ This repo exists for me to mess with red bot cogs. That's it. If you want to use
 
 You can try asking me for help, but I'm god awful at responding. Don't bother with opening issues and whatnot, I basically only know how to upload things to github and never look at notifications.
 
-If one of these cogs broke to the extend that you've lost a limb, life, or liberty - shoot me a message on discord **@nekojesus** after dealing with the hospital.
+If one of these cogs broke to the extent that you've lost a limb, life, or liberty - shoot me a message on discord **@nekojesus** after dealing with the hospital.
 
 <br />
 
