@@ -3,7 +3,7 @@ import discord
 import random
 import json
 import os
-import datetime
+from datetime import datetime
 
 class TarotReading(commands.Cog):
     """Tarot card reading cog"""
