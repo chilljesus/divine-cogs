@@ -23,15 +23,7 @@ class TarotReading(commands.Cog):
         cards_path = os.path.join(dir_path, 'cards')
         return [f.replace('.json', '') for f in os.listdir(cards_path) if f.endswith('.json')]
 
-    @commands.hybrid_command(
-        name="tarot",
-        description="Perform a tarot reading, pulling from over 100 decks")
-    @commands.option(
-        name="deck",
-        description="Specify a deck to pull from, defaults to random")
-    @commands.option(
-        name="user",
-        description="Ping a user to pull a reading for them")
+    @commands.hybrid_command()
     async def _tarot(self, ctx, deck: Optional[str] = None, user: Optional[discord.Member] = None):
         """Performs a tarot reading. Optionally specify a deck and a user."""
         user = user or ctx.author

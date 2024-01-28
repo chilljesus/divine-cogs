@@ -87,21 +87,16 @@ class Bible(commands.Cog):
             pages.append(emb)
         return pages
 
-    @commands.hybrid_command(
-        name="bible",
-        description="Pull up bible verses or search by text. Supports specifying a version.")
-    @commands.option(
-        name="search",
-        description="The verse to look up or the text to search for.")
-    @commands.option(
-        name="version",
-        description="Bible version to use for the search. Defaults to NRSVUE if not specified.")
+    @commands.hybrid_command()
     async def bible(self, ctx, search: str, version: str = "NRSVUE"):
         """
-        Pull up bible verses or reverse search by querying a word and get all its references
+        Pull up bible verses or reverse search by querying a word and get all its references.
 
-        Now supports specifying a version directly.
-        Default version is NRSVUE.
+        Parameters:
+        -----------
+        search: The verse to look up or the text to search for.
+        version: Optional; Bible version to use for the search. Defaults to NRSVUE if not specified.
+
         Examples:
         [p]bible "revelation 1:1" NRSVUE
         [p]bible "test" KJV
