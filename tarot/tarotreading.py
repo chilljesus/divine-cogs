@@ -5,6 +5,7 @@ import random
 import json
 import os
 from datetime import datetime
+from typing import Optional
 
 class TarotReading(commands.Cog):
     """Tarot card reading cog"""
