@@ -92,10 +92,9 @@ class Bible(commands.Cog):
         """
         Pull up bible verses or reverse search by querying a word and get all its references.
 
-        Parameters:
-        -----------
-        search: The verse to look up or the text to search for.
-        version: Optional; Bible version to use for the search. Defaults to NRSVUE if not specified.
+        Args:
+            search (str): The verse to look up or the text to search for.
+            version (str): Optional; Bible version to use for the search. Defaults to NRSVUE.
 
         Examples:
         [p]bible "revelation 1:1" NRSVUE
