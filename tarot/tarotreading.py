@@ -25,7 +25,7 @@ class TarotReading(commands.Cog):
 
     @commands.hybrid_command(
         name="tarot",
-        description="Perform a tarot reading")
+        description="Perform a tarot reading, pulling from over 100 decks")
     @commands.option(
         name="deck",
         description="Specify a deck to pull from, defaults to random")
