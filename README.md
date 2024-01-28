@@ -1,9 +1,9 @@
+<h5 align="center">divine-cogs</h1>
+
 <img src="https://jesus.sh/assets/images/bg/neko-1.gif" width="100%">
 
-<h1 align="center">divine-cogs</h1>
-
 <p align="center">
-  Some lightly modified, completely modified, built from scratch and broken cogs for a self-hosted instance of <a href="https://github.com/Cog-Creators/Red-DiscordBot">Red Discord Bot</a>.
+  Some lightly modified, completely modified, built from scratch and broken cogs for the <a href="https://github.com/Cog-Creators/Red-DiscordBot">Red Discord Bot</a>.
 </p>
 
 <p align="center">
