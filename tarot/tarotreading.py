@@ -16,7 +16,7 @@ class TarotReading(commands.Cog):
         return cards_path
 
     def list_decks(self):
-        dir_path = os.path.dirname(os.path.realpath(__file))
+        dir_path = os.path.dirname(os.path.realpath(__file__))
         cards_path = os.path.join(dir_ath, 'card')
         return [f.replace('.json', '') for f in os.listdir(cards_path) if f.endswith('.json')]
 
