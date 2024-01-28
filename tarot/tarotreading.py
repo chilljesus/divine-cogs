@@ -37,8 +37,8 @@ class TarotReading(commands.Cog):
                       timestamp=datetime.now())
 
         embed.set_author(name=f"Reading for {user.display_name}", icon_url=user.display_avatar)
-        embed.add_field(name="Card Description", value=card['upright_meaning'], inline=True)
-        embed.add_field(name=f"{position} Meaning", value=card['reversed_meaning'], inline=True)
+        embed.add_field(name="Card Description", value=card['card_meaning'], inline=True)
+        embed.add_field(name=f"{position} Meaning", value=card[f"{position}_meaning"], inline=True)
         embed.set_thumbnail(url=card['card_image'])
         embed.set_footer(text=f"Deck: {deck}", icon_url="https://nekoism.co/images/logo-small.png")
         
