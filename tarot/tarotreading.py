@@ -1,5 +1,6 @@
 from redbot.core import commands
 import discord
+from discord.ext.commands import BadArgument
 import random
 import json
 import os
@@ -22,15 +23,30 @@ class TarotReading(commands.Cog):
         return [f.replace('.json', '') for f in os.listdir(cards_path) if f.endswith('.json')]
 
     @commands.hybrid_command(name="tarot", description="Perform a tarot reading")
-    async def _tarot(self, ctx, deck: str = None, user: discord.Member = None):
+    #async def _tarot(self, ctx, deck: str = None, user: discord.Member = None):
+    async def _tarot(self, ctx, *, arg=None):
         """Performs a tarot reading. Optionally specify a deck and a user."""
+        user = None
+        deck = None
+        
+        if arg:
+            if arg in self.list_decks():
+                deck = arg
+            else:
+                try:
+                    user = await commands.MemberConverter().convert(ctx, arg)
+                except BadArgument:
+                    deck = random.choice(self.list_decks())
+        else:
+            deck = random.choice(self.list_decks())
+            
         user = user or ctx.author
-        deck = deck or random.choice(self.list_decks())
+        
+        #user = user or ctx.author
+        #deck = deck or random.choice(self.list_decks())
+
         card = await self.get_random_card(deck)
 
-        #embed = discord.Embed(title=f"Tarot Reading for {user.display_name}", description=f"Deck: {deck}")
-        #embed.add_field(name=card['card_name'], value=card['card_meaning'], inline=False)
-        #embed.set_image(url=card['card_image'])
         embed = discord.Embed(title=card['card_name'],
                       url=card['card_url'],
                       colour=0xffc0cb,
@@ -39,7 +55,6 @@ class TarotReading(commands.Cog):
         embed.set_author(name=f"Reading for {user.display_name}", icon_url=user.display_avatar)
         embed.add_field(name="Card Description", value=card['card_meaning'], inline=True)
         embed.add_field(name="Upright Meaning", value=card['upright_meaning'], inline=True)
-        #embed.set_image(url=card['card_image'])
         embed.set_thumbnail(url=card['card_image'])
         embed.set_footer(text=f"Deck: {deck}", icon_url="https://nekoism.co/images/logo-small.png")
         
