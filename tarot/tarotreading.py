@@ -25,21 +25,22 @@ class TarotReading(commands.Cog):
     @commands.hybrid_command(name="tarot", description="Perform a tarot reading")
     #async def _tarot(self, ctx, deck: str = None, user: discord.Member = None):
     async def _tarot(self, ctx, *, arg=None):
-        """Performs a tarot reading. Optionally specify a deck and a user."""
-        user = None
-        deck = None
-        
+        user = ctx.author
+        deck = random.choice(self.list_decks())
         if arg:
-            if arg in self.list_decks():
-                deck = arg
-            else:
+            args = arg.split()
+            for a in args:
                 try:
-                    user = await commands.MemberConverter().convert(ctx, arg)
+                    # Attempt to convert each argument to a Discord member
+                    potential_user = await commands.MemberConverter().convert(ctx, a)
+                    user = potential_user
                 except BadArgument:
-                    deck = random.choice(self.list_decks())
+                    # If not a user, check if it's a deck name
+                    if a in self.list_decks():
+                        deck = a
         else:
             deck = random.choice(self.list_decks())
-            
+
         user = user or ctx.author
         
         #user = user or ctx.author
