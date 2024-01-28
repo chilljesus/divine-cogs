@@ -27,9 +27,21 @@ class TarotReading(commands.Cog):
         deck = deck or random.choice(self.list_decks())
         card = await self.get_random_card(deck)
 
-        embed = discord.Embed(title=f"Tarot Reading for {user.display_name}", description=f"Deck: {deck}")
-        embed.add_field(name=card['card_name'], value=card['card_meaning'], inline=False)
+        #embed = discord.Embed(title=f"Tarot Reading for {user.display_name}", description=f"Deck: {deck}")
+        #embed.add_field(name=card['card_name'], value=card['card_meaning'], inline=False)
+        #embed.set_image(url=card['card_image'])
+        embed = discord.Embed(title=card['card_name'],
+                      url=card['card_url'],
+                      colour=0xffc0cb,
+                      timestamp=datetime.now())
+
+        embed.set_author(name=f"Reading for: {user.display_name}", icon_url=user.displayavatar)
+        embed.add_field(name="Card Description", value=card['card_meaning'], inline=True)
+        embed.add_field(name="Upright Meaning", value=card['upright_meaning'], inline=True)
         embed.set_image(url=card['card_image'])
+        embed.set_footer(text=f"Deck: {deck}", icon_url="https://nekoism.co/images/logo-small.png")
+
+await ctx.send(embed=embed)
         await ctx.send(embed=embed)
 
     async def get_random_card(self, deck_name):
