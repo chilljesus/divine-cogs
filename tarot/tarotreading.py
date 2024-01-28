@@ -10,6 +10,11 @@ class TarotReading(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    def get_card_path(self, deck_name):
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        cards_path = os.path.join(dir_path, 'cards', f'{deck_name}.json')
+        return cards_path
+
     @commands.hybrid_command(name="tarot", description="Perform a tarot reading")
     @commands.cooldown(1, 60, commands.BucketType.user)
     async def _tarot(self, ctx, deck: str = None, user: discord.Member = None):
@@ -24,7 +29,8 @@ class TarotReading(commands.Cog):
         await ctx.send(embed=embed)
 
     async def get_random_card(self, deck_name):
-        with open(f'./cards/{deck_name}.json', 'r') as file:
+        card_path = seld.get_card_path(deck_name)
+        with open(card_path, 'r') as file:
             deck = json.load(file)
             card_name = random.choice(list(deck.keys()))
             return deck[card_name]
