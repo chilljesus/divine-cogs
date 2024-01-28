@@ -10,7 +10,6 @@
 [p]repo add divine-cogs https://github.com/chilljesus/divine-cogs
 [p]cog install divine-cogs {cog}
 ```
-
 <br />
 
 ## About this repo
@@ -32,3 +31,7 @@ If one of these cogs broke to the extent that you've lost a limb, life, or liber
 |bible| Minor modifications of [npc203](https://github.com/npc203/npc-cogs)'s bible cog, setting the version to NRSVUE and adding slash commands |
 |stablediffusion| Adding slash commands to [japandotorg](https://github.com/japandotorg/Seina-Cogs)'s stable diffusion cog |
 |tarot| Do tarot readings utilizing all the decks found on [tarot.com](tarot.com/tarot/decks) (over 100)|
+
+<br />
+
+<img src="https://nekoism.co/images/logo-small.png">
