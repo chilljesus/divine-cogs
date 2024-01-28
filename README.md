@@ -34,4 +34,4 @@ If one of these cogs broke to the extent that you've lost a limb, life, or liber
 
 <br />
 
-<img style="text-align: center" height="256" src="https://nekoism.co/images/logo-small.png">
+<div style="text-align: center"><img height="256" src="https://nekoism.co/images/logo-small.png"></div>
