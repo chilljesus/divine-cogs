@@ -17,7 +17,7 @@ class TarotReading(commands.Cog):
 
     def list_decks(self):
         dir_path = os.path.dirname(os.path.realpath(__file__))
-        cards_path = os.path.join(dir_path, 'card')
+        cards_path = os.path.join(dir_path, 'cards')
         return [f.replace('.json', '') for f in os.listdir(cards_path) if f.endswith('.json')]
 
     @commands.hybrid_command(name="tarot", description="Perform a tarot reading")
