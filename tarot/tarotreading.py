@@ -21,7 +21,6 @@ class TarotReading(commands.Cog):
         return [f.replace('.json', '') for f in os.listdir(cards_path) if f.endswith('.json')]
 
     @commands.hybrid_command(name="tarot", description="Perform a tarot reading")
-    @commands.cooldown(1, 60, commands.BucketType.user)
     async def _tarot(self, ctx, deck: str = None, user: discord.Member = None):
         """Performs a tarot reading. Optionally specify a deck and a user."""
         user = user or ctx.author
