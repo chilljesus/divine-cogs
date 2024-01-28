@@ -34,7 +34,7 @@ class TarotReading(commands.Cog):
         await ctx.send(embed=embed)
 
     async def get_random_card(self, deck_name):
-        card_path = seld.get_card_path(deck_name)
+        card_path = self.get_card_path(deck_name)
         with open(card_path, 'r') as file:
             deck = json.load(file)
             card_name = random.choice(list(deck.keys()))
