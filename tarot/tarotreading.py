@@ -2,6 +2,7 @@ import os
 import json
 import random
 import discord
+import urllib.parse
 from typing import Optional
 from datetime import datetime
 from redbot.core import commands
