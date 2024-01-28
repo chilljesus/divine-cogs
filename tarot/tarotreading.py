@@ -15,12 +15,17 @@ class TarotReading(commands.Cog):
         cards_path = os.path.join(dir_path, 'cards', f'{deck_name}.json')
         return cards_path
 
+    def list_decks(self):
+        dir_path = os.path.dirname(os.path.realpath(__file))
+        cards_path = os.path.join(dir_ath, 'card')
+        return [f.replace('.json', '') for f in os.listdir(cards_path) if f.endswith('.json')]
+
     @commands.hybrid_command(name="tarot", description="Perform a tarot reading")
     @commands.cooldown(1, 60, commands.BucketType.user)
     async def _tarot(self, ctx, deck: str = None, user: discord.Member = None):
         """Performs a tarot reading. Optionally specify a deck and a user."""
         user = user or ctx.author
-        deck = deck or random.choice(os.listdir('./cards/')).replace('.json', '')
+        deck = deck or random.choice(self.list_decks())
         card = await self.get_random_card(deck)
 
         embed = discord.Embed(title=f"Tarot Reading for {user.display_name}", description=f"Deck: {deck}")
