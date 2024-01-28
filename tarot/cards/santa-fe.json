@@ -1,0 +1,626 @@
+{
+    "Three of Lightening (Wands)": {
+        "card_name": "Three of Lightening (Wands)",
+        "card_meaning": "The Three of Wands in this position advises you to act quickly and powerfully on an idea or desire you have been feeling. This card suggests exquisite timing, staying in the moment and responding to your instinct or intuition.",
+        "upright_meaning": "This suit, most often called \"Wands\" and sometimes called \"Rods\" or \"Staves,\" represents initiative, ambition, drive and desire. This is the suit of enterprise and risk-taking.",
+        "reversed_meaning": "Rest will restore lack of drive and optimism. The Three of Wands reversed points to a temporary lapse of drive or will. You might have overdone things and burned the candle at both ends.",
+        "card_url": "https://www.tarot.com/tarot/cards/three-of-wands/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/24.jpg"
+    },
+    "Knight of Lightening (Wands)": {
+        "card_name": "Knight of Lightening (Wands)",
+        "card_meaning": "The Knight of Wands (in some decks, a Prince) in this position advises that you modify your self-image in order to get a sense of yourself as a person of action. No matter what your past patterns have been, it is fully possible to place yourself solidly on the road toward the future.",
+        "upright_meaning": "This suit, most often called \"Wands\" and sometimes called \"Rods\" or \"Staves,\" represents initiative, ambition, drive and desire. This is the suit of enterprise and risk-taking.",
+        "reversed_meaning": "Give the knowledge or opinion of others a fair hearing; it may better prepare you for your path.",
+        "card_url": "https://www.tarot.com/tarot/cards/knight-of-wands/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/33.jpg"
+    },
+    "Seven of Rainbows (Swords)": {
+        "card_name": "Seven of Rainbows (Swords)",
+        "card_meaning": "The Seven of Swords in this position suggests that deep within you already know exactly what has to happen. You know what steps to take and what order to take them in to bring about a desirable outcome in this situation.",
+        "upright_meaning": "The Seven of this suit typically refers to mental preparedness, acquired through the use of imagination, including the rehearsing and visualizing of desired results. This card represents the positive mental habits of a natural winner. The image most often associated with this card is that of a canny warrior who has infiltrated into the enemy camp on the eve of a fateful battle, checking out their preparations and stealing their swords. Such a move is guaranteed to demoralize the enemy and undermine their performance in the upcoming confrontation.",
+        "reversed_meaning": "When the Seven of Swords is reversed it reminds us that even heroic effort sometimes does not fully succeed or goes unappreciated. If you have done the best you could do and responded to the calls of conscience appropriately, you are still a noble soul.",
+        "card_url": "https://www.tarot.com/tarot/cards/seven-of-swords/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/56.jpg"
+    },
+    "The Hierophant": {
+        "card_name": "The Hierophant",
+        "card_meaning": "The Hierophant advises that you return to the role of a meticulous student. Learn everything you can about your chosen area. Let that knowledge become a part of you and an operative influence on your day-to-day awareness. In this way, you can slowly and steadily establish real credibility in your field or chosen subject.",
+        "upright_meaning": "The Hierophant Tarot this card refers to a master and the learning of practical lessons from the study of natural law. This energy of this card points to some agent or resource that can reveal the secrets of life, the cycles of the Moon and tides, the links between human beings and the heavens.",
+        "reversed_meaning": "When the Hierophant card is reversed, this may be indicating that you bring an unnecessary episode of rebellion against traditional, long held ideals and spiritual beliefs that belong to your lineage. Be aware that without the steadying influence of tradition observed from generation to generation, there would be no stable support system within which you could afford to rebel.",
+        "card_url": "https://www.tarot.com/tarot/cards/the-hierophant/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/5.jpg"
+    },
+    "King of Buffalo (Coins)": {
+        "card_name": "King of Buffalo (Coins)",
+        "card_meaning": "The King of Coins in this position advises you to behave as if you already were a success. Project confidence that your plans and goals are in the process of unfolding perfectly.",
+        "upright_meaning": "Representing the energy of a King, this card in the suit of Coins or Pentacles displays one who has accomplished a lot in life and has arranged his or her affairs so that he has much good to show for it. Possessing a practical genius in the ways of the world, he loves to build things. Because he's so good at deal-making, this character is privy to the biggest deals in town. He has the power to make or break people financially. Although this does not always win him love, it certainly earns him respect.",
+        "reversed_meaning": "The King of Coins reversed suggests that you should shift your focus from control to self-discipline. This may be indicating an insatiable craving that reality on the physical plane cannot satisfy.",
+        "card_url": "https://www.tarot.com/tarot/cards/king-of-coins/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/77.jpg"
+    },
+    "Nine of Buffalo (Coins)": {
+        "card_name": "Nine of Buffalo (Coins)",
+        "card_meaning": "The Nine of Coins in this position suggests that you prepare yourself for greater resources to be flowing in your direction. If you pay attention -- and keep the faith -- you can make a smooth transition into a state of well being and peace of mind. Hard work has brought you to a place where you could earn and receive grace, comfort, and freedom -- whether that be personal, emotional or financial.",
+        "upright_meaning": "The Nine of this suit points to a person who is financially secure enough to live comfortably. This is about someone supported by her own business, inheritance or property. This is one person in a thousand.",
+        "reversed_meaning": "The Nine of Coins reversed suggests a period of self-discipline is needed to restore your energy and vitality. You may be enmeshed in a situation of dependency or overindulgence.",
+        "card_url": "https://www.tarot.com/tarot/cards/nine-of-coins/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/72.jpg"
+    },
+    "Temperance": {
+        "card_name": "Temperance",
+        "card_meaning": "The Temperance card advises you to identify and seek the missing ingredients in your life. Marshal your known skills and abilities and do what needs to be done to complete your mission.",
+        "upright_meaning": "The Temperance card is a reference to the soul. Classically female, the woman or angel on the Temperance card is mixing up a blend of subtle energies for the evolution of the personality. One key to interpreting this card can be found in its title -- a play on the process of tempering metals in a forge.",
+        "reversed_meaning": "The Temperance card reversed suggests that you are in danger of giving up on yourself. Something is making you feel apathetic and ignore what you deeply want and need.",
+        "card_url": "https://www.tarot.com/tarot/cards/temperance/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/14.jpg"
+    },
+    "Ten of Water (Cups)": {
+        "card_name": "Ten of Water (Cups)",
+        "card_meaning": "With the Ten of Cups in this position, prioritize teamwork over your personal goals. Everyone needs to feel they made a contribution. The crew needs to feel they are all in this together, and everyone needs to be rewarded when the ship comes in.",
+        "upright_meaning": "The Ten of this suit traditionally signifies family and community, often showing a celebratory scene including many generations, crowned by a rainbow signifying the end of hard times.",
+        "reversed_meaning": "The Ten of Cups reversed suggests that a group's collective good will is damaged and its safety net is fraying. Personal judgments and rejection abound. Things are being said and done that will be regretted later.",
+        "card_url": "https://www.tarot.com/tarot/cards/ten-of-cups/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/45.jpg"
+    },
+    "The Chariot": {
+        "card_name": "The Chariot",
+        "card_meaning": "The Chariot advises that you be prepared for changes that might include a move or an opportunity to travel. The Charioteer travels light and stays open to fresh experiences that change with every valley or mountain pass.",
+        "upright_meaning": "The Chariot Tarot card points to a triumphal feeling of freedom, as if the Charioteer is being paraded through the streets as a hero (or heroine). The card reflects congratulations for high achievement, and serves as a sign of empowerment.",
+        "reversed_meaning": "When this card is reversed, it suggests that you may balk when you know you need to pick up the reins and take responsibility for setting your life in motion.",
+        "card_url": "https://www.tarot.com/tarot/cards/the-chariot/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/7.jpg"
+    },
+    "Three of Buffalo (Coins)": {
+        "card_name": "Three of Buffalo (Coins)",
+        "card_meaning": "The Three of Coins in this position suggests that you showcase your unique capabilities. Let the world in on who you really are. This is a good time to seek recognition. Once you receive the appreciation you deserve, accept and savor the acknowledgment.",
+        "upright_meaning": "This suit, most often named \"Coins\" or \"Pentacles\", is a symbol for a magical talisman that represented wealth or potential. This suit represents something supportive that is available to you -- whether it be health, some kind of talent, a material or financial resource.",
+        "reversed_meaning": "The Three of Coins reversed suggests that you beware of perfectionism and other subtle forms of egoism. This may be tied to a refusal to share one's gifts and vision with the world.",
+        "card_url": "https://www.tarot.com/tarot/cards/three-of-coins/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/66.jpg"
+    },
+    "Nine of Rainbows (Swords)": {
+        "card_name": "Nine of Rainbows (Swords)",
+        "card_meaning": "The Nine of Swords in this position advises you to confront your fear of being alone and acknowledge the different limits you may have put on yourself because of that fear. In the name of being safe, you may have adhered to lower standards than you are capable of achieving. If so, then you may have resisted striking out on your own. Perhaps you have bargained away creativity and joy in order to avoid being challenged. These kinds of tradeoffs never work.",
+        "upright_meaning": "The Nine of this suit has a special resonance with the Middle Ages, because it figures the plight of a woman who is alone in the world, during the centuries when women had no personal rights, no ability to inherit property or use the law in their own defense. We generally see her sitting up in bed weeping, grieving and in fear of abandonment because of her vulnerability, wondering what will happen to her now that her protector (father, brother, husband, or son) is gone.",
+        "reversed_meaning": "When the Nine of Swords is reversed, it generally indicates an opportunity to wake up from a long dark period of depression and negativity. Some long dark period is becoming illuminated by optimism.",
+        "card_url": "https://www.tarot.com/tarot/cards/nine-of-swords/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/58.jpg"
+    },
+    "The Moon": {
+        "card_name": "The Moon",
+        "card_meaning": "The Moon card advises that you trust your instincts and intuitions. Your intuitive body, which is connected to all living things, is sharper and quicker than the cultivated, civilized self. The everyday mind may not be prepared for strange oceanic circumstances. Plus, it has no game plan. Your intuitive body will support you unerringly if you do not interfere with or try to control what you perceive. A better approach would be to meditate. Try to just be a witness. Do nothing; let nature carry you forward. This may be your best option in this situation.",
+        "upright_meaning": "The Moon card refers to a deep state of sensitivity and imaginative impressionability, developed within a womb of deep relaxation. Here we dream and go into trance, have visions and receive insights, wash in and out with the psychic tides, and experience deep mystical and/or terrifying realities beyond our ordinary senses. In a state of expanded consciousness, we cannot always control what happens. The Moon card represents the ultimate test of a soul's integrity, where the membrane between the self and the unknown is removed, and the drop of individuality re-enters the ocean of being. What transpires next is between a soul and its maker.",
+        "reversed_meaning": "The Moon card reversed suggests that you might be deluding yourself, exaggerating or embellishing your version of a situation. Consider whether you are repeating an emotional, dramatic rendition of events rather than keeping to the bare facts.",
+        "card_url": "https://www.tarot.com/tarot/cards/the-moon/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/18.jpg"
+    },
+    "Nine of Lightening (Wands)": {
+        "card_name": "Nine of Lightening (Wands)",
+        "card_meaning": "When the Nine of Wands is in this position, you have done everything you can to bring a situation to a successful conclusion. The full range of possibilities has been exhausted and all the creative energy that is available has already been put to use. This may be a great time to lay down your concerns and enjoy a rest. There is nothing more to bring to the mission unless you regenerate and restore the energy you have put into the cause.",
+        "upright_meaning": "This suit, most often called \"Wands\" and sometimes called \"Rods\" or \"Staves,\" represents initiative, ambition, drive and desire. This is the suit of enterprise and risk-taking.",
+        "reversed_meaning": "Avoid a situation that seems like a losing battle. Seek new perspective. When the Nine of Wands is reversed, it is time to question your motives. Are you truly defending the high ground because of humanitarian motives? Or are you merely competing with others? If you truly don't belong at the forefront when all is said and done, you will not be seen as a hero for obstructing others.",
+        "card_url": "https://www.tarot.com/tarot/cards/nine-of-wands/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/30.jpg"
+    },
+    "Ace of Rainbows (Swords)": {
+        "card_name": "Ace of Rainbows (Swords)",
+        "card_meaning": "The Ace of Swords in this position advises you to be steady--you are about to reach your objective. There may be no need to hesitate. Just concentrate on making your impact. This could be your moment. The arrow is pointed straight at the target. Your eye is keen, your grip is firm. Let that arrow fly! If you set aside distractions and hit your mark, you will be rewarded with insight and clarity.",
+        "upright_meaning": "This suit represents the rational mind and its ability to discriminate. Swords cut through things in order to pierce illusion, to differentiate between fantasy and reality.",
+        "reversed_meaning": "The Ace of Swords reversed suggests that you are not allowing yourself to see the one thing that matters most. You may be using reason to create rather than cut through obstacles.",
+        "card_url": "https://www.tarot.com/tarot/cards/ace-of-swords/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/50.jpg"
+    },
+    "Nine of Water (Cups)": {
+        "card_name": "Nine of Water (Cups)",
+        "card_meaning": "The Nine of Cups in this position advises that you open yourself to circumstances around you. There may be no need to manage a situation that does not require a lot of control or leadership. The tone of the moment is heartfelt and bonded. It is nurturing. Open up and choose to be receptive. Proceed from your heart, relying on your intuition. This is your truest source of information right now.",
+        "upright_meaning": "The Nine of this suit is sometimes titled Happiness, but it is also known as Victory. The image on several versions of this card often shows an innkeeper doing a brisk business and feeling very happy about it all.",
+        "reversed_meaning": "The Nine of Cups reversed suggests that you are getting what you thought you wanted, but it's not what you really want at all. The defect may not be in the thing itself, but in the surprise of discovering that your dream come true doesn't make you feel like you expected it would.",
+        "card_url": "https://www.tarot.com/tarot/cards/nine-of-cups/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/44.jpg"
+    },
+    "Two of Water (Cups)": {
+        "card_name": "Two of Water (Cups)",
+        "card_meaning": "The Two of Cups in this position advises you to speak your heart. It may be likely that the person you are trying to connect with feels the same. Still the other needs to hear this more fully. So why not make it clear and why not now?",
+        "upright_meaning": "The Two in this suit signifies a union of souls. This card traditionally describes a romantic relationship, but also includes the idea that all good friendships and partnerships are based on a natural affinity and a deep mutual understanding. As a personal reflection, it can also signify that your mind and your soul are discovering each other, maybe for the first time.",
+        "reversed_meaning": "The Two of Cups reversed indicates that you may be investing too much in a relationship. Sometimes this is a signal that you must stop seeking so much validation from others.",
+        "card_url": "https://www.tarot.com/tarot/cards/two-of-cups/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/37.jpg"
+    },
+    "King of Rainbows (Swords)": {
+        "card_name": "King of Rainbows (Swords)",
+        "card_meaning": "In this position, the King of Swords advises that you research your situation and in the process question existing authorities. It may be time to examine underlying assumptions and bring greater clarity into areas that have been left in the dark. Don't wait for others to do it. Instead, draw your own conclusions.",
+        "upright_meaning": "Traditionally, representing the energy of a King, this masculine energy form is The Adjudicator, the wise judge or mediator. He helps parties in conflict discover common ground and build upon it, and guides societies to see their greater good. His archetype is Solomon, ancient lawgiver and philosopher of the Old Testament. Sometimes appearing cool and detached, he can be misunderstood as not caring.",
+        "reversed_meaning": "When the King of Swords is reversed, pangs of conscience no longer prick as keenly. It may be that morality and integrity have been compromised.",
+        "card_url": "https://www.tarot.com/tarot/cards/king-of-swords/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/63.jpg"
+    },
+    "Eight of Rainbows (Swords)": {
+        "card_name": "Eight of Rainbows (Swords)",
+        "card_meaning": "With the Eight of Swords in this position, you are being reminded that every setback you experience is a teacher awakening you to renewed effort. This is a learn-by-doing situation; there is no formula that guarantees outcome. You can be sure, however, that an open-minded and optimistic attitude will serve you better in the face of surprising developments.",
+        "upright_meaning": "Often called \"The Test,\" the Eight of this suit usually pictures a warrior running the gauntlet, subjected to harsh examination, who finds out just how tough he or she is (or isn't) in the process. Life provides us with plenty of experiences that put us in situations of close scrutiny -- whether it's an entrance exam, a decisive job interview or even the tough conversations that follow upon a breach of trust in a close relationship.",
+        "reversed_meaning": "When the Eight of Swords is reversed, there is a tendency to rationalize, justify and project blame onto others. Be sure you are not doing that. Judge yourself by the standards you hold your adversary to, before you get caught in a trap of your own making.",
+        "card_url": "https://www.tarot.com/tarot/cards/eight-of-swords/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/57.jpg"
+    },
+    "Seven of Buffalo (Coins)": {
+        "card_name": "Seven of Buffalo (Coins)",
+        "card_meaning": "The Seven of Coins in this position advises you to focus on the long run. Look beyond this week or this month. This card exemplifies the magic of compound interest. You'll have much better results with a slow and steady investment of time, energy and labor than you would generate by trying to win the lottery.",
+        "upright_meaning": "The Seven of this suit is typically a paean to the humble laborer who is willing to show up every day and sweat in the sun for next season's bounty. The traditional concept is cultivation, with an attitude that slow and steady wins the race, with faith in nature's assistance. The protagonist of this card doesn't make excuses, isn't whimsical or moody, but is dedicated and sees the job through. Of course, it's no good to count your chickens before they hatch, but there's no question that the person who is vigilant over a project is more likely to get the desired result.",
+        "reversed_meaning": "The Seven of Coins reversed suggests that you may need a warning against doing something rash or taking a gamble. This card is traditionally associated with the idea of someone who is a gambler.",
+        "card_url": "https://www.tarot.com/tarot/cards/seven-of-coins/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/70.jpg"
+    },
+    "Knight of Water (Cups)": {
+        "card_name": "Knight of Water (Cups)",
+        "card_meaning": "The Knight of Cups (in some decks, a Prince) in this position advises that you jump into your new situation with both feet. Get involved with what is happening in the present. Think no more about the route you had to travel to get back here. There is no need to be cavalier about what seems familiar.",
+        "upright_meaning": "This card is traditionally entitled the Knight, but in some modern decks appears as the Prince. Traditionally, this card in this suit has pictured a homecoming -- portraying a return to his true heart's home after a long journey. Like the prodigal son, he may be returning after long estrangement from all he holds dear.",
+        "reversed_meaning": "The Knight of Cups reversed continually looks for excuses or a way to blame his problems on someone else. He is not mature enough to realize that until he takes personal responsibility for the way things are in his life, he will continue to add to conflict rather than exercising his natural helping and healing powers.",
+        "card_url": "https://www.tarot.com/tarot/cards/knight-of-cups/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/47.jpg"
+    },
+    "The Emperor": {
+        "card_name": "The Emperor",
+        "card_meaning": "When the Emperor arises, he advises you get in touch with your inner sovereignty and natural self-possession. Realize that somewhere deep inside you is the memory of royalty. Reach within to find that strain of natural nobility and leadership. These innate qualities will help you manage your current situation.",
+        "upright_meaning": "In the most practical terms, The Emperor Tarot card represents the highest leadership, a head of state, or the most exemplary and powerful person in the realm. This archetypal ruler is responsible for the affairs of a society or community, which are directly proportional to his well being and happiness.",
+        "reversed_meaning": "When the Emperor card is reversed, there may be a tendency to behave like a petty tyrant, insisting on being indulged, served and flattered. This emperor prefers his own version of events to what is actually true and as such risks losing the respect of his people.",
+        "card_url": "https://www.tarot.com/tarot/cards/the-emperor/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/4.jpg"
+    },
+    "The World": {
+        "card_name": "The World",
+        "card_meaning": "The World card may be giving you permission to do whatever you want. Presently, your motivation is close to the will of the divine. Even if you commit an error, it will be turned to the greater good. Stay active and just keep moving forward. It is unnecessary to keep checking or interrupting your spontaneity with calculation. Rather than look for consensus or affirmation from others, simply dance the dance. In other words, express yourself, react naturally, and let the chips fall where they may.",
+        "upright_meaning": "The World card points to the presiding wisdom which upholds life on this and all worlds. In most Tarot decks, it is a female figure that has become our standard World image. She originates in Hebrew, Gnostic, and Alchemical lore, and stands between heaven and Earth as the cosmic mother of souls, the wife of God, and our protector from the karmic forces we have set loose upon the Earth in our immaturity and ignorance.",
+        "reversed_meaning": "The World card is one of only two cards that have no reverse meaning. Nevertheless, it could indicate a slight slowdown in the flow of events or the need for more introspection as events unfold.",
+        "card_url": "https://www.tarot.com/tarot/cards/the-world/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/21.jpg"
+    },
+    "The High Priestess": {
+        "card_name": "The High Priestess",
+        "card_meaning": "The High Priestess advises you to adhere to your chosen spiritual practice on a more regular basis. If you want the benefits of evolution, you'll have to cooperate with spirit. We all have distractions, demands -- a whole life full of reasons why we cannot find the time to retreat into our inner sanctum.",
+        "upright_meaning": "The High Priestess is a Major Arcana, or \"trump\" card, that represents human wisdom. The High Priestess can be viewed as a kind of female Pope (a Papess), or the ancient Egyptian Priestess of Isis, the even more ancient snake and bird goddesses, the Greek goddess Persephone, or Eve, before the fall.",
+        "reversed_meaning": "The High Priestess card reversed suggests that when you have problems, it's usually because you are so attracted to your inner life that it has become an addiction in itself. It blots out your interest in ordinary reality, friends, and family -- the connections that hold us fast to our worldly identities.",
+        "card_url": "https://www.tarot.com/tarot/cards/the-high-priestess/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/2.jpg"
+    },
+    "Seven of Lightening (Wands)": {
+        "card_name": "Seven of Lightening (Wands)",
+        "card_meaning": "The Seven of Wands in this position tells you that the time for peak performance is now. Even if slightly unprepared, you may want to push yourself beyond your usual limits, thinking in larger terms and tweaking your competitive nature. Time and effort spent in preparation could pay off handsomely. You might be the one who vaults right over the heads of those who thought they could outdo you.",
+        "upright_meaning": "This suit, most often called \"Wands\" and sometimes called \"Rods\" or \"Staves,\" represents initiative, ambition, drive and desire. This is the suit of enterprise and risk-taking.",
+        "reversed_meaning": "Coming to terms with lack of motivation could boost your self-esteem. When the Seven of Wands is reversed you may be actively resisting the expenditure of time and energy required to make yourself useful. You are capable of being a role model but are having trouble accepting the challenge. Until you come to terms with your lack of motivation, you are letting yourself down by allowing your self-esteem to shrink.",
+        "card_url": "https://www.tarot.com/tarot/cards/seven-of-wands/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/28.jpg"
+    },
+    "Page of Buffalo (Coins)": {
+        "card_name": "Page of Buffalo (Coins)",
+        "card_meaning": "The Page of Coins (in some decks, a Princess) in this position advises that you study your chosen field seriously, gaining intellectual knowledge plus whatever experiential learning you can pick up as well. Listen to the stories of others, both their successes and their failures, and let yourself be inspired by their dedicated efforts.",
+        "upright_meaning": "This card is traditionally entitled The Page, but in some modern decks appears as a Princess. This card's energy has to do with learning about compound interest and abundance. Her attention is focused on learning the natural laws that pertain to natural synergies.",
+        "reversed_meaning": "The Page of Coins reversed suggests that you should not doubt or resist the impulse to be of service to others. Embrace the discipline that it takes and just do it.",
+        "card_url": "https://www.tarot.com/tarot/cards/page-of-coins/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/74.jpg"
+    },
+    "Page of Water (Cups)": {
+        "card_name": "Page of Water (Cups)",
+        "card_meaning": "The Page of Cups (in some decks, a Princess) in this position advises you to study the best ways to be of service. Strive to discern what would give more pleasure, comfort and emotional security. Then, provide it. Understand that what is happening has little or nothing to do with you personally. The best you can do is to offer support and listen closely.",
+        "upright_meaning": "This card is traditionally entitled the Page, but in some modern decks appears as a Princess. In this suit this card represents a poetic, mystical, emotionally open young person, still tender and idealistic, given to flights of imaginative fantasy.",
+        "reversed_meaning": "When the Page of Cups card is reversed it suggests that those around this Page, or Princess, have been tolerant of his or her self-indulgent feelings. In reality, they don't owe you this service.",
+        "card_url": "https://www.tarot.com/tarot/cards/page-of-cups/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/46.jpg"
+    },
+    "Four of Lightening (Wands)": {
+        "card_name": "Four of Lightening (Wands)",
+        "card_meaning": "The Four of Wands in this position supports your good, productive, evolutionary ideas. Concentrate on networking: use your charisma and power to attract like-minded souls so you can significantly increase your sphere of influence -- the more people you can reach, the better.",
+        "upright_meaning": "This suit, most often called \"Wands\" and sometimes called \"Rods\" or \"Staves,\" represents initiative, ambition, drive and desire. This is the suit of enterprise and risk-taking.",
+        "reversed_meaning": "Seek stimulation from imaginative individuals to sustain your creative powers. When the Four of Wands is reversed, you may be losing touch with the needs of others; your inherent problem-solving skills could go dormant. You need stimulation and contact with creative individuals of a like mind. Consciously seek it out because it's not going to come to you.",
+        "card_url": "https://www.tarot.com/tarot/cards/four-of-wands/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/25.jpg"
+    },
+    "Justice": {
+        "card_name": "Justice",
+        "card_meaning": "The Justice card advises you to listen carefully as others explain to you their version of events and the parts they played. It is unnecessary to offer feedback. Your role is to observe, listen closely, give a full hearing and keep your wits about you as the story takes shape.",
+        "upright_meaning": "The Justice Tarot card has to do with moral sensitivity and that which gives rise to empathy, compassion, and a sense of fairness. Since the time of Solomon, this image has represented a standard for the humane and fair-minded treatment of other beings.",
+        "reversed_meaning": "When the Justice card is reversed, the deeper meaning of this situation is being withheld for reasons only Higher Power truly understands. There are times that logical, common, rational and organic laws are overridden by some paradoxical higher order.",
+        "card_url": "https://www.tarot.com/tarot/cards/justice/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/11.jpg"
+    },
+    "Ace of Water (Cups)": {
+        "card_name": "Ace of Water (Cups)",
+        "card_meaning": "The Ace of Cups in this position advises you to challenge yourself and discover what is good about every relationship. Practice looking at the world through the eyes of the Divine. Allow your imagination to perceive the spiritual or evolutionary potential in every person and experience.",
+        "upright_meaning": "The suit in Tarot known as Cups is also referred to as Chalices or Hearts. It represents the emotional and psychic aspects of life -- fantasy, imagination, feelings, love.",
+        "reversed_meaning": "The Ace of Cups reversed warns of a loss of self-esteem, optimism and faith in the abundance that the universe has to offer. Stop to examine what it is that is causing you to lose altitude. It might be the mental food you are feeding yourself.",
+        "card_url": "https://www.tarot.com/tarot/cards/ace-of-cups/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/36.jpg"
+    },
+    "Five of Rainbows (Swords)": {
+        "card_name": "Five of Rainbows (Swords)",
+        "card_meaning": "The Five of Swords in this position advises you to prepare yourself for disappointment over how your fellow humans are setting their priorities. It seems that the lower end of human nature may be eroding good will in the current situation. Due to a strong cultural trend toward scarcity thinking, a \"me first\" outlook prevails. If this means that you need to develop a thick skin or carry your sword of truth closer, then do so.",
+        "upright_meaning": "Traditionally, the Five of this suit references the grim and sobering process of cleaning up the battlefield after a conflict. The war as a whole has not been won or lost yet, but in this skirmish there were grievous casualties. This card admonishes the loser to study carefully what went wrong, so that a new strategy can be devised and more setbacks forestalled. There is a need to regroup and rethink the game plan, discover your blind spots and weak links, and take corrective measures before getting back into the field for another round.",
+        "reversed_meaning": "The Five of Swords reversed suggests that you are finally gaining some mastery over competitive or combative impulses. This suggests that you may be outgrowing tendencies towards being automatically judgmental or critical.",
+        "card_url": "https://www.tarot.com/tarot/cards/five-of-swords/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/54.jpg"
+    },
+    "The Devil": {
+        "card_name": "The Devil",
+        "card_meaning": "The Devil card advises that you show some spunk. There may be nothing to be gained by trying to be subtle or strategic in this situation. Assert your agenda, express yourself honestly, and let the chips fall where they may. Your best bet could be to express your true emotions, possibly even including anger. Acknowledge that you have whatever feelings you have. While it may not be necessary to act out what you feel in every situation, accepting the power and depth of your inner experience enables you to remain true to yourself.",
+        "upright_meaning": "The Devil Tarot card expresses the realm of the taboo -- the culturally rejected wildness and undigested shadow side that each of us carries in our subconscious. This shadow is actually at the core of our being, which we cannot get rid of and will never succeed in taming. From its earliest versions, which portrayed a vampire-demon, The Devil evoked the church-fueled fear that a person could \"lose their soul\" to wild and passionate forces.",
+        "reversed_meaning": "The Devil card reversed suggests that you are enjoying creating chaos and resistance for no particular, positive reason. Your sense of humor could be a bit twisted. Your motive may be vengeance or you are simply being an irritant.",
+        "card_url": "https://www.tarot.com/tarot/cards/the-devil/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/15.jpg"
+    },
+    "The Hanged Man": {
+        "card_name": "The Hanged Man",
+        "card_meaning": "The Hanged Man advises you to surrender illusions of control. Accept that you have been overcome and deceived by your own devices. Having made your bed, you now need to lie in it. This is not a negative judgment. It's just that sometimes there are consequences for being in the wrong place at the wrong time. Bad things can happen to good people. These consequences are not fatal, even if they are inconvenient -- or perhaps even embarrassing.",
+        "upright_meaning": "The Hanged Man usually indicates a lack of ability to help oneself through independent action. The energy is arrested and awaiting judgment. With this card, there is no avenue for the will to regain control until the situation has passed.",
+        "reversed_meaning": "The Hanged Man reversed suggests that the seemingly noble deed of offering yourself as the sacrificial lamb is, at least for the time being, a useless gesture. There will be no benefit to the greater good; you will experience no expansion of consciousness.",
+        "card_url": "https://www.tarot.com/tarot/cards/the-hanged-man/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/12.jpg"
+    },
+    "Ten of Rainbows (Swords)": {
+        "card_name": "Ten of Rainbows (Swords)",
+        "card_meaning": "The Ten of Swords in this position advises that you lay low for a while. Don't make a move. Keep yourself as safe as possible until the drama, even the possible trauma, plays itself out. Once the turmoil dies down, then you can assess the damage and start to make repairs. The situation can be compared to a hurricane moving through the neighborhood. You can't be sure whether it is going to pass over a corner of the field or whether it is going to slam into your house.",
+        "upright_meaning": "The Ten of this suit represents finality, the end of something. As is easy to grasp from the picture in many decks, there is no hope for revival here. A limit has been reached, a line has been crossed and there is no turning back. In some situations this may be felt as a tragic loss, but it often brings with it a paradoxical sense of release and closure. The waiting and wondering are over. There is no more ambiguity. You can rightly let go and move on, as there is no more progress to be made here.",
+        "reversed_meaning": "The Ten of Swords is reversed suggests that you may have been over-dramatizing your predicament. In an attempt to get sympathy and understanding from others, you have begun to believe your own stories and excuses.",
+        "card_url": "https://www.tarot.com/tarot/cards/ten-of-swords/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/59.jpg"
+    },
+    "Three of Water (Cups)": {
+        "card_name": "Three of Water (Cups)",
+        "card_meaning": "The Three of Cups in this position advises that you tune in with your family and fully inform them about what's going on with you. Let them add substance to your ideas with their talent and imagination. Think of this occasion as a celebration, where their support helps you find success in your work. There may be something here for everyone to contribute. Put yourself in the loving hands of your family connections and your trust will be well rewarded. The synergy between you could enhance each individual's talent and creativity. You will love the results!",
+        "upright_meaning": "The Three of this suit is often entitled Consent, or simply Yes. This card resonates with a spirit of agreement, mutual support, encouragement and teamwork.",
+        "reversed_meaning": "The Three of Cups reversed indicates that you may be frustrating the best efforts of those who love you most. You need to ask yourself what is so important that you would place it above the bonds of love and mutual support.",
+        "card_url": "https://www.tarot.com/tarot/cards/three-of-cups/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/38.jpg"
+    },
+    "Four of Rainbows (Swords)": {
+        "card_name": "Four of Rainbows (Swords)",
+        "card_meaning": "The Four of Swords in this position strongly urges that you keep your own counsel in this situation. There may be too much fear and hostility in the environment for you to be heard. It might be that your ideas are not ripe enough or that you are not ready to listen to feedback from others.",
+        "upright_meaning": "A Four in this suit sends a message to take some time out, surrendering worldly concerns and retreating to a sheltered place of serenity away from the hustle and bustle. The oldest Tarot card images suggest a visit to the tombs of our ancestors, a place to contemplate your mortality and breathe in the dust of those who brought you here.",
+        "reversed_meaning": "The Four of Swords reversed suggests that even though solitary contemplation can be a great pleasure, it should be balanced with appropriate interpersonal communications. Isolation in this situation can, in some cases, be counterproductive.",
+        "card_url": "https://www.tarot.com/tarot/cards/four-of-swords/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/53.jpg"
+    },
+    "Five of Buffalo (Coins)": {
+        "card_name": "Five of Buffalo (Coins)",
+        "card_meaning": "The Five of Coins in this position advises you to create contractual agreements with those around you who have similar interests. In this kind of situation, there is strength in numbers. Put your heads together and devise a bold plan for future objectives and decide how to invest in their success. This Five of Coins recommends teamwork and the mutual benefits a combined effort can yield.",
+        "upright_meaning": "This suit, most often named \"Coins\" or \"Pentacles\", is a symbol for a magical talisman that represented wealth or potential. This suit represents something supportive that is available to you -- whether it be health, some kind of talent, a material or financial resource.",
+        "reversed_meaning": "The Five of Coins reversed suggests that you should take a hard look at a situation and root out possible deceptions. Perhaps you are being deceived or you are the one deceiving others (or yourself).",
+        "card_url": "https://www.tarot.com/tarot/cards/five-of-coins/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/68.jpg"
+    },
+    "Four of Buffalo (Coins)": {
+        "card_name": "Four of Buffalo (Coins)",
+        "card_meaning": "The Four of Coins in this position signifies a young person, naive and pampered, who has been left an estate. Think conscientiously about all those people whom your activities impact, including those whose work and effort went into building what you inherited and those whose welfare depends upon your right management.",
+        "upright_meaning": "This suit, most often named Coins or Pentacles, is a symbol for a magical talisman that represented wealth or potential. This suit represents something supportive that is available to you -- whether it be health, some kind of talent, a material or financial resource.",
+        "reversed_meaning": "The Four of Coins reversed suggests that instead of looking for ways you can help, you may be allowing resentment to get in your way. Are you are heading into a situation fraught with resentment, as if you feel you are owed something?",
+        "card_url": "https://www.tarot.com/tarot/cards/four-of-coins/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/67.jpg"
+    },
+    "Eight of Buffalo (Coins)": {
+        "card_name": "Eight of Buffalo (Coins)",
+        "card_meaning": "The Eight of Coins in this position recommends that you focus on your main project and produce as much as you can, while staying healthy. This is an important time for meeting goals. However, do not work so hard that quality suffers.",
+        "upright_meaning": "The Eight of this suit is the card of works. We see here the successful artisan spending time at his bench, hammering out the commissions he has attracted because of his skill. This artist is the best in her or his class, so popular that it's become difficult keep up with demand. She is paid whatever she asks and accepts only the most worthy assignments.",
+        "reversed_meaning": "The Eight of Coins reversed asks that you not mistake your work for your identity. It is a common error to overly identify with one's livelihood.",
+        "card_url": "https://www.tarot.com/tarot/cards/eight-of-coins/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/71.jpg"
+    },
+    "Queen of Water (Cups)": {
+        "card_name": "Queen of Water (Cups)",
+        "card_meaning": "The Queen of Cups in this position encourages you to be generous, kind and forgiving. Support the ability of others to get what they want. Nevertheless, remember as with anyone in a caretaking position, you have a fine line to walk. You do not want your loved ones or teammates to become complacent or dependent, as if they can take your support for granted with little or no consideration for your needs.",
+        "upright_meaning": "Traditionally, representing the energy of a Queen, this card traditionally portrays a sensitive, vulnerable, omniscient woman who offers unconditional love. She is supremely empathic -- sometimes to a fault. Her caring nature exposes her to everybody else's emotions and needs.",
+        "reversed_meaning": "The Queen of Cups reversed suggests that you stop all efforts to dull your pain or distract yourself from it. Looking the other way is not going to help you anymore. Neither is trying to rationalize away or control the situation.",
+        "card_url": "https://www.tarot.com/tarot/cards/queen-of-cups/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/48.jpg"
+    },
+    "Knight of Rainbows (Swords)": {
+        "card_name": "Knight of Rainbows (Swords)",
+        "card_meaning": "The Knight of Swords in this position advises you to remain open to conflicting ideas instead of surrounding yourself exclusively with people who agree with you. This Knight is most effective when testing his ideas in a debate. Emulate his ability to communicate successfully by keeping your conversations impersonal and humorous so no hurt feelings are provoked.",
+        "upright_meaning": "This card is traditionally entitled The Knight, but in some modern decks appears as The Prince. Traditionally, this card portrays the restless mind, aroused by thoughts of offense and defense, storming around searching for a target to pounce on. He often feels slighted, has a chip on his shoulder and bristles with a hostile attitude. His usual method is to look for someone to blame for his irritation.",
+        "reversed_meaning": "When the Knight of Swords is reversed, fear of conflict is so powerful that you will bargain away all that is meaningful just to get through, or out of, a tough situation. You will say what you don't mean, promise what you can't deliver and hope to be saved by a miracle, just to see yourself delivered from a stressful time.",
+        "card_url": "https://www.tarot.com/tarot/cards/knight-of-swords/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/61.jpg"
+    },
+    "Death": {
+        "card_name": "Death",
+        "card_meaning": "The Death card advises you to detach from the old order. You may want to close accounts, complete unfinished tasks, and gather your harvest. It is time to move on. If you cut the cords that have bound you to old ways and outdated conventions, you could free yourself to join the sweep of incoming light. This is not an excuse to reject others or hurt them in any way. It is simply a time to move toward your ultimate interests.",
+        "upright_meaning": "The Death card is not about the literal death of any person. It may represent the death of something else, like a project, plan, or relationship. This card also points to a time of harvest, symbolized in classical decks by the reaping skeleton. Unless the fruits of summer are harvested, they are lost to winter's harshness, and the people do not eat. As the scythe cuts the cords that link us to the past, it liberates us to go forward without fear, because we have nothing left to lose. Everything being pruned away is recycled for the fertility of the future, so that nothing is really ever lost, despite seasonal cycles of gain and loss.",
+        "reversed_meaning": "The Death card reversed suggests that you might long for the cord to be cut, but unfortunately you have to persist and endure without the relief of an ending. It is not time for termination and closure yet.",
+        "card_url": "https://www.tarot.com/tarot/cards/death/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/13.jpg"
+    },
+    "Five of Lightening (Wands)": {
+        "card_name": "Five of Lightening (Wands)",
+        "card_meaning": "The Five of Wands in this position encourages you to find your natural ambition. Identify what energizes you, what you would fight for and what you are passionate about -- even when you're tired or discouraged. Strive to make that the centerpiece of your mission.",
+        "upright_meaning": "This suit, most often called \"Wands\" and sometimes called \"Rods\" or \"Staves,\" represents initiative, ambition, drive and desire. This is the suit of enterprise and risk-taking.",
+        "reversed_meaning": "When team spirit fails despite all effort, your inner strength can pull you through. When the Five of Wands is reversed there is no way to completely overcome the competitive environment; you are unable to bond with potential partners in a team spirit. You must fall back on your own sense of mission and sense of survival to provide direction.",
+        "card_url": "https://www.tarot.com/tarot/cards/five-of-wands/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/26.jpg"
+    },
+    "Queen of Buffalo (Coins)": {
+        "card_name": "Queen of Buffalo (Coins)",
+        "card_meaning": "The Queen of Coins in this position advises you to trust the forces that have taken care of you up to this point. Continue to express your truth without worrying that you are going to lose the roof over your head or the bed you sleep in. It is your destiny to be safe and sound at this time in your life.",
+        "upright_meaning": "Traditionally, representing the energy of a Queen, this feminine guardian is endowed with enormous good sense and problem solving energy, but she is not particularly entrepreneurial. She loves to advise, encourage, and empower those she gets involved with, studying their problems with them and setting them up to solve them. Traditionally, she was pictured as the Sibyl or Oracle, perhaps a Tarot reader, who made herself available to people in need, no matter what their social class or situation. In modern times, she will be found educating, healing, managing disaster aid programs or a charitable drive of some sort.",
+        "reversed_meaning": "The Queen of Coins reversed suggests that you should make an objective assessment of the way you manage your life and identify areas that can be improved. This may be a warning against becoming addicted to whatever pleasure has you in its sway.",
+        "card_url": "https://www.tarot.com/tarot/cards/queen-of-coins/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/76.jpg"
+    },
+    "Two of Rainbows (Swords)": {
+        "card_name": "Two of Rainbows (Swords)",
+        "card_meaning": "The Two of Swords in this position advises that this may not be a good time to make a decision. Neither allow others to push you beyond your boundaries, nor permit yourself to act impulsively. You need to fully assimilate the situation before making any moves -- even if not having a solution as soon as you want causes tension.",
+        "upright_meaning": "The Two in this suit usually represents conflicting ideas or visions. These must be reconciled by communication in order to arrive in a harmonious place or to complete strategic negotiations. Mixed signals prevail.",
+        "reversed_meaning": "When the Two of Swords is reversed (i.e. upside-down), it suggests creative disagreements that can lead to the realization that two heads are better than one. You have the capacity to create synergy or at least provide common ground where argument once prevailed.",
+        "card_url": "https://www.tarot.com/tarot/cards/two-of-swords/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/51.jpg"
+    },
+    "King of Lightening (Wands)": {
+        "card_name": "King of Lightening (Wands)",
+        "card_meaning": "The King of Wands in this position reminds us that our lives are designed to bring us eventually to a place of self-ownership. An opportunity for self-empowerment is presenting itself to you now. Recognize that through your attitude and the way you express yourself to others, you hold the power over your own experiences in life.",
+        "upright_meaning": "This suit, most often called \"Wands\" and sometimes called \"Rods\" or \"Staves,\" represents initiative, ambition, drive and desire. This is the suit of enterprise and risk-taking.",
+        "reversed_meaning": "The wise use of power is to respectfully recognize the authority of others. When the King of Wands is reversed, there is danger in mistaking empowerment for domination, hence a potential for undermining the autonomy of others. Exercise what you think is the best, most positive use of power. Be on guard against any old tendencies to grab the controls and take over.",
+        "card_url": "https://www.tarot.com/tarot/cards/king-of-wands/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/35.jpg"
+    },
+    "The Magician": {
+        "card_name": "The Magician",
+        "card_meaning": "Have faith in your innate creativity. The Magician advises you give your questioning nature and free-associating mind plenty of room to explore the subject at hand. Behave just as if you were an open-minded and curious scientist. Through this process, you may bring freshness and clarity into the situation that is both stimulating and catalytic.",
+        "upright_meaning": "Traditionally, The Magician is one who can demonstrate hands-on magic -- as in healing, transformative rituals, alchemical transmutations, charging of talismans, and the like. A modern Magician is any person who completes the circuit between heaven and Earth; one who seeks to bring forth the divine gold within her or himself.",
+        "reversed_meaning": "The Magician card reversed suggests you may be working against your own creativity. Perhaps you feel that your ideas are too scandalous or too precedent breaking. Perhaps you feel it should be someone else who communicates these insights or challenges. Perhaps you are uncomfortable with taking a leadership position, even a temporary one.",
+        "card_url": "https://www.tarot.com/tarot/cards/the-magician/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/1.jpg"
+    },
+    "Queen of Rainbows (Swords)": {
+        "card_name": "Queen of Rainbows (Swords)",
+        "card_meaning": "The Queen of Swords in this position advises that you refrain from remaining dependent on others at this time. Instead of placing too much confidence in the promises people have made, harbor only those ambitions you know you can accomplish yourself.",
+        "upright_meaning": "Representing the energy of a Queen, this feminine power was traditionally known as a widow, crone or divorcee. In modern times, she can be viewed as a model of self-sufficiency, independence and intelligence. She often has extremely high standards due to her subtle sensitivities, which can be perceived by those around her as being critical or hard to please. Her true motive is to refine the world, to upgrade peoples' understanding -- so that everyone can have the space they need to become fully themselves.",
+        "reversed_meaning": "When the Queen of Swords is reversed, it indicates a propensity for denying your deepest feelings. Somewhere you decided that speaking up for the emotional truth is selfish and unattractive. As a result, you are prejudiced against your own needs.",
+        "card_url": "https://www.tarot.com/tarot/cards/queen-of-swords/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/62.jpg"
+    },
+    "Six of Water (Cups)": {
+        "card_name": "Six of Water (Cups)",
+        "card_meaning": "When the Six of Cups is in this position, take a look at what is repetitive or cyclical in your life; what links the present situation to the last such experience. A new beginning requires new energy and concentration. Until you analyze the past, you will continue to drift with its current.",
+        "upright_meaning": "The Six of this suit generally represents a refreshing openness and innocence, a willingness to learn and an optimism that things will get better as we advance together in understanding. The traditional title, The Past, reminds us of our original nature, when we were young and enthusiastic, when anything was possible and the future was an open book. We are to remember that this same freshness, those new possibilities, are always available to us, even now.",
+        "reversed_meaning": "With the Six of Cups reversed, you can finally close accounts with the emotional undertow that has been part of your life. You can now revisit those wounded places calmly, without the fear that you will be drawn back in.",
+        "card_url": "https://www.tarot.com/tarot/cards/six-of-cups/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/41.jpg"
+    },
+    "Page of Lightening (Wands)": {
+        "card_name": "Page of Lightening (Wands)",
+        "card_meaning": "This card is traditionally entitled a Page, but in some modern decks as a Princess. In this position, this card suggests that you cannot know how to facilitate communication until you have studied your environment. Your task may be to blend into your surroundings so you can gather information and get a clear sense of what is going on around you.",
+        "upright_meaning": "This suit, most often called \"Wands\" and sometimes called \"Rods\" or \"Staves,\" represents initiative, ambition, drive and desire. This is the suit of enterprise and risk-taking.",
+        "reversed_meaning": "Rather than worry about your image, emphasize the beneficial contribution you could make.",
+        "card_url": "https://www.tarot.com/tarot/cards/page-of-wands/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/32.jpg"
+    },
+    "Three of Rainbows (Swords)": {
+        "card_name": "Three of Rainbows (Swords)",
+        "card_meaning": "The Three of Swords in this position advises you to strike out on your own. Become more independent. Separate yourself from people and forces you do not feel compatible with. Grow a thicker skin.",
+        "upright_meaning": "Traditionally, the Three of Swords signified separation or the breakup of a significant relationship, including the tragic emotions that come along with such an event. Some cards show the horizon filled with storm clouds and flashing lightning.",
+        "reversed_meaning": "The Three of Swords reversed suggests that a storm is clearing, feelings are mending, communication skills are improving, accusations and paranoia are diminishing. The necessity of conflict seems to be draining away, a change that is worth being grateful for, even though some challenges may still arise from this episode.",
+        "card_url": "https://www.tarot.com/tarot/cards/three-of-swords/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/52.jpg"
+    },
+    "The Star": {
+        "card_name": "The Star",
+        "card_meaning": "The Star card advises that you rededicate yourself to your higher values, increase your spiritual cultivation and meditation practice, and surrender to the greater good. Connect to your higher self -- a being of a larger realm traveling on an evolutionary course that started long ago and runs indefinitely into the future. This is the part you wish to contact and communicate with.",
+        "upright_meaning": "The Star Tarot card is about reconnecting one's soul with the divine -- the transcending of personality, family, community, and reputation. It has to do ultimately with the freedom to be one's self. The soul is responding to celestial influences -- forces that can provide the personality with a stronger sense of purpose. The Star card helps us to remember our exalted origins and our attraction to a higher union.",
+        "reversed_meaning": "The Star card reversed suggests that you are temporarily alienated from your brilliance and usefulness. You may feel clumsy, unskilled, at odds within your true nature.",
+        "card_url": "https://www.tarot.com/tarot/cards/the-star/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/17.jpg"
+    },
+    "Two of Buffalo (Coins)": {
+        "card_name": "Two of Buffalo (Coins)",
+        "card_meaning": "The Two of Coins in this position advises you not to choose anything definitive for the time being. Give yourself a little more time to sort out your feelings and any mixed messages you may be receiving from others.",
+        "upright_meaning": "This suit, most often named \"Coins\" or \"Pentacles\", is a symbol for a magical talisman that represented wealth or potential. This suit represents something supportive that is available to you -- whether it be health, some kind of talent, or a material or financial resource.",
+        "reversed_meaning": "The Two of Coins reversed suggests that you let go of passivity if this is a time for action. You may be displaying too much ambivalence about outcomes, much to your detriment.",
+        "card_url": "https://www.tarot.com/tarot/cards/two-of-coins/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/65.jpg"
+    },
+    "Eight of Lightening (Wands)": {
+        "card_name": "Eight of Lightening (Wands)",
+        "card_meaning": "With the Eight of Wands in this position, learn all you can from recent successful experiences. Take note of what worked before and what did not. You possess awareness as to how to effectively apply your imagination to shape the world in productive and aesthetic ways. Thus, the testament to your talents may be revealed for everyone to see and admire.",
+        "upright_meaning": "This suit, most often called \"Wands\" and sometimes called \"Rods\" or \"Staves,\" represents initiative, ambition, drive and desire. This is the suit of enterprise and risk-taking.",
+        "reversed_meaning": "Awaken to the changes that are happening in your life; denial does not serve you. When the Eight of Wands is reversed, it is tempting to deny that a powerful chain of consequences has been unleashed in your life. It's very important that you awaken to the changes happening all around you. This is not a good time for you to assume that everything is fine the way it is.",
+        "card_url": "https://www.tarot.com/tarot/cards/eight-of-wands/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/29.jpg"
+    },
+    "The Tower": {
+        "card_name": "The Tower",
+        "card_meaning": "With the Tower card, think of yourself as an agent of transformation. This self-sacrificing role is likely to create stressful situations. Your vision shows you that a radical change has already been unleashed by forces much larger than mere mortals, and therefore you are no longer resisting.",
+        "upright_meaning": "In practically all renditions of the Tower card, disaster is striking or has just struck. The demons of madness and despair are released from ancient hiding places, and nature conspires with human failings to destabilize a society. The upheaval is collective and impersonal. Let us remember these images were created for the educated nobles and clergy -- reminding them that they have the most to lose if the hierarchy is toppled.",
+        "reversed_meaning": "The Tower card reversed suggests that the drama is over. All the leaning towers have fallen. Leave behind the issues and emotions that caused this to happen.",
+        "card_url": "https://www.tarot.com/tarot/cards/the-tower/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/16.jpg"
+    },
+    "Seven of Water (Cups)": {
+        "card_name": "Seven of Water (Cups)",
+        "card_meaning": "The Seven of Cups in this position advises that you relax your mind and open to the dreams and imaginings your inner child loves to entertain. Allow yourself to imagine a truly positive outcome for this situation. Perform an exercise in creative visualization by relaxing your guard and letting go of your fears.",
+        "upright_meaning": "The Seven of this suit typically refers to works of the imagination, the use of dream and vision to invent a future different than the life one is currently living. This card reminds us that our outcomes are not set in stone.",
+        "reversed_meaning": "The Seven of Cups reversed reminds you to reawaken to playfulness, joy and curiosity. Perhaps a lack of purpose is having a deadening effect. It's almost as if it is saying that you have forgotten how to dream. As a result, mind and imagination can become dry as a desert where only the harsh light of material reality can penetrate. In such a case, there is no golden glow, there is no higher purpose or magic spark.",
+        "card_url": "https://www.tarot.com/tarot/cards/seven-of-cups/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/42.jpg"
+    },
+    "Ace of Buffalo (Coins)": {
+        "card_name": "Ace of Buffalo (Coins)",
+        "card_meaning": "The Ace of Coins in this position advises that you apply nature's lesson of compound interest and develop your project gradually. A slow and steady buildup -- visible or invisible -- makes change and growth inevitable. Akin to the changing of the seasons, you do not notice this trend from day to day. As the year comes full circle, however, you cannot miss the changes.",
+        "upright_meaning": "This suit, most often named \"Coins\" or \"Pentacles\", is a symbol for a magical talisman that represented wealth or potential. This suit represents something supportive that is available to you -- whether it be health, some kind of talent, a material or financial resource.",
+        "reversed_meaning": "The Ace of Coins reversed suggests that you should reconnect with the values you are trying to serve. Perhaps external appearances have to distinguish between true gold and costume jewelry.",
+        "card_url": "https://www.tarot.com/tarot/cards/ace-of-coins/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/64.jpg"
+    },
+    "Knight of Buffalo (Coins)": {
+        "card_name": "Knight of Buffalo (Coins)",
+        "card_meaning": "When the Knight of Coins (in some decks, The Prince) falls in this position you are being advised to offer up your services to some project or enterprise in front of you. Your willing participation can make the difference between a marginal performance and a great one.",
+        "upright_meaning": "This card is usually called The Knight, but in some modern decks appears as the Prince. Traditionally, this card in this suit pictures an overseer of fertility and growth. His period of ascendancy is during the quiet years between conflicts, when everybody can collaborate in raising the collective standard of living. His horse is usually huge and thickset, more suitable to pulling a plow than riding swiftly into battle. His temperament is easygoing and relaxed, he's moving at the rate of the flow, because he knows that you can't hurry time.",
+        "reversed_meaning": "The Knight of Coins reversed suggests that you should stop wasting energy on people who can't appreciate you. Stop throwing good money after bad.",
+        "card_url": "https://www.tarot.com/tarot/cards/knight-of-coins/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/75.jpg"
+    },
+    "Ten of Lightening (Wands)": {
+        "card_name": "Ten of Lightening (Wands)",
+        "card_meaning": "The Ten of Wands in this position advises you to remember the true, simple heart of your youth and all the idealism it held. Now may be the time to reach deep into yourself and identify your purest, most wholesome impulses. As you do this, allow your optimistic and honorable side to see what's good about the world.",
+        "upright_meaning": "This suit, most often called \"Wands\" and sometimes called \"Rods\" or \"Staves,\" represents initiative, ambition, drive and desire. This is the suit of enterprise and risk-taking.",
+        "reversed_meaning": "Lack of perspective on your life may impair your progress. The Ten of Wands reversed suggests that you are struggling to get a sense of perspective on the situation. A lack of objectivity may impair your ability to follow through and bring things to closure.",
+        "card_url": "https://www.tarot.com/tarot/cards/ten-of-wands/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/31.jpg"
+    },
+    "Page of Rainbows (Swords)": {
+        "card_name": "Page of Rainbows (Swords)",
+        "card_meaning": "When the Page of Swords (in some decks, a Princess) is in this position, the situation requires subtle change in order for it to be brought to the highest good for all concerned. In contrast to times when one can best serve the greater good by being visible and heroic, this is a time when you must keep your own counsel, cover your tracks and stealthily accomplish what would be impossible to complete without privacy.",
+        "upright_meaning": "This card is traditionally entitled The Page, but in some modern decks appears as a Princess. The traditional interpretation is about a messenger, an emissary or liaison between separate camps, charged with faithfully representing one side's communications to the other. Because of this role, we do not think of this person as a servant, but rather as a diplomat, facilitating sensitive negotiations, often under difficult conditions.",
+        "reversed_meaning": "When the Page of Swords is reversed, it may be that one's critical tendencies are given too much leeway. Although you may declare a need to state the truth, a primary urge may be to recount another's shortcomings.",
+        "card_url": "https://www.tarot.com/tarot/cards/page-of-swords/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/60.jpg"
+    },
+    "Wheel of Fortune": {
+        "card_name": "Wheel of Fortune",
+        "card_meaning": "The Wheel of Fortune advises you follow the flow of events. Physical moves, spiritual awakenings, or dramatically changing social patterns could arise now. Accept these transformations.",
+        "upright_meaning": "The central theme of The Wheel of Fortune card is cyclical change. The wheel keeps on rolling, churning events in a ceaseless progression of ups and downs, either way freeing us from the past. No one can escape its cyclical action, which can feel somewhat terrifying -- no matter whether we are rising or falling. When one is balanced on top of the wheel, there is a moment of crystal clarity. However, the only part of the wheel that's actually not going up and down is the hub, which represents your eternal self.",
+        "reversed_meaning": "When the Wheel of Fortune card is reversed, it suggests that you may have dropped from the heights and have been sent back to the beginning -- to either start over or reframe your plan.",
+        "card_url": "https://www.tarot.com/tarot/cards/wheel-of-fortune/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/10.jpg"
+    },
+    "The Sun": {
+        "card_name": "The Sun",
+        "card_meaning": "The Sun card advises you to have confidence in your natural divinity. Throw off any cultural conditioning that keeps you from being authentic with yourself. Step into the full light of truth and reveal your motives and principles. Once done, you will no longer give away power to the people that criticize and shame you. Focus on the positive and the real. Your authentic shining self can be a light for others if you project it without contrivance.",
+        "upright_meaning": "The Sun card is about the self -- who you are and how you cultivate your personality and character. The Sun's radiance is where one's original nature can be encountered in health and safety. The limitations of time and space are stripped away; the soul is refreshed and temporarily protected from the chaos outside the garden walls. Under the light of the Sun, life reclaims its primordial goodness, truth, and beauty. If one person is shown on this card, it is usually signifying a human incarnation of the divine. When two humans are shown, the image is portraying a resolution of the tension between opposites at all levels. It's as if this card is saying \"You can do no wrong -- it's all to the good!\"",
+        "reversed_meaning": "The Sun card reversed suggests that this is one of two cards that traditionally have no negative meaning. Perhaps you will choose to take extra care to humbly count your blessings and give credit to all that have contributed to your successes.",
+        "card_url": "https://www.tarot.com/tarot/cards/the-sun/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/19.jpg"
+    },
+    "Ace of Lightening (Wands)": {
+        "card_name": "Ace of Lightening (Wands)",
+        "card_meaning": "The Ace of Wands in this position encourages energetic movement toward activity. Brace yourself and get ready to spring into action. You may need to make your move soon, so make sure you are fully prepared. Trust your instincts and spontaneity. When the opportunity comes, you may want to seize it without hesitation.",
+        "upright_meaning": "This suit, most often called \"Wands\" and sometimes called \"Rods\" or \"Staves,\" represents initiative, ambition, drive and desire. This is the suit of enterprise and risk-taking.",
+        "reversed_meaning": "The Ace of Wands reversed suggests that you may be resisting change, which can seem frightening. Nevertheless, it is to your ultimate advantage not to balk even though the situation may seem risky.",
+        "card_url": "https://www.tarot.com/tarot/cards/ace-of-wands/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/22.jpg"
+    },
+    "King of Water (Cups)": {
+        "card_name": "King of Water (Cups)",
+        "card_meaning": "The King of Cups in this position advises that you closely examine your conscience and bring your personal mission into alignment with what is best for everyone. You can then step into your community or situation with integrity and an ability to communicate the highest wisdom.",
+        "upright_meaning": "Traditionally, representing the energy of a King, this card usually portrays a watery background, with a man seated on a throne, holding the Cup of Mystery in his hand. Occasionally, his cup is fulminating like the mouth of a volcano, emanating light, but never boiling over.",
+        "reversed_meaning": "The King of Cups reversed is bitterly holding a grudge or some hatred -- withholding his natural propensity for forgiveness and blessing. This reversal creates an emotional vacuum around him and deprives him of serenity.",
+        "card_url": "https://www.tarot.com/tarot/cards/king-of-cups/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/49.jpg"
+    },
+    "Eight of Water (Cups)": {
+        "card_name": "Eight of Water (Cups)",
+        "card_meaning": "With the Eight of Cups in this position, look inside and recognize the part of you that still nurses an old grudge from a past injury or trauma. For the most part, your forward-looking self has gotten up and moved along. You are getting on with your life. There may still a part of you, however, that holds out and resists the healing. Are you nursing old wounds from painful losses of faith and trust? If so, now may be a good time to scrutinize your current motives.",
+        "upright_meaning": "The Eight of this suit is often used to signify a disappointment, emotional setback, betrayal or injury to the heart. Some Tarot decks illustrate this principle showing a young woman who has just been molested and then cast aside by a stranger passing through her village.",
+        "reversed_meaning": "The Eight of Cups reversed suggests that you may have experienced a terrible event, yet you have somehow not allowed it to ruin your life. You don't indulge in the kind of emotional agony this card generally represents, which may be a sign that you are more resilient than others; you bounce back from setbacks.",
+        "card_url": "https://www.tarot.com/tarot/cards/eight-of-cups/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/43.jpg"
+    },
+    "Six of Rainbows (Swords)": {
+        "card_name": "Six of Rainbows (Swords)",
+        "card_meaning": "The Six of Swords in this position reminds you that time is of the essence. You've seen the big picture, and good ideas have occurred to you about what needs to be done. Now it is necessary to take action. There may be no more time for debate.",
+        "upright_meaning": "The Six of this suit has generally been associated with the objectivity of scientific method, employed through the generations to sift fact from superstition, build facts into theories, and theories into laws which we can trust and use to improve our lives. One early title for this card was The Navigator -- one who has learned enough about the relation between the Earth and the heavens to be able to set a course across trackless oceans and arrive at a chosen spot on distant shores.",
+        "reversed_meaning": "When the Six of Swords is reversed, you are not using your rational, scientific, systematic, logical mind to its fullest potential. As a result, you are compromising your objectivity and limiting your perception of possibilities in the situation.",
+        "card_url": "https://www.tarot.com/tarot/cards/six-of-swords/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/55.jpg"
+    },
+    "Ten of Buffalo (Coins)": {
+        "card_name": "Ten of Buffalo (Coins)",
+        "card_meaning": "The Ten of Coins in this position advises that you think of yourself as one who may be of great benefit to people. No matter whether it be a service, an invention or an idea -- you know you are holding a storehouse of value. Your potential treasure is enough to take care of you and yours for a long time. Exactly how are you going to administer the rewards of your talent?",
+        "upright_meaning": "The Ten of this suit represents the final result of cumulative efforts -- perhaps after generations of effort -- resulting in such abundance that it directly and indirectly supports a lot of people. One layer of meaning refers to the pride of supporting your own lineage of well-loved souls.",
+        "reversed_meaning": "The Ten of Coins reversed suggests that having to make an entirely new start is sometimes a blessing. You may feel as if you have experienced a terrible loss or a fall from grace. This may be true, but both the having and the losing are part of the fluctuating evolution of human consciousness. Sometimes you just have to begin again.",
+        "card_url": "https://www.tarot.com/tarot/cards/ten-of-coins/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/73.jpg"
+    },
+    "Queen of Lightening (Wands)": {
+        "card_name": "Queen of Lightening (Wands)",
+        "card_meaning": "The Queen of Wands in this position reveals a need to hold your place in the chain of command and respect the hierarchy (at least for now). This may not be a time for you to be at the helm, even if you are motivated by a strong dedication to completing a project or overcoming a challenge.",
+        "upright_meaning": "This suit, most often called \"Wands\" and sometimes called \"Rods\" or \"Staves,\" represents initiative, ambition, drive and desire. This is the suit of enterprise and risk-taking.",
+        "reversed_meaning": "Reveal any hidden agendas before they alienate partners or associates.",
+        "card_url": "https://www.tarot.com/tarot/cards/queen-of-wands/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/34.jpg"
+    },
+    "Four of Water (Cups)": {
+        "card_name": "Four of Water (Cups)",
+        "card_meaning": "The Four of Cups in this position wants you to take a clear look at how stalled or distracted you have become. You may have been bogged down by negativity, hopelessness or a sense of limitation. It is not to your advantage, however, to see the world through such a narrow lens. Cut through some of the forces that undermine you, causing you to feel incapable. Sometimes you have to define what you are \"for\" by defining what you are \"against.\" Decide that you are not as heavy as the cup of earth, not placid as is the cup of water, not turbulent as is the cup of air. Rather, now may be the time to be as aroused as is the cup of fire. This arousal may constitute liberation from the circumstances that may have brought you here.",
+        "upright_meaning": "The suit often named Cups is also referred to as Chalices or Hearts. It represents the emotional and psychic aspects of life -- fantasy, imagination, feelings, love.",
+        "reversed_meaning": "The Four of Cups reversed indicates that you may not be making the reasons for some reluctance you are feeling clear to yourself or others. Some part of you is resisting the flow of events, but you are not admitting your own part in this.",
+        "card_url": "https://www.tarot.com/tarot/cards/four-of-cups/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/39.jpg"
+    },
+    "The Empress": {
+        "card_name": "The Empress",
+        "card_meaning": "The Empress advises you to trust in the good sense you have shown up to this point. Recognize your good intentions in carrying out your responsibilities as a compassionate human. You are capable of demonstrating the finest aspects of your personality.",
+        "upright_meaning": "The Empress is a Major Arcana, or \"trump\" card, that portrays the energy of the great mother. She is nature, around us but also within us, the ever-unfolding source of life-giving power. The Empress is often pictured as a pre-Christian Goddess, as the one whom The High Priestess is channeling down to Earth for the rest of us.",
+        "reversed_meaning": "Because the Empress represents Nature, when she is reversed she has tremendous natural power to correct her heedless children. Volcanoes, tsunami, hurricanes and the like symbolize violent emotions triggered by ignorant or foolish humans.",
+        "card_url": "https://www.tarot.com/tarot/cards/the-empress/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/3.jpg"
+    },
+    "Judgement": {
+        "card_name": "Judgement",
+        "card_meaning": "The Judgment card advises that you allow yourself to grow, transform, and release hidden potentials within yourself. Divest yourself of fruitless endeavors without neglecting your duties. At the same time, invest your energies in new growth.",
+        "upright_meaning": "The Judgement card, sometimes called \"Resurrection,\" represents the great reunion that the ancients believed would happen once in every age. This was the time when souls are harvested and taken home to their place of origin, outside the solar system. Then the world is seeded with a batch of new souls and the process starts over.",
+        "reversed_meaning": "The Judgment card reversed suggests that you feel like you are bumping into externally imposed restrictions, even if you thought you had let go of limitations. If that's the case, you need to accommodate those inexplicable blockages wherever they appear, without allowing the growth force rising within you to diminish.",
+        "card_url": "https://www.tarot.com/tarot/cards/judgement/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/20.jpg"
+    },
+    "Six of Buffalo (Coins)": {
+        "card_name": "Six of Buffalo (Coins)",
+        "card_meaning": "The Six of Coins in this position asks you to think of yourself as a cosmic talent agent, seeking individuals who show a spark or gift. You may help them refine and upgrade their skills to fit a larger context. The outcome is a peer relationship with a sense of mutual regard and admiration.",
+        "upright_meaning": "This suit, most often named \"Coins\" or \"Pentacles\", is a symbol for a magical talisman that represented wealth or potential. This suit represents something supportive that is available to you -- whether it be health, some kind of talent, a material or financial resource.",
+        "reversed_meaning": "The Six of Coins reversed suggests that the idea of payback may have become too important to you. The reversal of this card points to someone who is too focused on the idea of getting something back.",
+        "card_url": "https://www.tarot.com/tarot/cards/six-of-coins/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/69.jpg"
+    },
+    "Strength": {
+        "card_name": "Strength",
+        "card_meaning": "The Strength card advises that you assertively discipline yourself and separate self interest from enlightened wisdom. Deliberately identify with your intuition, even if it works against the desires of your willful ego.",
+        "upright_meaning": "The Strength Tarot card represents nature, which, however wild in its primal form, is tamed by our subtler, finer self -- our feminine side, our inner self. The will and passion of our instinctive nature does not need to be broken, but refined and brought to consciousness, so that all levels of creation may come into harmony.",
+        "reversed_meaning": "The Strength card reversed suggests that you are in a position where you have little power to affect behavior. No amount of modeling, persuasion or leadership will affect the out-of-control, untamed force that is set loose.",
+        "card_url": "https://www.tarot.com/tarot/cards/strength/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/8.jpg"
+    },
+    "The Hermit": {
+        "card_name": "The Hermit",
+        "card_meaning": "The Hermit advises that you think things through carefully. The demands on you have been high, giving you scant time for reflection. While you have a gift for understanding the larger implications involved, you need some private time to consider the steps to take in the future. You can't just lock yourself in your room for fifteen minutes and expect to come up with profound solutions. You need more seclusion and time to assimilate and process.",
+        "upright_meaning": "The challenge of The Hermit card is to be able to recognize a teacher in a humble disguise. This font of mysterious knowledge will not make it easy for the student to acquire his wisdom, as it takes time and long contemplation to fathom what he knows. He often speaks wordlessly, or in ancient and barbaric tongues, communicating with the elements, animals, and nature herself.",
+        "reversed_meaning": "When the Hermit card is reversed, you may be resisting the process of evolving towards a level of wisdom that sets you apart. Fear of the path is haunting you; it could be a fear of loneliness.",
+        "card_url": "https://www.tarot.com/tarot/cards/the-hermit/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/9.jpg"
+    },
+    "The Lovers": {
+        "card_name": "The Lovers",
+        "card_meaning": "The Lovers card advises that you study your options and make the wisest choice. Carefully consider your long-term interests. There is no judgment on what you choose to keep from the array of possibilities before you. Just watch out for choices that will produce dissatisfaction and discontent.",
+        "upright_meaning": "Although it has taken on a strictly romantic revision of meaning in some modern decks, traditionally The Lovers Tarot card reflected the challenges of choosing a partner. At a crossroads, one cannot take both paths. The images on this card in different decks have varied more than most, because we have had so many ways of looking at sex and relationships across cultures and centuries.",
+        "reversed_meaning": "The Lovers card reversed may indicate that you are going along with a divided situation because you have a vested interest in opposition. You can't resolve this situation until you own up to your own double standard.",
+        "card_url": "https://www.tarot.com/tarot/cards/the-lovers/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/6.jpg"
+    },
+    "Five of Water (Cups)": {
+        "card_name": "Five of Water (Cups)",
+        "card_meaning": "The Five of Cups in this position advises you to tighten your belt, make do with less and show more appreciation for the things you do have. If something is truly yours, it cannot be lost. When you are experiencing feelings of loss, it may be because of an inappropriate emotional attachment. If you promise things that you cannot deliver, then you might be setting yourself up for disappointment to follow. In overestimating our abilities, we are forced to face our limits.",
+        "upright_meaning": "The Five of this suit traditionally portrays the mess that is left after an emotional upheaval, such as a tantrum or fit of rage. Consequences run the gamut from a hangover and lost wages, to abuse and ruined relationships.",
+        "reversed_meaning": "The Five of Cups reversed represents a paradoxical situation wherein what seems like the worst thing that could happen actually creates a better circumstance.",
+        "card_url": "https://www.tarot.com/tarot/cards/five-of-cups/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/40.jpg"
+    },
+    "The Fool": {
+        "card_name": "The Fool",
+        "card_meaning": "The Fool advises that you lighten up. Let yourself be spontaneous enough to stretch beyond the realm of logic. There is no advantage to be gained by thinking you possess the knowledge, power, or control to direct reality. Open and receive without question, instead of trying to manage what's happening right now. The Fool has no ambition to manipulate a specific outcome. Just be happy to be part of the whole.",
+        "upright_meaning": "Pamela Coleman-Smith's artful rendition of The Fool in the Rider-Waite Tarot deck is often used to represent Tarot in general. Early classical versions of The Fool card, however, portray quite a different character -- a person driven by base needs and urges, who has fallen into a state of poverty and deprivation.",
+        "reversed_meaning": "When the Fool card is reversed, you are encountering an unfinished side of yourself, a part still caught in the shadows of ignorance or immaturity. An emotional reflex or psychological attitude could be holding you back from responding authentically and naturally.",
+        "card_url": "https://www.tarot.com/tarot/cards/the-fool/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/0.jpg"
+    },
+    "Six of Lightening (Wands)": {
+        "card_name": "Six of Lightening (Wands)",
+        "card_meaning": "The Six of Wands in this position advises taking action on your most burning and passionate convictions, no matter what the social consequences. Continue to articulate and define yourself in light of the torch you are carrying. This inspires others to conceive some new ideas of their own.",
+        "upright_meaning": "This suit, most often called \"Wands\" and sometimes called \"Rods\" or \"Staves,\" represents initiative, ambition, drive and desire. This is the suit of enterprise and risk-taking.",
+        "reversed_meaning": "The Six of Wands reversed encourages you to agree to take a leadership role even if it's uncomfortable. Along with the admiration and privileges of a leadership role comes the pressure of people's expectations and a certain lack of privacy. You cannot hold up your good side twenty-four hours a day, so surrender to the reality that you will be more visible and accountable now, warts and all. Adjust your behavior to accommodate this predicament.",
+        "card_url": "https://www.tarot.com/tarot/cards/six-of-wands/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/27.jpg"
+    },
+    "Two of Lightening (Wands)": {
+        "card_name": "Two of Lightening (Wands)",
+        "card_meaning": "The Two of Wands in this position advises you to respect your own decision making process. Instead of criticizing yourself for indecisiveness, appreciate the various implications of possible choices. Avoid pushing yourself to make a commitment.",
+        "upright_meaning": "This suit, most often called \"Wands\" and sometimes called \"Rods\" or \"Staves,\" represents initiative, ambition, drive and desire. This is the suit of enterprise and risk-taking.",
+        "reversed_meaning": "When decision-making stymies you, look within your Self for the solution. The Two of Wands reversed suggests someone who is momentarily stuck in the process of decision making. You feel like you are in an all-too-familiar hall of mirrors, unable to recognize the real doorway amidst the many reflected images of it.",
+        "card_url": "https://www.tarot.com/tarot/cards/two-of-wands/santa-fe",
+        "card_image": "https://gfx.tarot.com/images/site/decks/santa-fe/full_size/23.jpg"
+    }
+}

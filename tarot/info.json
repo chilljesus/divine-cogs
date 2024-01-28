@@ -1,12 +1,12 @@
 {
     "author": [
-        "TrustyJAID"
+        "NekoJesus"
     ],
-    "description": "Find your tarot reading, your life reading, or pull a random tarot card!",
+    "description": "Get a tarot reading using a comprehensive list of decks.",
     "disabled": false,
     "end_user_data_statement": "This cog does not persistently store data or metadata about users.",
     "hidden": false,
-    "install_msg": "Usage: `[p]tarot life` `[p]tarot reading` `[p]tarot card`",
+    "install_msg": "Usage: `[p]tarot (deck) (user)`",
     "max_bot_version": "0.0.0",
     "min_bot_version": "3.5.0",
     "min_python_version": [
