@@ -40,7 +40,7 @@ class TarotReading(commands.Cog):
         embed.add_field(name="Card Description", value=card['card_meaning'], inline=True)
         embed.add_field(name="Upright Meaning", value=card['upright_meaning'], inline=True)
         #embed.set_image(url=card['card_image'])
-        embed.set_thumbnail(url=card['card-Image'])
+        embed.set_thumbnail(url=card['card_image'])
         embed.set_footer(text=f"Deck: {deck}", icon_url="https://nekoism.co/images/logo-small.png")
         
         await ctx.send(embed=embed)
