@@ -98,9 +98,7 @@ class Bible(commands.Cog):
         [p]bible "revelation 1:1" NRSVUE
         [p]bible "test" KJV
         """
-        # Removed the regex search for version as it's now a separate argument
-
-        # Updated URL construction to use 'search' and 'version'
+        
         if re.match(r"\w+(?: ?)\d+:\d+", search):
             url = "/passage/?search="
         else:
@@ -128,7 +126,7 @@ class Bible(commands.Cog):
                 # Word Search
                 elif text := soup.find("div", {"class": "search-result-list"}):
                     pages = self.parse_search(
-                        text, verses, version, emb_color=await ctx.embed_color()
+                        text, search, version, emb_color=await ctx.embed_color()
                     )
                 # No result checks
                 else:
