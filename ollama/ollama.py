@@ -19,7 +19,8 @@ class Ollama(commands.Cog):
             "model": "",
             "threads": False,
             "bot_name": "",
-            "bot_avatar": ""
+            "bot_avatar": "",
+            "chats": []
         }
         
         default_user = {
@@ -210,7 +211,14 @@ class Ollama(commands.Cog):
     @ollama.command(name="newchat")
     async def newchat(self, ctx):
         if ctx.guild is not None:
-            await ctx.send("New Chat Initialized.")
+            thread_name = f"{message.author.display_name} Chat"
+            thread = await message.create_thread(name=thread_name, auto_archive_duration=60)
+            #async with self.config.guild(ctx.guild).chats() as chats:
+            #    if ctx.channel.id not in chats:
+            #        chats.append(ctx.channel.id)
+            #        await ctx.send("New Chat Initialized.")
+            #    else:
+            #        await ctx.send("This channel is already initialized for new chats.")
         else:
             await ctx.send("New Chat Initialized.")
 
@@ -224,9 +232,6 @@ class Ollama(commands.Cog):
         if ctx.guild is not None:
             await self.config.guild(ctx.guild).bot_name.set(name)
             scope = "Guild"
-        else:
-            await self.config.user(ctx.author).bot_name.set(name)
-            scope = "DM"
         await ctx.send(f"{scope} bot name updated successfully.")
 
     @commands.admin()
@@ -239,9 +244,6 @@ class Ollama(commands.Cog):
         if ctx.guild is not None:
             await self.config.guild(ctx.guild).bot_avatar.set(url)
             scope = "Guild"
-        else:
-            await self.config.user(ctx.author).bot_avatar.set(url)
-            scope = "DM"
         await ctx.send(f"{scope} bot avatar updated successfully.")
 
     ### THE SAUCE ###
@@ -253,7 +255,7 @@ class Ollama(commands.Cog):
         ctx = await self.bot.get_context(message)
         if ctx.valid:
             return
-        if self.bot.user.mentioned_in(message) or (message.reference and message.reference.resolved and message.reference.resolved.author.id == self.bot.user.id) or isinstance(message.channel, discord.DMChannel):
+        if self.bot.user.mentioned_in(message) or (message.reference and message.reference.resolved and message.reference.resolved.author.id == self.bot.user.id) or isinstance(message.channel, discord.DMChannel) or ((message.channel.type.public_thread or message.channel.type.private_thread) and message.channel.owner.id == self.bot.user.id):
             await self.process_message(message)
 
     async def process_message(self, message):
@@ -261,7 +263,7 @@ class Ollama(commands.Cog):
             threads = await self.config.guild(message.guild).threads()
         else:
             threads = False
-        if isinstance(message.channel, discord.DMChannel):
+        if isinstance(message.channel, discord.DMChannel) or ((message.channel.type.public_thread or message.channel.type.private_thread) and message.channel.owner.id == self.bot.user.id):
             history = []
             async for msg in message.channel.history(limit=15):
                 if msg.content == "New Chat Initialized.":
@@ -270,13 +272,13 @@ class Ollama(commands.Cog):
             history = history[::-1]
             formatted_messages = [{"role": "assistant" if msg.author.id == self.bot.user.id else "user", "content": msg.content} for msg in history]
             await self.send_response(message, formatted_messages)
-        elif threads:
+        #elif threads:
             # Create a thread named after the user's name
-            thread_name = f"{message.author.display_name} Chat"
-            thread = await message.create_thread(name=thread_name, auto_archive_duration=60)
+        #    thread_name = f"{message.author.display_name} Chat"
+        #    thread = await message.create_thread(name=thread_name, auto_archive_duration=60)
             # The initial message will be processed in respond_in_thread,
             # so we don't need to send it directly here.
-            await self.respond_in_thread(thread, message)
+        #    await self.respond_in_thread(thread, message)
         else:
             formatted_message = [{"role": "user", "content": message.content}]
             await self.send_response(message, formatted_message)
@@ -323,7 +325,7 @@ class Ollama(commands.Cog):
                     if response.status == 200:
                         data = await response.json()
                         response_message = data.get("message", {}).get("content", "Sorry, I couldn't process your request.")
-                        if bot_name is not None and bot_avatar is not None:
+                        if bot_name is not None and bot_avatar is not None and isinstance(message.channel, discord.DMChannel) is False:
                             webhook = await message.channel.create_webhook(name=bot_name)
                             await webhook.send(str(f"{response_message}"), username=bot_name, avatar_url=bot_avatar)
                             webhooks = await message.channel.webhooks()
