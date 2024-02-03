@@ -172,16 +172,15 @@ class Ollama(commands.Cog):
     async def on_message(self, message):
         if message.author.bot or message.author.id == self.bot.user.id:
             return
-
         ctx = await self.bot.get_context(message)
         if ctx.valid:
             return
-        
         if self.bot.user.mentioned_in(message) or (message.reference and message.reference.resolved and message.reference.resolved.author.id == self.bot.user.id) or isinstance(message.channel, discord.DMChannel):
             await self.process_message(message)
 
     async def process_message(self, message):
-        threads = await self.config.threads()
+        if ctx.guild is not None:
+            threads = await self.config.guild(ctx.guild).threads()
         if threads:
             # Create a thread named after the user's name
             thread_name = f"{message.author.display_name} Chat"
@@ -190,9 +189,9 @@ class Ollama(commands.Cog):
             # so we don't need to send it directly here.
             await self.respond_in_thread(thread, message)
         else:
-            # When not using threads, format the initial message correctly.
             formatted_message = [{"role": "user", "content": message.content}]
             await self.send_response(message.channel, formatted_message)
+            
 
     async def respond_in_thread(self, thread, initial_message):
         # Collect messages in the thread, ensuring to filter and format correctly
