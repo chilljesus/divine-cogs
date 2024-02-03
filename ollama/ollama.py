@@ -312,8 +312,8 @@ class Ollama(commands.Cog):
                     response_text = await response.text()
                     if response.status == 200:
                         data = await response.json()
-                        response_message = data.get("message", {}).get("content", "Sorry, I couldn't process your request.")
-                        if response_message is None or response_message.isspace():
+                        response_message = data.get("message", {}).get("content")
+                        if not response_message or response_message.isspace():
                             await self.send_response(message, formatted_messages)
                             return
                         if bot_name is not None and bot_avatar is not None and isinstance(message.channel, discord.DMChannel) is False:
