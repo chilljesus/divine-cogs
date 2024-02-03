@@ -266,7 +266,9 @@ class Ollama(commands.Cog):
             threads = await self.config.guild(message.guild).threads()
         else:
             threads = False
-        if isinstance(message.channel, discord.DMChannel) or ((message.channel.type == "public_thread" or "private_thread") and message.channel.owner.id == self.bot.user.id):
+        chats = await self.config.guild(message.guild).chats()
+        #  or ((message.channel.type == "public_thread" or "private_thread") and message.channel.owner.id == self.bot.user.id)
+        if isinstance(message.channel, discord.DMChannel) or (message.channel.id in chats):
             history = []
             async for msg in message.channel.history(limit=15):
                 if msg.content == "New Chat Initialized.":
