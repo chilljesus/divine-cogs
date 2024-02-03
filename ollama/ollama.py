@@ -7,14 +7,27 @@ class Ollama(commands.Cog):
         self.bot = bot
         self.config = Config.get_conf(self, identifier=20240203, force_registration=True)
         self.session = aiohttp.ClientSession()
-        default_global = {
+
+        # Default settings for guilds
+        default_guild = {
             "api_hostname": "localhost",
             "api_port": 8000,
             "api_endpoint": "/api/chat",
             "model": "",
             "threads": False
         }
-        self.config.register_global(**default_global)
+        
+        # Default settings for individual users (DMs)
+        default_user = {
+            "api_hostname": "localhost",
+            "api_port": 8000,
+            "api_endpoint": "/api/chat",
+            "model": "",
+            "threads": False
+        }
+
+        self.config.register_guild(**default_guild)
+        self.config.register_user(**default_user)
 
     def cog_unload(self):
         self.bot.loop.create_task(self.session.close())
@@ -23,6 +36,18 @@ class Ollama(commands.Cog):
     async def ollama(self, ctx):
         """Ollama configuration commands."""
         pass
+
+    @commands.command(name="settings")
+    async def showsettings(self, ctx):
+        """Displays the current settings for the guild or DM."""
+        if ctx.guild is not None:
+            settings = await self.config.guild(ctx.guild).all()
+            scope = "Guild"
+        else:
+            settings = await self.config.user(ctx.author).all()
+            scope = "DM"
+        settings_formatted = "\n".join([f"{key}: {value}" for key, value in settings.items()])
+        await ctx.send(f"**{scope} Settings:**\n```{settings_formatted}```")
 
     @ollama.command(name="getmodels")
     async def getmodels(self, ctx):
@@ -43,12 +68,18 @@ class Ollama(commands.Cog):
         except Exception as e:
             await ctx.send(f"An exception occurred: ```{e}```")
 
-    @ollama.command(name="sethost")
+    @commands.command(name="sethost")
     async def sethost(self, ctx, hostname: str):
         """Set the API hostname."""
-        await self.config.api_hostname.set(hostname)
-        full_url = f"http://{await self.config.api_hostname()}:{await self.config.api_port()}{await self.config.api_endpoint()}"
-        await ctx.send(f"API hostname updated. Current API URL: {full_url}")
+        if ctx.guild is not None:
+            await self.config.guild(ctx.guild).api_hostname.set(hostname)
+            scope = "Guild"
+        else:
+            await self.config.user(ctx.author).api_hostname.set(hostname)
+            scope = "DM"
+        
+        full_url = f"http://{hostname}:{await self.config.guild(ctx.guild).api_port() if ctx.guild else await self.config.user(ctx.author).api_port()}{await self.config.guild(ctx.guild).api_endpoint() if ctx.guild else await self.config.user(ctx.author).api_endpoint()}"
+        await ctx.send(f"{scope} API hostname updated. Current API URL: {full_url}")
 
     @ollama.command(name="setport")
     async def setport(self, ctx, port: int):
@@ -67,12 +98,17 @@ class Ollama(commands.Cog):
     @ollama.command(name="setmodel")
     async def setmodel(self, ctx, model: str):
         """Set the model variable."""
-        await self.config.model.set(model)
+        if ctx.guild is not None:
+            await self.config.guild(ctx.guild).model.set(model)
+            scope = "Guild"
+        else:
+            await self.config.user(ctx.author).model.set(model)
+            scope = "DM"
         await ctx.send("Model variable updated.")
 
     @ollama.command(name="setthreads")
     async def setthreads(self, ctx, threads: bool):
-        """Enable or disable response in threads."""
+        """Toggles responding with a thread."""
         await self.config.threads.set(threads)
         await ctx.send("Threads setting updated.")
 
