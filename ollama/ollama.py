@@ -314,7 +314,7 @@ class Ollama(commands.Cog):
                         data = await response.json()
                         response_message = data.get("message", {}).get("content", "Sorry, I couldn't process your request.")
                         if response_message is None or response_message.isspace():
-                            await self.send_response(message, formatted_message)
+                            await self.send_response(message, formatted_messages)
                             return
                         if bot_name is not None and bot_avatar is not None and isinstance(message.channel, discord.DMChannel) is False:
                             webhook = await message.channel.create_webhook(name=bot_name)
