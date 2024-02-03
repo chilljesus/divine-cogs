@@ -84,8 +84,8 @@ class Ollama(commands.Cog):
         except Exception as e:
             await ctx.send(f"An exception occurred: ```{e}```")
 
-    @ollama.is_owner()
-    @ollama.command(name="addmodeltoblacklist")
+    @commands.is_owner()
+    @commands.command(name="addmodeltoblacklist")
     async def add_model_to_blacklist(self, ctx, *, model_name: str):
         """Adds a model to the global models blacklist. Bot owner only."""
         async with self.config.models_blacklist() as blacklist:
