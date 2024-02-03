@@ -213,7 +213,6 @@ class Ollama(commands.Cog):
             scope = "DM"
         await ctx.send("Model variable updated.")
 
-    # todo: fix how it works
     @commands.admin()
     @ollama.command(name="threads")
     async def setthreads(self, ctx):
@@ -370,5 +369,9 @@ async def setup(bot):
 #                               /'_,,--''                           #
 #                              | (                                  #
 #                               `'                                  #
+#                                                                   #
+#####################################################################
+#                                                                   #
+#           AM EEPY, AM SEEP, AM TIERDE AWF FUKXIN PYTHON           #
 #                                                                   #
 #####################################################################
