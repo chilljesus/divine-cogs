@@ -130,7 +130,7 @@ class Ollama(commands.Cog):
         await self.config.history_limit.set(history)
         await ctx.send(f"History updated to `{history}` messages.")
 
-    @commands.owner()
+    @commands.is_owner()
     @ollama.command(name="requests")
     async def requests(self, ctx):
         """Toggles dm'ing when requests are made (very spammy)."""
