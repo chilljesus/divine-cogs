@@ -309,11 +309,11 @@ class Ollama(commands.Cog):
         try:
             async with message.channel.typing():
                 async with self.session.post(api_url, json=json_payload) as response:
-                    response_text = await response.text()  # Get the raw response text
+                    response_text = await response.text()
                     if response.status == 200:
                         data = await response.json()
                         response_message = data.get("message", {}).get("content", "Sorry, I couldn't process your request.")
-                        if response_message is None:
+                        if response_message is None or response_message.isspace():
                             await self.send_response(message, formatted_message)
                             return
                         if bot_name is not None and bot_avatar is not None and isinstance(message.channel, discord.DMChannel) is False:
