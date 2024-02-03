@@ -42,6 +42,7 @@ class Ollama(commands.Cog):
 
     ### GENERAL COMMANDS ###
 
+    @commands.admin()
     @ollama.command(name="settings")
     async def showsettings(self, ctx):
         """Displays the current settings for the guild or DM."""
@@ -54,6 +55,7 @@ class Ollama(commands.Cog):
         settings_formatted = "\n".join([f"{key}: {value}" for key, value in settings.items()])
         await ctx.send(f"**{scope} Settings:**\n```{settings_formatted}```")
 
+    @commands.admin()
     @ollama.command(name="getmodels")
     async def getmodels(self, ctx):
         """Get the available models."""
@@ -97,6 +99,7 @@ class Ollama(commands.Cog):
 
     ### API SETUP ###
 
+    @commands.admin()
     @ollama.command(name="host")
     async def sethost(self, ctx, hostname: str):
         """Set the API hostname."""
@@ -113,6 +116,7 @@ class Ollama(commands.Cog):
         full_url = f"{hostname}:{await config_scope.api_port()}{await config_scope.api_endpoint()}"
         await ctx.send(f"{scope} API hostname updated. Current API URL: {full_url}")
 
+    @commands.admin()
     @ollama.command(name="port")
     async def setport(self, ctx, port: int):
         """Set the API port."""
@@ -127,6 +131,7 @@ class Ollama(commands.Cog):
         full_url = f"{await config_scope.api_hostname()}:{port}{await config_scope.api_endpoint()}"
         await ctx.send(f"{scope} API port updated. Current API URL: {full_url}")
 
+    @commands.admin()
     @ollama.command(name="endpoint")
     async def setendpoint(self, ctx, endpoint: str):
         """Set the API endpoint."""
@@ -145,6 +150,7 @@ class Ollama(commands.Cog):
 
     ### SERVER / DM STUFF ###
 
+    @commands.admin()
     @ollama.command(name="model")
     async def setmodel(self, ctx, model: str):
         """Set the model variable."""
@@ -157,6 +163,7 @@ class Ollama(commands.Cog):
         await ctx.send("Model variable updated.")
 
     # todo: fix how it works
+    @commands.admin()
     @ollama.command(name="threads")
     async def setthreads(self, ctx):
         """Toggles responding with a thread."""
