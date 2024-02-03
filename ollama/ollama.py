@@ -160,7 +160,10 @@ class Ollama(commands.Cog):
     @ollama.command(name="setthreads")
     async def setthreads(self, ctx, threads: bool):
         """Toggles responding with a thread."""
-        await self.config.threads.set(threads)
+        if ctx.guid is not None:
+            await self.config.guild(ctx.guild).threads.set(threads)
+        else:
+            await self.config.user(ctx.author).threads.set(threads)
         await ctx.send("Threads setting updated.")
 
     ### THE SAUCE ###
