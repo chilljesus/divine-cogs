@@ -210,15 +210,15 @@ class Ollama(commands.Cog):
 
     @ollama.command(name="newchat")
     async def newchat(self, ctx):
-        if ctx.guild is not None:
-            thread_name = f"{ctx.author.display_name} Chat"
-            thread = await ctx.message.create_thread(name=thread_name, auto_archive_duration=60)
-            #async with self.config.guild(ctx.guild).chats() as chats:
-            #    if ctx.channel.id not in chats:
-            #        chats.append(ctx.channel.id)
-            #        await ctx.send("New Chat Initialized.")
-            #    else:
-            #        await ctx.send("This channel is already initialized for new chats.")
+        if ctx.guild is not None and (message.channel.type == "public_thread" or "private_thread") is False:
+            #thread_name = f"{ctx.author.display_name} Chat"
+            #thread = await ctx.message.create_thread(name=thread_name, auto_archive_duration=60)
+            async with self.config.guild(ctx.guild).chats() as chats:
+                if ctx.channel.id not in chats:
+                    chats.append(ctx.channel.id)
+                    await ctx.send("New Chat Initialized.")
+                else:
+                    await ctx.send("New Chat Initialized")
         else:
             await ctx.send("New Chat Initialized.")
 
@@ -255,7 +255,9 @@ class Ollama(commands.Cog):
         ctx = await self.bot.get_context(message)
         if ctx.valid:
             return
-        if self.bot.user.mentioned_in(message) or (message.reference and message.reference.resolved and message.reference.resolved.author.id == self.bot.user.id) or isinstance(message.channel, discord.DMChannel) or ((message.channel.type == "public_thread" or "private_thread") and message.channel.owner.id == self.bot.user.id):
+        if message.guild is not None:
+            chats = await self.config.guild(message.guild).chats()
+        if self.bot.user.mentioned_in(message) or (message.reference and message.reference.resolved and message.reference.resolved.author.id == self.bot.user.id) or isinstance(message.channel, discord.DMChannel) or ((message.channel.type == "public_thread" or "private_thread") and message.channel.owner.id == self.bot.user.id) or (message.channel.id in chats):
             await self.process_message(message)
 
     async def process_message(self, message):
@@ -272,26 +274,9 @@ class Ollama(commands.Cog):
             history = history[::-1]
             formatted_messages = [{"role": "assistant" if msg.author.id == self.bot.user.id else "user", "content": msg.content} for msg in history]
             await self.send_response(message, formatted_messages)
-        #elif threads:
-            # Create a thread named after the user's name
-        #    thread_name = f"{message.author.display_name} Chat"
-        #    thread = await message.create_thread(name=thread_name, auto_archive_duration=60)
-            # The initial message will be processed in respond_in_thread,
-            # so we don't need to send it directly here.
-        #    await self.respond_in_thread(thread, message)
         else:
             formatted_message = [{"role": "user", "content": message.content}]
             await self.send_response(message, formatted_message)
-            
-
-    async def respond_in_thread(self, thread, initial_message):
-        # Collect messages in the thread, ensuring to filter and format correctly
-        async for msg in thread.history(limit=100):
-            if msg.author.bot:
-                continue
-            formatted_messages = [{"role": "assistant" if msg.author.id == self.bot.user.id else "user", "content": msg.content} for msg in await thread.history(limit=100).flatten() if not msg.author.bot]
-            await self.send_response(thread, formatted_messages)
-            break
 
     async def send_response(self, message, formatted_messages):
         if message.guild is not None:
