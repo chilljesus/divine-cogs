@@ -9,7 +9,8 @@ class Ollama(commands.Cog):
         self.session = aiohttp.ClientSession()
 
         default_global = {
-            "models_blacklist": []
+            "models_blacklist": [],
+            "history_limit": 15
         }
 
         default_guild = {
@@ -120,6 +121,13 @@ class Ollama(commands.Cog):
                         await ctx.send(f"Error contacting the API. Status: {response.status}\nResponse: ```{response_text}```")
         except Exception as e:
             await ctx.send(f"An exception occurred: ```{e}```")
+
+    @commands.is_owner()
+    @ollama.command(name="history")
+    async def sethistory(self, ctx, history: int):
+        """Set the message history limit."""
+        await self.config.history_limit.set(history)
+        await ctx.send(f"History updated to `{history}` messages.")
 
     @commands.is_owner()
     @ollama.command(name="addmodeltoblacklist")
@@ -270,7 +278,7 @@ class Ollama(commands.Cog):
         #  or ((message.channel.type == "public_thread" or "private_thread") and message.channel.owner.id == self.bot.user.id)
         if isinstance(message.channel, discord.DMChannel) or (message.channel.id in chats):
             history = []
-            async for msg in message.channel.history(limit=15):
+            async for msg in message.channel.history(limit=await self.config.history_limit()):
                 if msg.content == "New Chat Initialized.":
                     break
                 history.append(msg)
