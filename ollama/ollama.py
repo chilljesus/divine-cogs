@@ -111,7 +111,7 @@ class Ollama(commands.Cog):
                     if response.status == 200:
                         data = await response.json()
                         response_message = data.get("message", {}).get("content", "Sorry, I couldn't process your request.")
-                        response_message = '.'.join(response_message.split('.')[:-1]) + '.'
+                        #response_message = '.'.join(response_message.split('.')[:-1]) + '.'
                         await destination.send(f"{response_message}")
                     else:
                         await destination.send(f"Error contacting the API. Status: {response.status}\nResponse: ```{response_text}```")
