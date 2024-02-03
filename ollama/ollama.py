@@ -57,7 +57,15 @@ class Ollama(commands.Cog):
     @commands.command(name="getmodels")
     async def getmodels(self, ctx):
         """Get the available models."""
-        api_url = f"{await self.config.guild(ctx.guild).api_hostname() if ctx.guild is not None else self.config.user(ctx.author).api_hostname()}:{await self.config.guild(ctx.guild).api_port() if ctx.guild is not None else self.config.user(ctx.author).api_port()}/api/tags"
+        if ctx.guild is not None:
+            config_source = self.config.guild(ctx.guild)
+        else:
+            config_source = self.config.user(ctx.author)
+
+        api_hostname = await config_source.api_hostname()
+        api_port = await config_source.api_port()
+        api_url = f"{api_hostname}:{api_port}/api/tags"
+
         blacklist = await self.config.models_blacklist()
         try:
             async with ctx.typing():
