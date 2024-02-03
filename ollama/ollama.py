@@ -31,7 +31,7 @@ class Ollama(commands.Cog):
 
         try:
             async with ctx.typing():
-                async with self.session.post(api_url) as response:
+                async with self.session.get(api_url) as response:
                     response_text = await response.text()  # Get the raw response text
                     if response.status == 200:
                         data = await response.json()
