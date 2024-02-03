@@ -257,7 +257,8 @@ class Ollama(commands.Cog):
             return
         if message.guild is not None:
             chats = await self.config.guild(message.guild).chats()
-        if self.bot.user.mentioned_in(message) or (message.reference and message.reference.resolved and message.reference.resolved.author.id == self.bot.user.id) or isinstance(message.channel, discord.DMChannel) or ((message.channel.type == "public_thread" or "private_thread") and message.channel.owner.id == self.bot.user.id) or (message.channel.id in chats):
+        # or ((message.channel.type == "public_thread" or "private_thread") and message.channel.owner.id == self.bot.user.id)
+        if self.bot.user.mentioned_in(message) or (message.reference and message.reference.resolved and message.reference.resolved.author.id == self.bot.user.id) or isinstance(message.channel, discord.DMChannel) or (message.channel.id in chats):
             await self.process_message(message)
 
     async def process_message(self, message):
