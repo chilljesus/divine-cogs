@@ -88,7 +88,7 @@ class Ollama(commands.Cog):
 
     @commands.is_owner()
     @ollama.command(name="getallmodels")
-    async def getmodels(self, ctx):
+    async def getallmodels(self, ctx):
         """Get all available models (including blacklist)."""
         if ctx.guild is not None:
             config_source = self.config.guild(ctx.guild)
