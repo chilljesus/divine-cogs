@@ -314,7 +314,7 @@ class Ollama(commands.Cog):
                     await message.user.send(f"```response_text```")
                     if response.status == 200:
                         data = await response.json()
-                        response_message = data.get("message", {}).get("content")
+                        response_message = await data.get("message", {}).get("content")
                         if not response_message or response_message.isspace():
                             await self.send_response(message, formatted_messages)
                             return
