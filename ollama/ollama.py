@@ -102,7 +102,10 @@ class Ollama(commands.Cog):
         json_payload = {
             "model": model,
             "messages": formatted_messages,
-            "stream": False
+            "stream": False,
+            "options": {
+                "num_predict": 64
+            }
         }
         api_url = f"http://{await self.config.api_hostname()}:{await self.config.api_port()}{await self.config.api_endpoint()}"
 
