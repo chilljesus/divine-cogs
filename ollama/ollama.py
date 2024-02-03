@@ -68,16 +68,19 @@ class Ollama(commands.Cog):
             await self.send_response(message, [message])
 
     async def respond_in_thread(self, thread, initial_message):
-        # Collect messages in the thread
-        messages = [initial_message] + await thread.history(limit=100).flatten()
-        formatted_messages = [{"role": "assistant" if msg.author.id == self.bot.user.id else "user", "content": msg.content} for msg in messages if not msg.author.bot]
-        await self.send_response(thread, formatted_messages)
+        # Collect messages in the thread, ensuring to filter and format correctly
+        async for msg in thread.history(limit=100):
+            if msg.author.bot:
+                continue  # Skip bot messages
+            formatted_messages = [{"role": "assistant" if msg.author.id == self.bot.user.id else "user", "content": msg.content} for msg in await thread.history(limit=100).flatten() if not msg.author.bot]
+            await self.send_response(thread, formatted_messages)
+            break  # Exit after processing to avoid repeating the send_response call
 
-    async def send_response(self, destination, messages):
+    async def send_response(self, destination, formatted_messages):
         model = await self.config.model()
         json_payload = {
             "model": model,
-            "messages": messages,
+            "messages": formatted_messages,
             "stream": False
         }
         api_url = f"http://{await self.config.api_hostname()}:{await self.config.api_port()}{await self.config.api_endpoint()}"
