@@ -212,7 +212,7 @@ class Ollama(commands.Cog):
     async def newchat(self, ctx):
         if ctx.guild is not None:
             thread_name = f"{ctx.author.display_name} Chat"
-            thread = await ctx.create_thread(name=thread_name, auto_archive_duration=60)
+            thread = await ctx.message.create_thread(name=thread_name, auto_archive_duration=60)
             #async with self.config.guild(ctx.guild).chats() as chats:
             #    if ctx.channel.id not in chats:
             #        chats.append(ctx.channel.id)
