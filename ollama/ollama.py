@@ -63,9 +63,13 @@ class Ollama(commands.Cog):
             # Create a thread named after the user's name
             thread_name = f"{message.author.display_name} Chat"
             thread = await message.create_thread(name=thread_name, auto_archive_duration=60)
+            # The initial message will be processed in respond_in_thread,
+            # so we don't need to send it directly here.
             await self.respond_in_thread(thread, message)
         else:
-            await self.send_response(message, [message])
+            # When not using threads, format the initial message correctly.
+            formatted_message = [{"role": "user", "content": message.content}]
+            await self.send_response(message.channel, formatted_message)
 
     async def respond_in_thread(self, thread, initial_message):
         # Collect messages in the thread, ensuring to filter and format correctly
