@@ -66,7 +66,7 @@ class Ollama(commands.Cog):
         if ctx.valid:
             return
         
-        if self.bot.user.mentioned_in(message) or (message.reference and message.reference.resolved and message.reference.resolved.author.id == self.bot.user.id) or message.channel.DMChannel:
+        if self.bot.user.mentioned_in(message) or (message.reference and message.reference.resolved and message.reference.resolved.author.id == self.bot.user.id) or discord.DMChannel:
             await self.process_message(message)
 
     async def process_message(self, message):
