@@ -29,9 +29,9 @@ If one of these cogs broke to the extent that you've lost a limb, life, or liber
 |audioslash| just a duplicate of [hollowstrawberry](https://github.com/hollowstrawberry/crab-cogs)|
 |autoreact| just a duplicate of [hollowstrawberry](https://github.com/hollowstrawberry/crab-cogs)|
 |bible| Minor modifications of [npc203](https://github.com/npc203/npc-cogs)'s bible cog, setting the version to NRSVUE and adding slash commands |
+|ollama| A discord implementation of the [ollama api](https://github.com/ollama/ollama/blob/main/docs/api.md) |
 |stablediffusion| Adding slash commands to [japandotorg](https://github.com/japandotorg/Seina-Cogs)'s stable diffusion cog |
 |tarot| Do tarot readings utilizing all the decks found on [tarot.com](tarot.com/tarot/decks) (over 100)|
-|ollama| A discord implementation of the [ollama api](https://github.com/ollama/ollama/blob/main/docs/api.md) |
 
 <br />
 
