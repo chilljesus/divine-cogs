@@ -10,7 +10,8 @@ class Ollama(commands.Cog):
 
         default_global = {
             "models_blacklist": [],
-            "history_limit": 15
+            "history_limit": 15,
+            "requests": False
         }
 
         default_guild = {
@@ -129,6 +130,13 @@ class Ollama(commands.Cog):
         await self.config.history_limit.set(history)
         await ctx.send(f"History updated to `{history}` messages.")
 
+    @commands.owner()
+    @ollama.command(name="requests")
+    async def requests(self, ctx):
+        """Toggles dm'ing when requests are made (very spammy)."""
+        await self.config.requests.set(not await self.config.requests())
+        await ctx.send(f"Requests setting updated to: `{await self.config.requests()}`")
+
     @commands.is_owner()
     @ollama.command(name="addmodeltoblacklist")
     async def add_model_to_blacklist(self, ctx, *, model_name: str):
@@ -212,7 +220,7 @@ class Ollama(commands.Cog):
         """Toggles responding with a thread."""
         if ctx.guild is not None:
             await self.config.guild(ctx.guild).threads.set(not await self.config.guild(ctx.guild).threads())
-            await ctx.send("Threads setting updated.")
+            await ctx.send(f"Threads setting updated to: {await self.config.guild(ctx.guild).threads()}")
         else:
             await ctx.send("Threads cannot be activated inside private messages.")
 
@@ -320,6 +328,8 @@ class Ollama(commands.Cog):
                     response_text = await response.text()
                     if response.status == 200:
                         data = await response.json()
+                        if await self.config.requests():
+                            await messager.user.send(f"Sent\n```{json_payload}```\nReceived\n```{data}```")
                         response_message = data.get("message", {}).get("content")
                         if not response_message or response_message.isspace():
                             await self.send_response(message, formatted_messages)
