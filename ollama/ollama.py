@@ -30,18 +30,18 @@ class Ollama(commands.Cog):
         api_url = f"http://{await self.config.api_hostname()}:{await self.config.api_port()}/api/tags"
 
         try:
-            async with destination.typing():
+            async with ctx.typing():
                 async with self.session.post(api_url) as response:
                     response_text = await response.text()  # Get the raw response text
                     if response.status == 200:
                         data = await response.json()
                         model_names = [model['name'] for model in data['models']]
                         response_message = '\n'.join(model_names)
-                        await destination.send(f"{response_message}")
+                        await ctx.send(f"{response_message}")
                     else:
-                        await destination.send(f"Error contacting the API. Status: {response.status}\nResponse: ```{response_text}```")
+                        await ctx.send(f"Error contacting the API. Status: {response.status}\nResponse: ```{response_text}```")
         except Exception as e:
-            await destination.send(f"An exception occurred: ```{e}```")
+            await ctx.send(f"An exception occurred: ```{e}```")
 
     @ollama.command(name="sethost")
     async def sethost(self, ctx, hostname: str):
