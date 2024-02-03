@@ -181,6 +181,8 @@ class Ollama(commands.Cog):
     async def process_message(self, message):
         if message.guild is not None:
             threads = await self.config.guild(message.guild).threads()
+        else:
+            threads = False
         if threads:
             # Create a thread named after the user's name
             thread_name = f"{message.author.display_name} Chat"
