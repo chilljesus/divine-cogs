@@ -9,7 +9,7 @@ class Ollama(commands.Cog):
         self.session = aiohttp.ClientSession()
 
         default_global = {
-            "model_blacklist": []
+            "models_blacklist": []
         }
 
         default_guild = {
