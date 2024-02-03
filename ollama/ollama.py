@@ -24,13 +24,30 @@ class Ollama(commands.Cog):
         """Ollama configuration commands."""
         pass
 
-    @ollama.command(name="setapi")
-    async def setapi(self, ctx, hostname: str, port: int, endpoint: str):
-        """Set the API hostname, port, and endpoint."""
+    @ollama.command(name="sethost")
+    async def sethost(self, ctx, hostname: str):
+        """Set the API hostname."""
         await self.config.api_hostname.set(hostname)
+        # After setting the host, display the full current URL
+        full_url = f"http://{await self.config.api_hostname()}:{await self.config.api_port()}{await self.config.api_endpoint()}"
+        await ctx.send(f"API hostname updated. Current API URL: {full_url}")
+
+    @ollama.command(name="setport")
+    async def setport(self, ctx, port: int):
+        """Set the API port."""
         await self.config.api_port.set(port)
+        # After setting the port, display the full current URL
+        full_url = f"http://{await self.config.api_hostname()}:{await self.config.api_port()}{await self.config.api_endpoint()}"
+        await ctx.send(f"API port updated. Current API URL: {full_url}")
+
+    @ollama.command(name="setendpoint")
+    async def setendpoint(self, ctx, endpoint: str):
+        """Set the API endpoint."""
         await self.config.api_endpoint.set(endpoint)
-        await ctx.send("API settings updated.")
+        # After setting the endpoint, display the full current URL
+        full_url = f"http://{await self.config.api_hostname()}:{await self.config.api_port()}{await self.config.api_endpoint()}"
+        await ctx.send(f"API endpoint updated. Current API URL: {full_url}")
+
 
     @ollama.command(name="setmodel")
     async def setmodel(self, ctx, model: str):
