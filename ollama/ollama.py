@@ -228,7 +228,7 @@ class Ollama(commands.Cog):
         api_url = f"{api_hostname}:{api_port}{api_endpoint}"
         
         try:
-            async with destination.typing():
+            async with message.channel.typing():
                 async with self.session.post(api_url, json=json_payload) as response:
                     response_text = await response.text()  # Get the raw response text
                     if response.status == 200:
