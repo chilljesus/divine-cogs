@@ -25,7 +25,7 @@ class Ollama(commands.Cog):
         pass
 
     @ollama.command(name="getmodels")
-    async def getmodels(self, message):
+    async def getmodels(self, ctx):
         """Get the available models."""
         api_url = f"http://{await self.config.api_hostname()}:{await self.config.api_port()}/api/tags"
 
