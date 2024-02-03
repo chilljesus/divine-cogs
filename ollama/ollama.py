@@ -97,7 +97,7 @@ class Ollama(commands.Cog):
 
     ### API SETUP ###
 
-    @ollama.command(name="sethost")
+    @ollama.command(name="host")
     async def sethost(self, ctx, hostname: str):
         """Set the API hostname."""
         if not hostname.startswith(('http://', 'https://')):
@@ -113,7 +113,7 @@ class Ollama(commands.Cog):
         full_url = f"{hostname}:{await config_scope.api_port()}{await config_scope.api_endpoint()}"
         await ctx.send(f"{scope} API hostname updated. Current API URL: {full_url}")
 
-    @ollama.command(name="setport")
+    @ollama.command(name="port")
     async def setport(self, ctx, port: int):
         """Set the API port."""
         if ctx.guild is not None:
@@ -127,7 +127,7 @@ class Ollama(commands.Cog):
         full_url = f"{await config_scope.api_hostname()}:{port}{await config_scope.api_endpoint()}"
         await ctx.send(f"{scope} API port updated. Current API URL: {full_url}")
 
-    @ollama.command(name="setendpoint")
+    @ollama.command(name="endpoint")
     async def setendpoint(self, ctx, endpoint: str):
         """Set the API endpoint."""
         if not endpoint.startswith('/'):
@@ -145,7 +145,7 @@ class Ollama(commands.Cog):
 
     ### SERVER / DM STUFF ###
 
-    @ollama.command(name="setmodel")
+    @ollama.command(name="model")
     async def setmodel(self, ctx, model: str):
         """Set the model variable."""
         if ctx.guild is not None:
@@ -156,14 +156,14 @@ class Ollama(commands.Cog):
             scope = "DM"
         await ctx.send("Model variable updated.")
 
-    # todo: make server / dm specific, fix how it works
-    @ollama.command(name="setthreads")
-    async def setthreads(self, ctx, threads: bool):
+    # todo: fix how it works
+    @ollama.command(name="threads")
+    async def setthreads(self, ctx):
         """Toggles responding with a thread."""
-        if ctx.guid is not None:
-            await self.config.guild(ctx.guild).threads.set(threads)
+        if ctx.guild is not None:
+            await self.config.guild(ctx.guild).threads.set(not await self.config.guild(ctx.guild).threads())
         else:
-            await self.config.user(ctx.author).threads.set(threads)
+            await self.config.user(ctx.author).threads.set(not await self.config.user(ctx.author).threads())    
         await ctx.send("Threads setting updated.")
 
     ### THE SAUCE ###
@@ -234,7 +234,6 @@ class Ollama(commands.Cog):
                     if response.status == 200:
                         data = await response.json()
                         response_message = data.get("message", {}).get("content", "Sorry, I couldn't process your request.")
-                        #response_message = '.'.join(response_message.split('.')[:-1]) + '.'
                         await message.channel.send(f"{response_message}")
                     else:
                         await message.channel.send(f"Error contacting the API. Status: {response.status}\nResponse: ```{response_text}```")
