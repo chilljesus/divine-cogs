@@ -14,7 +14,7 @@ class Ollama(commands.Cog):
 
         default_guild = {
             "api_hostname": "localhost",
-            "api_port": 8000,
+            "api_port": 11434,
             "api_endpoint": "/api/chat",
             "model": "",
             "threads": False
@@ -22,7 +22,7 @@ class Ollama(commands.Cog):
         
         default_user = {
             "api_hostname": "localhost",
-            "api_port": 8000,
+            "api_port": 11434,
             "api_endpoint": "/api/chat",
             "model": "",
             "threads": False
@@ -87,7 +87,37 @@ class Ollama(commands.Cog):
             await ctx.send(f"An exception occurred: ```{e}```")
 
     @commands.is_owner()
-    @commands.command(name="addmodeltoblacklist")
+    @ollama.command(name="getallmodels")
+    async def getmodels(self, ctx):
+        """Get all available models (including blacklist)."""
+        if ctx.guild is not None:
+            config_source = self.config.guild(ctx.guild)
+        else:
+            config_source = self.config.user(ctx.author)
+
+        api_hostname = await config_source.api_hostname()
+        api_port = await config_source.api_port()
+        api_url = f"{api_hostname}:{api_port}/api/tags"
+
+        try:
+            async with ctx.typing():
+                async with self.session.get(api_url) as response:
+                    response_text = await response.text()
+                    if response.status == 200:
+                        data = await response.json()
+                        model_names = [model['name'] for model in data['models']]
+                        if model_names:
+                            response_message = '\n'.join(model_names)
+                            await ctx.send(f"Available models:\n{response_message}")
+                        else:
+                            await ctx.send("There are no available models.")
+                    else:
+                        await ctx.send(f"Error contacting the API. Status: {response.status}\nResponse: ```{response_text}```")
+        except Exception as e:
+            await ctx.send(f"An exception occurred: ```{e}```")
+
+    @commands.is_owner()
+    @ollama.command(name="addmodeltoblacklist")
     async def add_model_to_blacklist(self, ctx, *, model_name: str):
         """Adds a model to the global models blacklist. Bot owner only."""
         async with self.config.models_blacklist() as blacklist:
@@ -169,9 +199,9 @@ class Ollama(commands.Cog):
         """Toggles responding with a thread."""
         if ctx.guild is not None:
             await self.config.guild(ctx.guild).threads.set(not await self.config.guild(ctx.guild).threads())
+            await ctx.send("Threads setting updated.")
         else:
-            await self.config.user(ctx.author).threads.set(not await self.config.user(ctx.author).threads())    
-        await ctx.send("Threads setting updated.")
+            await ctx.send("Threads cannot be activated inside private messages.")
 
     ### THE SAUCE ###
 
