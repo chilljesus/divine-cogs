@@ -310,6 +310,8 @@ class Ollama(commands.Cog):
             async with message.channel.typing():
                 async with self.session.post(api_url, json=json_payload) as response:
                     response_text = await response.text()
+                    await message.user.send(f"```json_payload```")
+                    await message.user.send(f"```response_text```")
                     if response.status == 200:
                         data = await response.json()
                         response_message = data.get("message", {}).get("content")
