@@ -1,0 +1,13 @@
+{
+    "author": ["NekoJesus"],
+    "install_msg": "A cog for integrating with an ollama api.",
+    "name": "Ollama",
+    "disabled": false,
+    "short": "Ollama via discord bot.",
+    "description": "Ollama via discord bot.\nUse `[p]ollama`",
+    "tags": [
+        "ai"
+    ],
+    "required_cogs": {},
+    "type": "COG"
+}
