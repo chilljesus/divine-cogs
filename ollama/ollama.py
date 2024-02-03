@@ -57,7 +57,7 @@ class Ollama(commands.Cog):
     @commands.command(name="getmodels")
     async def getmodels(self, ctx):
         """Get the available models."""
-        api_url = f"http://{await self.config.api_hostname()}:{await self.config.api_port()}/api/tags"
+        api_url = f"{await self.config.api_hostname()}:{await self.config.api_port()}/api/tags"
         blacklist = await self.config.models_blacklist()
 
         try:
