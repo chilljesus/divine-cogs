@@ -275,7 +275,7 @@ class Ollama(commands.Cog):
                     break
                 history.append(msg)
             history = history[::-1]
-            formatted_messages = [{"role": "assistant" if msg.author.id == self.bot.user.id else "user", "content": msg.content} for msg in history]
+            formatted_messages = [{"role": "assistant" if msg.author.bot or message.author.id == self.bot.user.id else "user", "content": msg.content} for msg in history]
             await self.send_response(message, formatted_messages)
         else:
             formatted_message = [{"role": "user", "content": message.content}]
