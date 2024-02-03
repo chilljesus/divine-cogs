@@ -218,7 +218,7 @@ class Ollama(commands.Cog):
                     chats.append(ctx.channel.id)
                     await ctx.send("New Chat Initialized.")
                 else:
-                    await ctx.send("New Chat Initialized")
+                    await ctx.send("New Chat Initialized.")
         else:
             await ctx.send("New Chat Initialized.")
 
