@@ -110,7 +110,7 @@ class Ollama(commands.Cog):
         api_url = f"http://{await self.config.api_hostname()}:{await self.config.api_port()}{await self.config.api_endpoint()}"
 
         try:
-            async with self.typing():
+            async with destination.typing():
                 async with self.session.post(api_url, json=json_payload) as response:
                     response_text = await response.text()  # Get the raw response text
                     if response.status == 200:
