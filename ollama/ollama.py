@@ -56,7 +56,7 @@ class Ollama(commands.Cog):
     @commands.command(name="getmodels")
     async def getmodels(self, ctx):
         """Get the available models."""
-        api_url = f"http://{await self.config.api_hostname()}:{await self.config.api_port()}/api/tags"
+        api_url = f"{await self.config.api_hostname()}:{await self.config.api_port()}/api/tags"
         blacklist = await self.config.models_blacklist()
 
         try:
@@ -116,7 +116,7 @@ class Ollama(commands.Cog):
             await self.config.user(ctx.author).api_port.set(port)
             config_scope = self.config.user(ctx.author)
             scope = "DM"
-        full_url = f"http://{await config_scope.api_hostname()}:{port}{await config_scope.api_endpoint()}"
+        full_url = f"{await config_scope.api_hostname()}:{port}{await config_scope.api_endpoint()}"
         await ctx.send(f"{scope} API port updated. Current API URL: {full_url}")
 
     @commands.command(name="setendpoint")
@@ -132,7 +132,7 @@ class Ollama(commands.Cog):
             await self.config.user(ctx.author).api_endpoint.set(endpoint)
             config_scope = self.config.user(ctx.author)
             scope = "DM"
-        full_url = f"http://{await config_scope.api_hostname()}:{await config_scope.api_port()}{endpoint}"
+        full_url = f"{await config_scope.api_hostname()}:{await config_scope.api_port()}{endpoint}"
         await ctx.send(f"{scope} API endpoint updated. Current API URL: {full_url}")
 
     ### SERVER / DM STUFF ###
@@ -202,7 +202,7 @@ class Ollama(commands.Cog):
                 "num_predict": 256
             }
         }
-        api_url = f"http://{await self.config.api_hostname()}:{await self.config.api_port()}{await self.config.api_endpoint()}"
+        api_url = f"{await self.config.api_hostname()}:{await self.config.api_port()}{await self.config.api_endpoint()}"
 
         try:
             async with destination.typing():
