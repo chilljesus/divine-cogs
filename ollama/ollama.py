@@ -210,7 +210,7 @@ class Ollama(commands.Cog):
     @ollama.command(name="newchat")
     async def newchat(self, ctx):
         if ctx.guild is not None:
-            return
+            await ctx.send("New Chat Initialized.")
         else:
             await ctx.send("New Chat Initialized.")
 
