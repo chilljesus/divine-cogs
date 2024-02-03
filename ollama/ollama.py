@@ -203,6 +203,13 @@ class Ollama(commands.Cog):
         else:
             await ctx.send("Threads cannot be activated inside private messages.")
 
+    @ollama.command(name="newchat")
+    async def newchat(self, ctx):
+        if ctx.guild is not None:
+            return
+        else:
+            await ctx.send("New Chat Initialized.")
+
     ### THE SAUCE ###
 
     @commands.Cog.listener()
@@ -220,7 +227,16 @@ class Ollama(commands.Cog):
             threads = await self.config.guild(message.guild).threads()
         else:
             threads = False
-        if threads:
+        if isinstance(message.channel, discord.DMChannel):
+            history = []
+            async for msg in message.channel.history(limit=15):
+                if msg.content == "New Chat Initialized.":
+                    break
+                history.append(msg)
+            history = history[::-1]
+            formatted_messages = [{"role": "assistant" if msg.author.id == self.bot.user.id else "user", "content": msg.content} for msg in history]
+            await self.send_response(message, formatted_messages)
+        elif threads:
             # Create a thread named after the user's name
             thread_name = f"{message.author.display_name} Chat"
             thread = await message.create_thread(name=thread_name, auto_archive_duration=60)
