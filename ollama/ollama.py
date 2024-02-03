@@ -255,7 +255,7 @@ class Ollama(commands.Cog):
         ctx = await self.bot.get_context(message)
         if ctx.valid:
             return
-        if self.bot.user.mentioned_in(message) or (message.reference and message.reference.resolved and message.reference.resolved.author.id == self.bot.user.id) or isinstance(message.channel, discord.DMChannel) or ((message.channel.type.public_thread or message.channel.type.private_thread) and message.channel.owner.id == self.bot.user.id):
+        if self.bot.user.mentioned_in(message) or (message.reference and message.reference.resolved and message.reference.resolved.author.id == self.bot.user.id) or isinstance(message.channel, discord.DMChannel) or ((message.channel.type == "public_thread" or "private_thread") and message.channel.owner.id == self.bot.user.id):
             await self.process_message(message)
 
     async def process_message(self, message):
@@ -263,7 +263,7 @@ class Ollama(commands.Cog):
             threads = await self.config.guild(message.guild).threads()
         else:
             threads = False
-        if isinstance(message.channel, discord.DMChannel) or ((message.channel.type.public_thread or message.channel.type.private_thread) and message.channel.owner.id == self.bot.user.id):
+        if isinstance(message.channel, discord.DMChannel) or ((message.channel.type == "public_thread" or "private_thread") and message.channel.owner.id == self.bot.user.id):
             history = []
             async for msg in message.channel.history(limit=15):
                 if msg.content == "New Chat Initialized.":
