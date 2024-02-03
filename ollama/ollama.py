@@ -28,7 +28,6 @@ class Ollama(commands.Cog):
     async def sethost(self, ctx, hostname: str):
         """Set the API hostname."""
         await self.config.api_hostname.set(hostname)
-        # After setting the host, display the full current URL
         full_url = f"http://{await self.config.api_hostname()}:{await self.config.api_port()}{await self.config.api_endpoint()}"
         await ctx.send(f"API hostname updated. Current API URL: {full_url}")
 
@@ -36,7 +35,6 @@ class Ollama(commands.Cog):
     async def setport(self, ctx, port: int):
         """Set the API port."""
         await self.config.api_port.set(port)
-        # After setting the port, display the full current URL
         full_url = f"http://{await self.config.api_hostname()}:{await self.config.api_port()}{await self.config.api_endpoint()}"
         await ctx.send(f"API port updated. Current API URL: {full_url}")
 
@@ -44,10 +42,8 @@ class Ollama(commands.Cog):
     async def setendpoint(self, ctx, endpoint: str):
         """Set the API endpoint."""
         await self.config.api_endpoint.set(endpoint)
-        # After setting the endpoint, display the full current URL
         full_url = f"http://{await self.config.api_hostname()}:{await self.config.api_port()}{await self.config.api_endpoint()}"
         await ctx.send(f"API endpoint updated. Current API URL: {full_url}")
-
 
     @ollama.command(name="setmodel")
     async def setmodel(self, ctx, model: str):
@@ -68,10 +64,9 @@ class Ollama(commands.Cog):
 
         ctx = await self.bot.get_context(message)
         if ctx.valid:
-            return  # Ignore commands
-
-        # Check if the bot is mentioned or if the message is a reply to the bot
-        if self.bot.user.mentioned_in(message) or (message.reference and message.reference.resolved and message.reference.resolved.author.id == self.bot.user.id):
+            return
+        
+        if self.bot.user.mentioned_in(message) or (message.reference and message.reference.resolved and message.reference.resolved.author.id == self.bot.user.id) or message.channel.DMChannel:
             await self.process_message(message)
 
     async def process_message(self, message):
@@ -92,10 +87,10 @@ class Ollama(commands.Cog):
         # Collect messages in the thread, ensuring to filter and format correctly
         async for msg in thread.history(limit=100):
             if msg.author.bot:
-                continue  # Skip bot messages
+                continue
             formatted_messages = [{"role": "assistant" if msg.author.id == self.bot.user.id else "user", "content": msg.content} for msg in await thread.history(limit=100).flatten() if not msg.author.bot]
             await self.send_response(thread, formatted_messages)
-            break  # Exit after processing to avoid repeating the send_response call
+            break
 
     async def send_response(self, destination, formatted_messages):
         model = await self.config.model()
@@ -104,7 +99,7 @@ class Ollama(commands.Cog):
             "messages": formatted_messages,
             "stream": False,
             "options": {
-                "num_predict": 64
+                "num_predict": 256
             }
         }
         api_url = f"http://{await self.config.api_hostname()}:{await self.config.api_port()}{await self.config.api_endpoint()}"
@@ -116,12 +111,11 @@ class Ollama(commands.Cog):
                     if response.status == 200:
                         data = await response.json()
                         response_message = data.get("message", {}).get("content", "Sorry, I couldn't process your request.")
+                        response_message = '.'.join(response_message.split('.')[:-1]) + '.'
                         await destination.send(f"{response_message}")
                     else:
-                        # Send the status and response in a code block to help diagnose issues
                         await destination.send(f"Error contacting the API. Status: {response.status}\nResponse: ```{response_text}```")
         except Exception as e:
-            # Catch any exceptions and send them in a code block
             await destination.send(f"An exception occurred: ```{e}```")
 
 async def setup(bot):
