@@ -324,8 +324,8 @@ class Ollama(commands.Cog):
                         data = await response.json()
                         response_message = data.get("message", {}).get("content", "Sorry, I couldn't process your request.")
                         if bot_name is not None and bot_avatar is not None:
-                            webhook = await message.channel.create_webhook(name=bot_name, avatar_url=bot_avatar)
-                            await webhook.send(str(message))
+                            webhook = await message.channel.create_webhook(name=bot_name)
+                            await webhook.send(str(message), username=bot_name, avatar_url=bot_avatar)
                             webhooks = await message.channel.webhooks()
                             for webhook_obj in webhooks:
                                 await webhook_obj.delete()
