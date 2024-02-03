@@ -17,7 +17,9 @@ class Ollama(commands.Cog):
             "api_port": 11434,
             "api_endpoint": "/api/chat",
             "model": "",
-            "threads": False
+            "threads": False,
+            "bot_name": "",
+            "bot_avatar": ""
         }
         
         default_user = {
@@ -25,7 +27,9 @@ class Ollama(commands.Cog):
             "api_port": 11434,
             "api_endpoint": "/api/chat",
             "model": "",
-            "threads": False
+            "threads": False,
+            "bot_name": "",
+            "bot_avatar": ""
         }
 
         self.config.register_guild(**default_guild)
@@ -210,6 +214,36 @@ class Ollama(commands.Cog):
         else:
             await ctx.send("New Chat Initialized.")
 
+    @commands.admin()
+    @ollama.command(name="name")
+    async def set_bot_name(self, ctx, *, name: str):
+        """Set the bot name."""
+        if len(name) > 15:
+            await ctx.send("The bot name must be under 15 characters.")
+            return
+        if ctx.guild is not None:
+            await self.config.guild(ctx.guild).bot_name.set(name)
+            scope = "Guild"
+        else:
+            await self.config.user(ctx.author).bot_name.set(name)
+            scope = "DM"
+        await ctx.send(f"{scope} bot name updated successfully.")
+
+    @commands.admin()
+    @ollama.command(name="avatar")
+    async def set_bot_avatar(self, ctx, *, url: str):
+        """Set the bot avatar URL."""
+        if not url.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')):
+            await ctx.send("Please provide a valid image URL. Accepted formats: PNG, JPG, JPEG, GIF")
+            return
+        if ctx.guild is not None:
+            await self.config.guild(ctx.guild).bot_avatar.set(url)
+            scope = "Guild"
+        else:
+            await self.config.user(ctx.author).bot_avatar.set(url)
+            scope = "DM"
+        await ctx.send(f"{scope} bot avatar updated successfully.")
+
     ### THE SAUCE ###
 
     @commands.Cog.listener()
@@ -279,6 +313,8 @@ class Ollama(commands.Cog):
         api_port = await config_source.api_port()
         api_endpoint = await config_source.api_endpoint()
         api_url = f"{api_hostname}:{api_port}{api_endpoint}"
+        bot_name = await config_source.bot_name()
+        bot_avatar = await config_source.bot_avatar()
         
         try:
             async with message.channel.typing():
@@ -287,7 +323,14 @@ class Ollama(commands.Cog):
                     if response.status == 200:
                         data = await response.json()
                         response_message = data.get("message", {}).get("content", "Sorry, I couldn't process your request.")
-                        await message.channel.send(f"{response_message}")
+                        if bot_name is not None and bot_avatar is not None:
+                            webhook = await message.channel.create_webhook(name=bot_name, avatar_url=bot_avatar)
+                            await webhook.send(str(message))
+                            webhooks = await message.channel.webhooks()
+                            for webhook_obj in webhooks:
+                                await webhook_obj.delete()
+                        else:
+                            await message.channel.send(f"{response_message}")
                     else:
                         await message.channel.send(f"Error contacting the API. Status: {response.status}\nResponse: ```{response_text}```")
         except Exception as e:
