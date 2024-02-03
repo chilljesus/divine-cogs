@@ -192,7 +192,7 @@ class Ollama(commands.Cog):
             await self.respond_in_thread(thread, message)
         else:
             formatted_message = [{"role": "user", "content": message.content}]
-            await self.send_response(message.channel, formatted_message)
+            await self.send_response(message, formatted_message)
             
 
     async def respond_in_thread(self, thread, initial_message):
@@ -204,8 +204,11 @@ class Ollama(commands.Cog):
             await self.send_response(thread, formatted_messages)
             break
 
-    async def send_response(self, destination, formatted_messages):
-        model = await self.config.model()
+    async def send_response(self, message, formatted_messages):
+        if message.guild is not None:
+            model = await self.config.guild(message.guild).model()
+        else:
+            model = await self.config.user(message.author).model()
         json_payload = {
             "model": model,
             "messages": formatted_messages,
@@ -214,8 +217,16 @@ class Ollama(commands.Cog):
                 "num_predict": 256
             }
         }
-        api_url = f"{await self.config.api_hostname()}:{await self.config.api_port()}{await self.config.api_endpoint()}"
+        if message.guild is not None:
+            config_source = self.config.guild(message.guild)
+        else:
+            config_source = self.config.user(message.author)
 
+        api_hostname = await config_source.api_hostname()
+        api_port = await config_source.api_port()
+        api_endpoint = await config_source.api_endpoint()
+        api_url = f"{api_hostname}:{api_port}{api_endpoint}"
+        
         try:
             async with destination.typing():
                 async with self.session.post(api_url, json=json_payload) as response:
@@ -224,11 +235,11 @@ class Ollama(commands.Cog):
                         data = await response.json()
                         response_message = data.get("message", {}).get("content", "Sorry, I couldn't process your request.")
                         #response_message = '.'.join(response_message.split('.')[:-1]) + '.'
-                        await destination.send(f"{response_message}")
+                        await message.channel.send(f"{response_message}")
                     else:
-                        await destination.send(f"Error contacting the API. Status: {response.status}\nResponse: ```{response_text}```")
+                        await message.channel.send(f"Error contacting the API. Status: {response.status}\nResponse: ```{response_text}```")
         except Exception as e:
-            await destination.send(f"An exception occurred: ```{e}```")
+            await message.channel.send(f"An exception occurred: ```{e}```")
 
 async def setup(bot):
     cog = Ollama(bot)
