@@ -42,7 +42,7 @@ class Ollama(commands.Cog):
 
     ### GENERAL COMMANDS ###
 
-    @commands.command(name="settings")
+    @ollama.command(name="settings")
     async def showsettings(self, ctx):
         """Displays the current settings for the guild or DM."""
         if ctx.guild is not None:
@@ -54,7 +54,7 @@ class Ollama(commands.Cog):
         settings_formatted = "\n".join([f"{key}: {value}" for key, value in settings.items()])
         await ctx.send(f"**{scope} Settings:**\n```{settings_formatted}```")
 
-    @commands.command(name="getmodels")
+    @ollama.command(name="getmodels")
     async def getmodels(self, ctx):
         """Get the available models."""
         if ctx.guild is not None:
@@ -84,8 +84,8 @@ class Ollama(commands.Cog):
         except Exception as e:
             await ctx.send(f"An exception occurred: ```{e}```")
 
-    @commands.is_owner()
-    @commands.command(name="addmodeltoblacklist")
+    @ollama.is_owner()
+    @ollama.command(name="addmodeltoblacklist")
     async def add_model_to_blacklist(self, ctx, *, model_name: str):
         """Adds a model to the global models blacklist. Bot owner only."""
         async with self.config.models_blacklist() as blacklist:
@@ -97,7 +97,7 @@ class Ollama(commands.Cog):
 
     ### API SETUP ###
 
-    @commands.command(name="sethost")
+    @ollama.command(name="sethost")
     async def sethost(self, ctx, hostname: str):
         """Set the API hostname."""
         if not hostname.startswith(('http://', 'https://')):
@@ -113,7 +113,7 @@ class Ollama(commands.Cog):
         full_url = f"{hostname}:{await config_scope.api_port()}{await config_scope.api_endpoint()}"
         await ctx.send(f"{scope} API hostname updated. Current API URL: {full_url}")
 
-    @commands.command(name="setport")
+    @ollama.command(name="setport")
     async def setport(self, ctx, port: int):
         """Set the API port."""
         if ctx.guild is not None:
@@ -127,7 +127,7 @@ class Ollama(commands.Cog):
         full_url = f"{await config_scope.api_hostname()}:{port}{await config_scope.api_endpoint()}"
         await ctx.send(f"{scope} API port updated. Current API URL: {full_url}")
 
-    @commands.command(name="setendpoint")
+    @ollama.command(name="setendpoint")
     async def setendpoint(self, ctx, endpoint: str):
         """Set the API endpoint."""
         if not endpoint.startswith('/'):
