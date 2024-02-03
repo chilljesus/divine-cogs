@@ -329,7 +329,7 @@ class Ollama(commands.Cog):
                     if response.status == 200:
                         data = await response.json()
                         if await self.config.requests():
-                            await message.auther.send(f"Sent\n```{json_payload}```\nReceived\n```{data}```")
+                            await message.author.send(f"Sent\n```{json_payload}```\nReceived\n```{data}```")
                         response_message = data.get("message", {}).get("content")
                         if not response_message or response_message.isspace():
                             await self.send_response(message, formatted_messages)
