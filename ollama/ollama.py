@@ -107,15 +107,16 @@ class Ollama(commands.Cog):
         api_url = f"http://{await self.config.api_hostname()}:{await self.config.api_port()}{await self.config.api_endpoint()}"
 
         try:
-            async with self.session.post(api_url, json=json_payload) as response:
-                response_text = await response.text()  # Get the raw response text
-                if response.status == 200:
-                    data = await response.json()
-                    response_message = data.get("message", {}).get("content", "Sorry, I couldn't process your request.")
-                    await destination.send(f"```{response_message}```")
-                else:
-                    # Send the status and response in a code block to help diagnose issues
-                    await destination.send(f"Error contacting the API. Status: {response.status}\nResponse: ```{response_text}```")
+            async with self.typing():
+                async with self.session.post(api_url, json=json_payload) as response:
+                    response_text = await response.text()  # Get the raw response text
+                    if response.status == 200:
+                        data = await response.json()
+                        response_message = data.get("message", {}).get("content", "Sorry, I couldn't process your request.")
+                        await destination.send(f"{response_message}")
+                    else:
+                        # Send the status and response in a code block to help diagnose issues
+                        await destination.send(f"Error contacting the API. Status: {response.status}\nResponse: ```{response_text}```")
         except Exception as e:
             # Catch any exceptions and send them in a code block
             await destination.send(f"An exception occurred: ```{e}```")
