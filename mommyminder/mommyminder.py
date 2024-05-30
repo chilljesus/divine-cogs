@@ -134,9 +134,9 @@ class MommyMinder(commands.Cog):
         try:
             tz = pytz.timezone(timezone)
             await self.config.user(interaction.user).timezone.set(timezone)
-            await interaction.response.send(f"Your timezone has been set to {timezone}.")
+            await interaction.response.send_message(f"Your timezone has been set to {timezone}.")
         except pytz.UnknownTimeZoneError:
-            await interaction.response.send("Invalid timezone. Please provide a valid timezone identifier (e.g., 'US/Eastern').")
+            await interaction.response.send_message("Invalid timezone. Please provide a valid timezone identifier (e.g., 'US/Eastern').")
         
 class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
     def __init__(self, bot: Red, user: discord.User):
