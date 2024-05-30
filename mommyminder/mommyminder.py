@@ -144,7 +144,7 @@ class MommyMinder(commands.Cog):
     async def testnotify(self, ctx):
         """Testing command to build notifications"""
         user_data = await self.config.user(ctx.author).all()
-        gender = user_data("gender", "neutral")
+        gender = user_data.get("gender", "neutral")
         notification_responses = responses[gender]["notification"]
         selected_response = random.choice(notification_responses)
         statement, action = selected_response
