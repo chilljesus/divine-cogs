@@ -5,6 +5,8 @@ from datetime import datetime, timedelta
 import pytz
 import discord
 import aiohttp
+from responses import responses
+import random
 
 class MommyMinder(commands.Cog):
     def __init__(self, bot):
@@ -83,11 +85,15 @@ class MommyMinder(commands.Cog):
     @commands.command()
     async def testnotify(self, ctx):
         """Testing command to build notifications"""
+        user_data = await self.config.user(ctx.author).all()
+        gender = user_data("gender", "neutral")
+        notification_responses = responses[gender]["notification"]
+        selected_response = random.choice(notification_responses)
+        statement, action = selected_response
         async with aiohttp.ClientSession() as session:
-            async with session.get("https://nekos.best/api/v2/hug") as resp:
+            async with session.get(f"https://nekos.best/api/v2/{action}") as resp:
                 image = await resp.json()
-        embed = discord.Embed(title="Reminder Name", color=discord.Color.purple(), description="Hey there {name}, something something better do it or ill tell {name} on you!")
-        embed.add_field(name="Name", value="Reminder Name", inline=False)
+        embed = discord.Embed(title="Reminder Name", color=discord.Color.purple(), description=statement)
         embed.add_field(name="Time", value="Reminder Time", inline=False)
         embed.set_image(url=image["results"][0]["url"])
         await ctx.send(embed=embed)
