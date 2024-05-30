@@ -126,7 +126,7 @@ class MommyMinder(commands.Cog):
          app_commands.Choice(name="Fluid", value="fluid"),
     ])
     async def set_gender(self, interaction: discord.Interaction, gender: app_commands.Choice[str]):
-        await self.config.user(interaction.user).gender.set(gender)
+        await self.config.user(interaction.user).gender.set(gender.value)
         await interaction.response.send_message(f"Your pronouns have been set to be {gender.value}", ephemeral=True)
 
     @app_commands.command(name="settimezone", description="Send your timezone as a tz identifier (google it)")
