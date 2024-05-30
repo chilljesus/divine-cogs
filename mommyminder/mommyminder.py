@@ -84,12 +84,6 @@ class MommyMinder(commands.Cog):
         user = message.author
         await user.send("Please use the slash commands to set up your reminders.")
 
-    @commands.hybrid_command(name="setreminder", description="Setup a new reminder")
-    async def set_reminder(self, ctx: commands.Context):
-        await ctx.defer()
-        modal = ReminderSetupModal(bot=self.bot, ctx=ctx)
-        await ctx.send_modal(modal)
-
     ### GENERAL COMMANDS ###
 
 #    @commands.admin()
@@ -142,11 +136,16 @@ class MommyMinder(commands.Cog):
 #        await ctx.send(f"{scope} bot avatar updated successfully.")
 
 ### THE ACTUAL SETUP SHIZ ###
+    @commands.hybrid_command(name="setreminder")
+    async def set_reminder(self, ctx: discord.ApplicationContext):
+        await ctx.defer()
+        modal = ReminderSetupModal(bot=self.bot, user=ctx.author)
+        await ctx.send_modal(modal)
 
 class ReminderSetupModal(discord.ui.Modal):
-    def __init__(self, bot: Red, ctx: commands.Context):
+    def __init__(self, bot: Red, user: discord.User):
         self.bot = bot
-        self.ctx = ctx
+        self.user = user
         super().__init__(title="Set Reminder")
 
         self.name = discord.ui.TextInput(label="Reminder Name", placeholder="e.g. Take Medication")
@@ -168,7 +167,7 @@ class ReminderSetupModal(discord.ui.Modal):
         self.add_item(self.buddy)
 
     async def callback(self, interaction: discord.Interaction):
-        user = interaction.user
+        user = self.user
         name = self.name.value
         time_str = self.time.value
         tz_str = self.timezone.value
