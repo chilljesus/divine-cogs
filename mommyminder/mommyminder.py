@@ -58,19 +58,14 @@ class MommyMinder(commands.Cog):
         user = self.bot.get_user(user_id)
         if not user:
             return
-        
         await user.send(f"Reminder: {reminder['name']}")
         accountable_buddy = reminder.get("accountable_buddy")
-        
         if accountable_buddy:
             buddy = self.bot.get_user(accountable_buddy)
             if buddy:
                 await buddy.send(f"{user.name} has a reminder: {reminder['name']}")
-
-        # Confirm task completion
         def check(msg):
             return msg.author == user and msg.content.lower() == "done"
-
         try:
             await self.bot.wait_for("message", timeout=1800.0, check=check)
         except TimeoutError:
@@ -110,15 +105,6 @@ class MommyMinder(commands.Cog):
         embed.add_field(name="Reminders", value=reminders_str, inline=False)
         await interaction.response.send_message(embed=embed, ephemeral=True)
     
-    @commands.Cog.listener()
-    async def on_message(self, message: discord.Message):
-        if message.guild is None and not message.author.bot:
-            await self.handle_dm(message)
-
-    async def handle_dm(self, message: discord.Message):
-        user = message.author
-        #await user.send("Please use the slash commands to set up your reminders.")
-
     ### THE ACTUAL SETUP SHIZ ###        
     @app_commands.command(name="setreminder", description="Set a new reminder.")
     async def set_reminder(self, interaction: discord.Interaction):
@@ -128,7 +114,6 @@ class MommyMinder(commands.Cog):
         except Exception as e:
             print(f"Error sending modal: {e}")
             await interaction.response.send_message("An error occurred while displaying the modal. Please try again.", ephemeral=True)
-
         
     @app_commands.command(name="setpronouns", description="Add your pronouns.")
     @app_commands.choices(gender=[
@@ -149,7 +134,85 @@ class MommyMinder(commands.Cog):
             await interaction.response.send_message(f"Your timezone has been set to {timezone}.")
         except pytz.UnknownTimeZoneError:
             await interaction.response.send_message("Invalid timezone. Please provide a valid timezone identifier (e.g., 'US/Eastern').")
+     
+    @app_commands.command(name="setbuddy", description="Set a default acountability buddy")
+    async def set_buddy(self, interaction: discord.Interaction, buddy: discord.Member):
+        await self.config.user(interaction.user).buddy.set(buddy.value)
+        await interaction.response.send_message(f"Your default buddy has been set to {buddy.value}", ephemeral=True)
         
+    @app_commands.command(name="Reminders", description="See and edit your reminders")
+    async def edit_reminders(self, interaction: discord.Interaction):
+        reminders = await self.config.user(interaction.user).get(reminders)
+        if not reminders:
+            await interaction.response.send_message("You have no reminders set.", ephemeral=True)
+            return
+        current_index = 0
+        embed = self.create_reminder_embed(reminders, current_index)
+        view = ReminderView(reminders, current_index, self.config, interaction.user)
+        await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
+    def create_reminder_embed(self, reminders, index):
+        reminder = reminders[index]
+        embed = discord.Embed(title=f"Reminder {index + 1}/{len(reminders)}", color=discord.Color.purple())
+        embed.add_field(name="Name", value=reminder["name"], inline=False)
+        embed.add_field(name="Next Reminder", value=reminder["remaining"], inline=False)
+        embed.add_field(name="Time", value=reminder["time"], inline=False)
+        embed.add_field(name="Frequency", value=reminder["frequency"], inline=False)
+        embed.add_field(name="Accountable Buddy", value=str(reminder["accountable_buddy"]), inline=False)
+        return embed
+    
+class ReminderView(discord.ui.View):
+    def __init__(self, reminders, current_index, config, user):
+        super().__init__(timeout=None)
+        self.reminders = reminders
+        self.current_index = current_index
+        self.config = config
+        self.user = user
+        self.update_buttons()
+
+    @discord.ui.button(label="Previous", style=discord.ButtonStyle.primary, disabled=True)
+    async def previous(self, button: discord.ui.Button, interaction: discord.Interaction):
+        self.current_index -= 1
+        embed = self.create_reminder_embed()
+        self.update_buttons()
+        await interaction.response.edit_message(embed=embed, view=self)
+
+    @discord.ui.button(label="Next", style=discord.ButtonStyle.primary, disabled=False)
+    async def next(self, button: discord.ui.Button, interaction: discord.Interaction):
+        self.current_index += 1
+        embed = self.create_reminder_embed()
+        self.update_buttons()
+        await interaction.response.edit_message(embed=embed, view=self)
+
+    @discord.ui.button(label="Delete", style=discord.ButtonStyle.danger)
+    async def delete(self, button: discord.ui.Button, interaction: discord.Interaction):
+        del self.reminders[self.current_index]
+        await self.config.user(self.user).reminders.set(self.reminders)
+
+        if not self.reminders:
+            await interaction.response.edit_message(content="All reminders deleted.", embed=None, view=None)
+            return
+
+        if self.current_index >= len(self.reminders):
+            self.current_index = len(self.reminders) - 1
+        
+        embed = self.create_reminder_embed()
+        self.update_buttons()
+        await interaction.response.edit_message(embed=embed, view=self)
+
+    def create_reminder_embed(self):
+        reminder = self.reminders[self.current_index]
+        embed = discord.Embed(title=f"Reminder {self.current_index + 1}/{len(self.reminders)}", color=discord.Color.blue())
+        embed.add_field(name="Name", value=reminder["name"], inline=False)
+        embed.add_field(name="Next Reminder", value=reminder["remaining"], inline=False)
+        embed.add_field(name="Time", value=reminder["time"], inline=False)
+        embed.add_field(name="Frequency", value=reminder["frequency"], inline=False)
+        embed.add_field(name="Accountable Buddy", value=str(reminder["accountable_buddy"]), inline=False)
+        return embed
+
+    def update_buttons(self):
+        self.previous.disabled = self.current_index == 0
+        self.next.disabled = self.current_index == len(self.reminders) - 1
+            
 class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
     def __init__(self, bot: Red, user: discord.User):
         super().__init__(title="Set Reminder")
