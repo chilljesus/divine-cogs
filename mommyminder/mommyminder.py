@@ -137,10 +137,10 @@ class MommyMinder(commands.Cog):
 
 ### THE ACTUAL SETUP SHIZ ###
     @app_commands.command(name="setreminder")
-    async def set_reminder(self, ctx: commands.Context):
+    async def set_reminder(self, interaction: discord.Interaction):
         #await ctx.defer()
-        modal = ReminderSetupModal(bot=self.bot, user=ctx.author)
-        await ctx.interaction.response.send_modal(modal)
+        modal = ReminderSetupModal(bot=self.bot, user=interaction.author)
+        await interaction.response.send_modal(modal)
 
 class ReminderSetupModal(discord.ui.Modal):
     def __init__(self, bot: Red, user: discord.User):
