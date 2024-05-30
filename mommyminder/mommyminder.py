@@ -171,6 +171,7 @@ class ReminderSetupModal(discord.ui.Modal):
         self.add_item(self.buddy)
 
     async def callback(self, interaction: discord.Interaction):
+        print("Received callback")
         user = self.user
         name = self.name.value
         time_str = self.time.value
@@ -182,21 +183,21 @@ class ReminderSetupModal(discord.ui.Modal):
         if frequency not in ["daily", "weekly"]:
             await interaction.response.send_message("Invalid frequency. Please specify 'Daily' or 'Weekly'.", ephemeral=True)
             return
-
+        print("Frequency is valid.")
         # Validate the provided time
         try:
             time_obj = datetime.strptime(time_str, "%H:%M").time()
         except ValueError:
             await interaction.response.send_message("Invalid time format. Please use HH:MM (24-hour).", ephemeral=True)
             return
-
+        print("Time is valid.")
         # Validate the timezone
         try:
             tz = pytz.timezone(tz_str)
         except pytz.UnknownTimeZoneError:
             await interaction.response.send_message("Invalid timezone. Please set your timezone using the settimezone command.", ephemeral=True)
             return
-
+        print("Timezone is valid.")
         # Calculate the reminder time
         now = datetime.now(tz)
         reminder_datetime = datetime.combine(now.date(), time_obj, tz)
@@ -207,7 +208,7 @@ class ReminderSetupModal(discord.ui.Modal):
                 reminder_datetime += timedelta(days=1)
             else:  # frequency == "weekly"
                 reminder_datetime += timedelta(days=7)
-
+        print("Adjusted reminders.")
         reminder = {
             "name": name,
             "remaining": reminder_datetime.isoformat(),
@@ -219,7 +220,7 @@ class ReminderSetupModal(discord.ui.Modal):
         # Save the reminder
         async with self.bot.get_cog("MommyMinder").config.user(user).reminders() as reminders:
             reminders.append(reminder)
-
+        print("Set variables.")
         await interaction.response.send_message(f"Reminder '{name}' set for {time_str} {tz_str} ({frequency}).")
 
 async def setup(bot):
