@@ -90,7 +90,7 @@ class MommyMinder(commands.Cog):
         embed.add_field(name="Name", value="Reminder Name", inline=False)
         embed.add_field(name="Time", value="Reminder Time", inline=False)
         embed.set_image(url=image["results"][0]["url"])
-        ctx.send(embed=embed)
+        await ctx.send(embed=embed)
                 
     ### GENERAL COMMANDS ###
     
