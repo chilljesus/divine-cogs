@@ -140,7 +140,7 @@ class MommyMinder(commands.Cog):
         await self.config.user(interaction.user).buddy.set(buddy.value)
         await interaction.response.send_message(f"Your default buddy has been set to {buddy.value}", ephemeral=True)
         
-    @app_commands.command(name="Reminders", description="See and edit your reminders")
+    @app_commands.command(name="reminders", description="See and edit your reminders")
     async def edit_reminders(self, interaction: discord.Interaction):
         reminders = await self.config.user(interaction.user).get(reminders)
         if not reminders:
