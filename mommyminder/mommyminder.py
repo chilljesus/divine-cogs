@@ -119,7 +119,21 @@ class MommyMinder(commands.Cog):
         user = self.bot.get_user(user_id)
         if not user:
             return
-        await user.send(f"Reminder: {reminder['name']}")
+        
+        user_data = await self.config.user(user_id).all()
+        gender = user_data.get("gender", "neutral")
+        notification_responses = responses[gender]["notification"]
+        selected_response = random.choice(notification_responses)
+        statement, action = selected_response
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f"https://nekos.best/api/v2/{action}") as resp:
+                image = await resp.json()
+        embed = discord.Embed(title=f"reminder['name']", color=discord.Color.purple(), description=statement)
+        embed.add_field(name="Time", value=f"reminder['time']", inline=False)
+        embed.set_image(url=image["results"][0]["url"])
+        await user.send(embed=embed)
+        
+        #await user.send(f"Reminder: {reminder['name']}")
         accountable_buddy = reminder.get("accountable_buddy")
         if accountable_buddy:
             buddy = self.bot.get_user(accountable_buddy)
