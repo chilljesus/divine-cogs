@@ -126,17 +126,17 @@ class MommyMinder(commands.Cog):
          app_commands.Choice(name="Fluid", value="fluid"),
     ])
     async def set_gender(self, interaction: discord.Interaction, gender: app_commands.Choice[str]):
-        await self.config.user(ctx.author).gender.set(gender)
+        await self.config.user(interaction.user).gender.set(gender)
         await interaction.response.send_message(f"Your pronouns have been set to be {gender.value}", ephemeral=True)
-        
+
     @app_commands.command(name="settimezone", description="Send your timezone as a tz identifier (google it)")
     async def set_timezone(self, interaction: discord.Interaction, timezone: str):
         try:
             tz = pytz.timezone(timezone)
-            await self.config.user(ctx.author).timezone.set(timezone)
-            await ctx.send(f"Your timezone has been set to {timezone}.")
+            await self.config.user(interaction.user).timezone.set(timezone)
+            await interaction.response.send(f"Your timezone has been set to {timezone}.")
         except pytz.UnknownTimeZoneError:
-            await ctx.send("Invalid timezone. Please provide a valid timezone identifier (e.g., 'US/Eastern').")
+            await interaction.response.send("Invalid timezone. Please provide a valid timezone identifier (e.g., 'US/Eastern').")
         
 class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
     def __init__(self, bot: Red, user: discord.User):
