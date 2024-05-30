@@ -117,29 +117,29 @@ class MommyMinder(commands.Cog):
 
     ### SERVER / DM STUFF ###
 
-    @commands.admin()
-    @MommyMinder.command(name="name")
-    async def set_bot_name(self, ctx, *, name: str):
-        """Set the bot name."""
-        if len(name) > 15:
-            await ctx.send("The bot name must be under 15 characters.")
-            return
-        if ctx.guild is not None:
-            await self.config.guild(ctx.guild).bot_name.set(name)
-            scope = "Guild"
-        await ctx.send(f"{scope} bot name updated successfully.")
+#    @commands.admin()
+#    @MommyMinder.command(name="name")
+#    async def set_bot_name(self, ctx, *, name: str):
+#        """Set the bot name."""
+#        if len(name) > 15:
+#            await ctx.send("The bot name must be under 15 characters.")
+#            return
+#        if ctx.guild is not None:
+#            await self.config.guild(ctx.guild).bot_name.set(name)
+#            scope = "Guild"
+#        await ctx.send(f"{scope} bot name updated successfully.")
 
-    @commands.admin()
-    @MommyMinder.command(name="avatar")
-    async def set_bot_avatar(self, ctx, *, url: str):
-        """Set the bot avatar URL."""
-        if not url.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')):
-            await ctx.send("Please provide a valid image URL. Accepted formats: PNG, JPG, JPEG, GIF")
-            return
-        if ctx.guild is not None:
-            await self.config.guild(ctx.guild).bot_avatar.set(url)
-            scope = "Guild"
-        await ctx.send(f"{scope} bot avatar updated successfully.")
+#    @commands.admin()
+#    @MommyMinder.command(name="avatar")
+#    async def set_bot_avatar(self, ctx, *, url: str):
+#        """Set the bot avatar URL."""
+#        if not url.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')):
+#            await ctx.send("Please provide a valid image URL. Accepted formats: PNG, JPG, JPEG, GIF")
+#            return
+#        if ctx.guild is not None:
+#            await self.config.guild(ctx.guild).bot_avatar.set(url)
+#            scope = "Guild"
+#        await ctx.send(f"{scope} bot avatar updated successfully.")
 
 ### THE ACTUAL SETUP SHIZ ###
 
