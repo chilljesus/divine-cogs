@@ -148,7 +148,7 @@ class MommyMinder(commands.Cog):
                 
         def check(i: discord.Interaction, button):
             #return msg.author == user and msg.content.lower() == "done"
-            return i.author == ctx.author and i.message == msg
+            return i.author == user and i.message == msg
             return 
         
         try:
