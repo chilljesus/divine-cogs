@@ -115,7 +115,7 @@ class MommyMinder(commands.Cog):
         app_commands.Choice(name=tz, value=tz) for tz in pytz.all_timezones
     ]
     @app_commands.command(name="settimezone", description="Set your timezone.")
-    @app_commands.choices(gender=timezone_options[:25])
+    @app_commands.choices(timezone=timezone_options[:25])
     async def set_timezone(self, interaction: discord.Interaction, timezone: app_commands.Choice[str]):
         await interaction.response.send_message(f"Your timezone has been set to {timezone.value}", ephemeral=True)
 
