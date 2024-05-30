@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 import pytz
 import discord
 import aiohttp
+import hmfull as HMfull
 
 class MommyMinder(commands.Cog):
     def __init__(self, bot):
@@ -22,6 +23,7 @@ class MommyMinder(commands.Cog):
             "accountable_buddies": [],
             "timezone": None,
             "gender": None,
+            "buddy": None,
         }
 
         self.config.register_guild(**default_guild)
@@ -79,30 +81,28 @@ class MommyMinder(commands.Cog):
         """MommyMinder configuration commands."""
         pass
 
+    @commands.command()
+    async def testnotify(self, ctx):
+        """Testing command to build notifications"""
+        embed = discord.Embed(title="Reminder Name", color=discord.Color.purple(), description="Hey there {name}, something something better do it or ill tell {name} on you!")
+        embed.add_field(name="Name", value="Reminder Name", inline=False)
+        embed.add_field(name="Time", value="Reminder Time", inline=False)
+        embed.set_image(url=HMfull.NekoLove.sfw.hug["url"])
+        ctx.send(embed=embed)
+                
     ### GENERAL COMMANDS ###
     
-    @app_commands.command(name="settings", description="Displays your settings and reminders.")
+    @app_commands.command(name="settings", description="Displays your settings.")
     async def settings(self, interaction: discord.Interaction):
         user = interaction.user
         user_data = await self.config.user(user).all()
         gender = user_data.get("gender", "Not set")
         timezone = user_data.get("timezone", "Not set")
-        reminders = user_data.get("reminders", [])
-        reminders_str = ""
-        for reminder in reminders:
-            reminders_str += (
-                f"**Name:** {reminder['name']}\n"
-                f"**Next Reminder:** {reminder['remaining']}\n"
-                f"**Time:** {reminder['time']}\n"
-                f"**Frequency:** {reminder['frequency']}\n"
-                f"**Accountable Buddy:** {reminder['accountable_buddy']}\n\n"
-            )
-        if not reminders_str:
-            reminders_str = "No reminders set."
-        embed = discord.Embed(title="Your Settings and Reminders", color=discord.Color.purple())
+        buddy = user_data.get("buddy", "Not set")
+        embed = discord.Embed(title="Your Settings", color=discord.Color.purple())
         embed.add_field(name="Gender", value=gender, inline=False)
         embed.add_field(name="Timezone", value=timezone, inline=False)
-        embed.add_field(name="Reminders", value=reminders_str, inline=False)
+        embed.add_field(name="Default Buddy", value=buddy, inline=False)
         await interaction.response.send_message(embed=embed, ephemeral=True)
     
     ### THE ACTUAL SETUP SHIZ ###        
