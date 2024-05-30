@@ -130,7 +130,7 @@ class MommyMinder(commands.Cog):
         await interaction.response.send_message(f"Your pronouns have been set to be {gender.value}", ephemeral=True)
         
     @app_commands.command(name="settimezone", description="Send your timezone as a tz identifier (google it)")
-    async def set_timezone(self, interaction: discord.Interaction, current_time: str):
+    async def set_timezone(self, interaction: discord.Interaction, timezone: str):
         try:
             tz = pytz.timezone(timezone)
             await self.config.user(ctx.author).timezone.set(timezone)
