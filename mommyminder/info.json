@@ -1,0 +1,14 @@
+{
+    "author": ["NekoJesus"],
+    "install_msg": "A cog for reminding you take your meds, drink water, and stay alive and happy and well nourished and stuff. Good kitty~",
+    "name": "MommyMinder",
+    "disabled": false,
+    "short": "Healthy living reminders.",
+    "description": "Healthy living reminders.\nUse `[p]mommyminder`",
+    "tags": [
+        "reminders"
+    ],
+    "required_cogs": {},
+    "requirements": [],
+    "type": "COG"
+}
