@@ -131,7 +131,12 @@ class MommyMinder(commands.Cog):
         embed = discord.Embed(title=reminder["name"], color=discord.Color.purple(), description=statement)
         embed.add_field(name="Time", value=reminder["time"], inline=False)
         embed.set_image(url=image["results"][0]["url"])
-        await user.send(embed=embed, components=[Button(style=ButtonStyle.red, label="Done!", custom_id="confirm")])
+        
+        button = Button(style=discord.ButtonStyle.red, label="Done!", custom_id="confirm")
+        view = View()
+        view.add_item(button)
+        
+        await user.send(embed=embed, view=view)
         
         #await user.send(f"Reminder: {reminder['name']}")
         accountable_buddy = reminder.get("accountable_buddy")
@@ -144,6 +149,7 @@ class MommyMinder(commands.Cog):
             #return msg.author == user and msg.content.lower() == "done"
             return i.author == ctx.author and i.message == msg
             return 
+        
         try:
             #await self.bot.wait_for("message", timeout=1800.0, check=check)
             interaction, button = await client.wait_for('button_click', check=check)
