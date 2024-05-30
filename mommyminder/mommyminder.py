@@ -145,33 +145,30 @@ class MommyMinder(commands.Cog):
             buddy = self.bot.get_user(accountable_buddy)
             if buddy:
                 await buddy.send(f"{user.name} has a reminder: {reminder['name']}")
+                        
+            def check(interaction: discord.Interaction):
+                return interaction.user == user and interaction.message.id == message.id
+
+            try:
+                interaction = await self.bot.wait_for("interaction", timeout=1800.0, check=check)
+                if interaction.data['custom_id'] == "confirm":
                 
-        def check(i: discord.Interaction, button):
-            #return msg.author == user and msg.content.lower() == "done"
-            return i.author == user and i.message == msg
-            return 
-        
-        try:
-            #await self.bot.wait_for("message", timeout=1800.0, check=check)
-            interaction, button = await self.bot.wait_for('button_click', check=check)
-            if button.custom_id == "confirm":
+                    confirmation_responses = responses[gender]["confirmation"]
+                    selected_response = random.choice(confirmation_responses)
+                    statement, action = selected_response
+                    async with aiohttp.ClientSession() as session:
+                        async with session.get(f"https://nekos.best/api/v2/{action}") as resp:
+                            image = await resp.json()
+                    embed = discord.Embed(title=reminder["name"], color=discord.Color.purple(), description=statement)
+                    embed.add_field(name="Time", value=reminder["time"], inline=False)
+                    embed.set_image(url=image["results"][0]["url"])
+                    await user.send(embed=embed)
                 
-                confirmation_responses = responses[gender]["confirmation"]
-                selected_response = random.choice(confirmation_responses)
-                statement, action = selected_response
-                async with aiohttp.ClientSession() as session:
-                    async with session.get(f"https://nekos.best/api/v2/{action}") as resp:
-                        image = await resp.json()
-                embed = discord.Embed(title=reminder["name"], color=discord.Color.purple(), description=statement)
-                embed.add_field(name="Time", value=reminder["time"], inline=False)
-                embed.set_image(url=image["results"][0]["url"])
-                await user.send(embed=embed)
-                
-        except TimeoutError:
-            if accountable_buddy:
-                buddy = self.bot.get_user(accountable_buddy)
-                if buddy:
-                    await buddy.send(f"{user.name} did not confirm their reminder: {reminder['name']}")
+            except TimeoutError:
+                if accountable_buddy:
+                    buddy = self.bot.get_user(accountable_buddy)
+                    if buddy:
+                        await buddy.send(f"{user.name} did not confirm their reminder: {reminder['name']}")
 
     @commands.group(name="mommyminder")
     async def mommyminder(self, ctx):
