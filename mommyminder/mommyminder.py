@@ -36,31 +36,23 @@ class MommyMinder(commands.Cog):
 
     @tasks.loop(minutes=1.0)
     async def reminder_check(self):
-        print("Checking reminders")
         now = datetime.now(pytz.utc)
+        print(f"Running reminder check at {now}.") 
         all_users = await self.config.all_users()
-        
         for user_id, data in all_users.items():
             reminders = data.get("reminders", [])
-            for reminder in reminders:
+            for i, reminder in enumerate(reminders):
                 tz = pytz.timezone(await self.config.user_from_id(user_id).timezone())
                 remaining = datetime.fromisoformat(reminder["remaining"])
-
-                # Check if it's time to send the reminder
                 if now >= remaining:
                     await self.send_reminder(user_id, reminder)
-
-                    # Update the remaining time for the reminder after sending
                     if reminder["frequency"] == "daily":
                         next_reminder_datetime = remaining + timedelta(days=1)
                     elif reminder["frequency"] == "weekly":
-                        next_reminder_datetime = remaining + timedelta(days=7)
-
+                        next_reminder_datetime = remaining + timedelta(weeks=1)
                     reminder["remaining"] = next_reminder_datetime.isoformat()
-                    
-                    # Save the updated reminder
-                    async with self.config.user_from_id(user_id).reminders() as reminders:
-                        reminders[reminders.index(reminder)] = reminder
+                    async with self.config.user_from_id(user_id).reminders() as user_reminders:
+                        user_reminders[i] = reminder
 
     async def send_reminder(self, user_id: int, reminder: dict):
         user = self.bot.get_user(user_id)
