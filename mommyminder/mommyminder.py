@@ -136,7 +136,7 @@ class MommyMinder(commands.Cog):
 #        await ctx.send(f"{scope} bot avatar updated successfully.")
 
 ### THE ACTUAL SETUP SHIZ ###
-    @commands.hybrid_command(name="setreminder")
+    @commands.Cog.slash_command(name="setreminder")
     async def set_reminder(self, ctx):
         #await ctx.defer()
         modal = ReminderSetupModal(bot=self.bot, user=ctx.author)
