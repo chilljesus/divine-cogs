@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 import pytz
 import discord
 import aiohttp
-import hmfull as HMfull
 
 class MommyMinder(commands.Cog):
     def __init__(self, bot):
@@ -84,10 +83,13 @@ class MommyMinder(commands.Cog):
     @commands.command()
     async def testnotify(self, ctx):
         """Testing command to build notifications"""
+        async with aiohttp.ClientSession() as session:
+            async with session.get("https://nekos.best/api/v2/neko") as resp:
+                image = await resp.json()
         embed = discord.Embed(title="Reminder Name", color=discord.Color.purple(), description="Hey there {name}, something something better do it or ill tell {name} on you!")
         embed.add_field(name="Name", value="Reminder Name", inline=False)
         embed.add_field(name="Time", value="Reminder Time", inline=False)
-        embed.set_image(url=HMfull.NekoLove.sfw.hug["url"])
+        embed.set_image(url=image["results"][0]["url"])
         ctx.send(embed=embed)
                 
     ### GENERAL COMMANDS ###
