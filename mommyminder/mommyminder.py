@@ -128,8 +128,8 @@ class MommyMinder(commands.Cog):
         async with aiohttp.ClientSession() as session:
             async with session.get(f"https://nekos.best/api/v2/{action}") as resp:
                 image = await resp.json()
-        embed = discord.Embed(title=f"reminder['name']", color=discord.Color.purple(), description=statement)
-        embed.add_field(name="Time", value=f"reminder['time']", inline=False)
+        embed = discord.Embed(title=reminder["name"], color=discord.Color.purple(), description=statement)
+        embed.add_field(name="Time", value=reminder["time"], inline=False)
         embed.set_image(url=image["results"][0]["url"])
         await user.send(embed=embed)
         
@@ -139,6 +139,7 @@ class MommyMinder(commands.Cog):
             buddy = self.bot.get_user(accountable_buddy)
             if buddy:
                 await buddy.send(f"{user.name} has a reminder: {reminder['name']}")
+                
         def check(msg):
             return msg.author == user and msg.content.lower() == "done"
         try:
@@ -217,7 +218,7 @@ class MommyMinder(commands.Cog):
      
     @app_commands.command(name="setbuddy", description="Set a default acountability buddy")
     async def set_buddy(self, interaction: discord.Interaction, buddy: discord.Member):
-        await self.config.user(interaction.user).buddy.set(buddy.value)
+        await self.config.user(interaction.user).buddy.set(buddy.id)
         await interaction.response.send_message(f"Your default buddy has been set to {buddy.value}", ephemeral=True)
         
     @app_commands.command(name="reminders", description="See and edit your reminders")
