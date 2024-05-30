@@ -137,7 +137,7 @@ class MommyMinder(commands.Cog):
         view = View()
         view.add_item(button)
         
-        await user.send(embed=embed, view=view)
+        message = await user.send(embed=embed, view=view)
         
         #await user.send(f"Reminder: {reminder['name']}")
         accountable_buddy = reminder.get("accountable_buddy")
