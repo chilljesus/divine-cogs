@@ -171,21 +171,21 @@ class ReminderView(discord.ui.View):
         self.update_buttons()
 
     @discord.ui.button(label="Previous", style=discord.ButtonStyle.primary, disabled=True)
-    async def previous(self, button: discord.ui.Button, interaction: discord.Interaction):
+    async def previous(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.current_index -= 1
         embed = self.create_reminder_embed()
         self.update_buttons()
         await interaction.response.edit_message(embed=embed, view=self)
 
     @discord.ui.button(label="Next", style=discord.ButtonStyle.primary, disabled=False)
-    async def next(self, button: discord.ui.Button, interaction: discord.Interaction):
+    async def next(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.current_index += 1
         embed = self.create_reminder_embed()
         self.update_buttons()
         await interaction.response.edit_message(embed=embed, view=self)
 
     @discord.ui.button(label="Delete", style=discord.ButtonStyle.danger)
-    async def delete(self, button: discord.ui.Button, interaction: discord.Interaction):
+    async def delete(self, interaction: discord.Interaction, button: discord.ui.Button):
         del self.reminders[self.current_index]
         await self.config.user(self.user).reminders.set(self.reminders)
 
@@ -213,7 +213,7 @@ class ReminderView(discord.ui.View):
     def update_buttons(self):
         self.previous.disabled = self.current_index == 0
         self.next.disabled = self.current_index == len(self.reminders) - 1
-            
+                    
 class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
     def __init__(self, bot: Red, user: discord.User):
         super().__init__(title="Set Reminder")
