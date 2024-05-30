@@ -175,7 +175,6 @@ class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
         self.add_item(self.buddy)
 
     async def on_submit(self, interaction: discord.Interaction):
-        print("Received callback")
         user = self.user
         name = self.name.value
         time_str = self.time.value
@@ -183,28 +182,31 @@ class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
         buddy_id = int(self.buddy.value)
         tz_str = await self.bot.get_cog("MommyMinder").config.user(user).timezone()
 
+        print(f"Received modal submission: name={name}, time_str={time_str}, frequency={frequency}, buddy_id={buddy_id}, tz_str={tz_str}")
+
         # Check if frequency is valid
         if frequency not in ["daily", "weekly"]:
             await interaction.response.send_message("Invalid frequency. Please specify 'Daily' or 'Weekly'.", ephemeral=True)
             return
-        print("Frequency is valid.")
+        
         # Validate the provided time
         try:
             time_obj = datetime.strptime(time_str, "%H:%M").time()
         except ValueError:
             await interaction.response.send_message("Invalid time format. Please use HH:MM (24-hour).", ephemeral=True)
             return
-        print("Time is valid.")
+        
         # Validate the timezone
         try:
             tz = pytz.timezone(tz_str)
         except pytz.UnknownTimeZoneError:
             await interaction.response.send_message("Invalid timezone. Please set your timezone using the settimezone command.", ephemeral=True)
             return
-        print("Timezone is valid.")
+        
         # Calculate the reminder time
         now = datetime.now(tz)
-        reminder_datetime = datetime.combine(now.date(), time_obj, tz)
+        today_date = now.date()
+        reminder_datetime = tz.localize(datetime.combine(today_date, time_obj))
         
         # Adjust reminder_datetime based on the current time and frequency
         if reminder_datetime < now:
@@ -212,7 +214,7 @@ class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
                 reminder_datetime += timedelta(days=1)
             else:  # frequency == "weekly"
                 reminder_datetime += timedelta(days=7)
-        print("Adjusted reminders.")
+        
         reminder = {
             "name": name,
             "remaining": reminder_datetime.isoformat(),
