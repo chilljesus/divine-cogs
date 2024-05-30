@@ -120,7 +120,7 @@ class MommyMinder(commands.Cog):
         if not user:
             return
         
-        user_data = await self.config.user(user_id).all()
+        user_data = await self.config.user(user).all()
         gender = user_data.get("gender", "neutral")
         notification_responses = responses[gender]["notification"]
         selected_response = random.choice(notification_responses)
