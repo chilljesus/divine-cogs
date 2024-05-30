@@ -35,6 +35,7 @@ class MommyMinder(commands.Cog):
 
     @tasks.loop(minutes=1.0)
     async def reminder_check(self):
+        print("Checking reminders")
         now = datetime.now(pytz.utc)
         all_users = await self.config.all_users()
         
