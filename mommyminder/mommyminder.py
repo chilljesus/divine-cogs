@@ -1,5 +1,5 @@
 from redbot.core import commands, Config
-from redbod.core.bot import Red
+from redbot.core.bot import Red
 from discord.ext import tasks
 from datetime import datetime, timedelta
 import pytz
