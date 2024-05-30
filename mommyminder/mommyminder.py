@@ -131,7 +131,7 @@ class MommyMinder(commands.Cog):
         embed = discord.Embed(title=reminder["name"], color=discord.Color.purple(), description=statement)
         embed.add_field(name="Time", value=reminder["time"], inline=False)
         embed.set_image(url=image["results"][0]["url"])
-        await user.send(embed=embed)
+        await user.send(embed=embed, components=[Button(style=ButtonStyle.red, label="Done!", custom_id="confirm")])
         
         #await user.send(f"Reminder: {reminder['name']}")
         accountable_buddy = reminder.get("accountable_buddy")
@@ -140,10 +140,26 @@ class MommyMinder(commands.Cog):
             if buddy:
                 await buddy.send(f"{user.name} has a reminder: {reminder['name']}")
                 
-        def check(msg):
-            return msg.author == user and msg.content.lower() == "done"
+        def check(i: discord.Interaction, button):
+            #return msg.author == user and msg.content.lower() == "done"
+            return i.author == ctx.author and i.message == msg
+            return 
         try:
-            await self.bot.wait_for("message", timeout=1800.0, check=check)
+            #await self.bot.wait_for("message", timeout=1800.0, check=check)
+            interaction, button = await client.wait_for('button_click', check=check)
+            if button.custom_id == "confirm":
+                
+                confirmation_responses = responses[gender]["confirmation"]
+                selected_response = random.choice(confirmation_responses)
+                statement, action = selected_response
+                async with aiohttp.ClientSession() as session:
+                    async with session.get(f"https://nekos.best/api/v2/{action}") as resp:
+                        image = await resp.json()
+                embed = discord.Embed(title=reminder["name"], color=discord.Color.purple(), description=statement)
+                embed.add_field(name="Time", value=reminder["time"], inline=False)
+                embed.set_image(url=image["results"][0]["url"])
+                await user.send(embed=embed)
+                
         except TimeoutError:
             if accountable_buddy:
                 buddy = self.bot.get_user(accountable_buddy)
@@ -219,7 +235,7 @@ class MommyMinder(commands.Cog):
     @app_commands.command(name="setbuddy", description="Set a default acountability buddy")
     async def set_buddy(self, interaction: discord.Interaction, buddy: discord.Member):
         await self.config.user(interaction.user).buddy.set(buddy.id)
-        await interaction.response.send_message(f"Your default buddy has been set to {buddy.value}", ephemeral=True)
+        await interaction.response.send_message(f"Your default buddy has been set to {buddy.display_name}", ephemeral=True)
         
     @app_commands.command(name="reminders", description="See and edit your reminders")
     async def edit_reminders(self, interaction: discord.Interaction):
