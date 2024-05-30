@@ -118,12 +118,6 @@ class MommyMinder(commands.Cog):
     @app_commands.choices(gender=gender_options[:25])
     async def set_timezone(self, interaction: discord.Interaction, timezone: app_commands.Choice[str]):
         await interaction.response.send_message(f"Your timezone has been set to {timezone.value}", ephemeral=True)
-        
-    @app_commands.command(name="setreminder")
-    async def set_reminder(self, interaction: discord.Interaction):
-        #await ctx.defer()
-        modal = ReminderSetupModal(bot=self.bot, user=interaction.user)
-        await interaction.response.send_modal(modal)
 
 class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
     def __init__(self, bot: Red, user: discord.User):
