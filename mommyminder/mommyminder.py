@@ -92,18 +92,18 @@ class MommyMinder(commands.Cog):
 
     ### GENERAL COMMANDS ###
 
-    @commands.admin()
-    @MommyMinder.commands(name="settings")
-    async def showsettings(self, ctx):
-        """Displays the current settings for the guild or DM."""
-        if ctx.guild is not None:
-            settings = await self.config.guild(ctx.guild).all()
-            scope = "Guild"
-        else:
-            settings = await self.config.user(ctx.author).all()
-            scope = "DM"
-        settings_formatted = "\n".join([f"{key}: {value}" for key, value in settings.items()])
-        await ctx.send(f"**{scope} Settings:**\n```{settings_formatted}```")
+#    @commands.admin()
+#    @MommyMinder.commands(name="settings")
+#    async def showsettings(self, ctx):
+#        """Displays the current settings for the guild or DM."""
+#        if ctx.guild is not None:
+#            settings = await self.config.guild(ctx.guild).all()
+#            scope = "Guild"
+#        else:
+#            settings = await self.config.user(ctx.author).all()
+#            scope = "DM"
+#        settings_formatted = "\n".join([f"{key}: {value}" for key, value in settings.items()])
+#        await ctx.send(f"**{scope} Settings:**\n```{settings_formatted}```")
 
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
