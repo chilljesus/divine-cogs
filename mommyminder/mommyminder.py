@@ -156,21 +156,23 @@ class MommyMinder(commands.Cog):
         except pytz.UnknownTimeZoneError:
             await interaction.response.send_message("Invalid timezone. Please provide a valid timezone identifier (e.g., 'US/Eastern').")
         
-class ReminderSetupModal(self, discord.ui.Modal, title="Set Reminder"):
-    self.bot = Red
-    self.user = discord.User
+class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
+    def __init__(self, bot: Red, user: discord.User):
+        super().__init__(title="Set Reminder")
+        self.bot = bot
+        self.user = user
 
-    self.name = discord.ui.TextInput(label="Reminder Name", placeholder="e.g. Take Medication")
-    self.add_item(self.name)
+        self.name = discord.ui.TextInput(label="Reminder Name", placeholder="e.g. Take Medication")
+        self.add_item(self.name)
 
-    self.time = discord.ui.TextInput(label="Reminder Time (HH:MM, 24-hour)", placeholder="e.g. 14:00, 02:30")
-    self.add_item(self.time)
+        self.time = discord.ui.TextInput(label="Reminder Time (HH:MM, 24-hour)", placeholder="e.g. 14:00, 02:30")
+        self.add_item(self.time)
 
-    self.frequency = discord.ui.TextInput(label="Frequency (Daily/Weekly)", placeholder="e.g. Daily or Weekly")
-    self.add_item(self.frequency)
+        self.frequency = discord.ui.TextInput(label="Frequency (Daily/Weekly)", placeholder="e.g. Daily or Weekly")
+        self.add_item(self.frequency)
 
-    self.buddy = discord.ui.TextInput(label="Accountable Buddy (User ID)", placeholder="e.g. 123456789012345678")
-    self.add_item(self.buddy)
+        self.buddy = discord.ui.TextInput(label="Accountable Buddy (User ID)", placeholder="e.g. 123456789012345678")
+        self.add_item(self.buddy)
 
     async def on_submit(self, interaction: discord.Interaction):
         print("Received callback")
