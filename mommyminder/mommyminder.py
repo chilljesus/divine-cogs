@@ -154,14 +154,34 @@ class ReminderSetupModal(discord.ui.Modal):
         self.time = discord.ui.TextInput(label="Reminder Time (HH:MM, 24-hour)", placeholder="e.g. 14:00")
         self.add_item(self.time)
 
-        self.timezone = discord.ui.TextInput(label="Time Zone", placeholder="e.g. UTC, PST, EST")
+        timezone_options = [
+            discord.SelectOption(label=tz, value=tz) for tz in pytz.all_timezones
+        ]
+        self.timezone = discord.ui.Select(
+            placeholder="Select Time Zone",
+            options=timezone_options[:25]  # Limiting to 25 options due to Discord's limit per select menu
+        )
         self.add_item(self.timezone)
 
-        self.frequency = discord.ui.Select(placeholder="Frequency", options=[
-            discord.SelectOption(label="Daily", value="daily"),
-            discord.SelectOption(label="Weekly", value="weekly")
-        ])
+        self.frequency = discord.ui.Select(
+            placeholder="Frequency",
+            options=[
+                discord.SelectOption(label="Daily", value="daily"),
+                discord.SelectOption(label="Weekly", value="weekly")
+            ]
+        )
         self.add_item(self.frequency)
+
+        self.gender = discord.ui.Select(
+            placeholder="Select Gender",
+            options=[
+                discord.SelectOption(label="Masculine", value="masc"),
+                discord.SelectOption(label="Feminine", value="fem"),
+                discord.SelectOption(label="Neutral", value="neutral"),
+                discord.SelectOption(label="Fluid", value="fluid")
+            ]
+        )
+        self.add_item(self.gender)
 
         self.buddy = discord.ui.TextInput(label="Accountable Buddy (User ID)", placeholder="e.g. 123456789012345678")
         self.add_item(self.buddy)
@@ -170,8 +190,9 @@ class ReminderSetupModal(discord.ui.Modal):
         user = self.user
         name = self.name.value
         time_str = self.time.value
-        tz_str = self.timezone.value
+        tz_str = self.timezone.values[0]
         frequency = self.frequency.values[0]
+        gender = self.gender.values[0]
         buddy_id = int(self.buddy.value)
         
         try:
@@ -195,6 +216,7 @@ class ReminderSetupModal(discord.ui.Modal):
             "name": name,
             "time": reminder_datetime.isoformat(),
             "frequency": frequency,
+            "gender": gender,
             "accountable_buddy": buddy_id
         }
 
