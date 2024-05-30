@@ -20,7 +20,9 @@ class MommyMinder(commands.Cog):
         
         default_user = {
             "reminders": [],
-            "accountable_buddies": []
+            "accountable_buddies": [],
+            "timezone": "",
+            "gender": "",
         }
 
         self.config.register_guild(**default_guild)
@@ -75,16 +77,31 @@ class MommyMinder(commands.Cog):
         pass
 
     ### SETUP COMMANDS ###
-    @commands.Cog.listener()
-    async def on_message(self, message: discord.Message):
-        if message.guild is None and not message.author.bot:
-            await self.handle_dm(message)
-
-    async def handle_dm(self, message: discord.Message):
-        user = message.author
-        await user.send("Please use the slash commands to set up your reminders.")
 
     ### GENERAL COMMANDS ###
+    
+    @app_commands.command(name="settings", description="Displays your settings and reminders.")
+    async def settings(self, interaction: discord.Interaction):
+        user = interaction.user
+        user_data = await self.config.user(user).all()
+        timezone = user_data.get("timezone", "Not set")
+        reminders = user_data.get("reminders", [])
+        reminders_str = ""
+        for reminder in reminders:
+            reminders_str += (
+                f"**Name:** {reminder['name']}\n"
+                f"**Next Reminder:** {reminder['remaining']}\n"
+                f"**Time:** {reminder['time']}\n"
+                f"**Frequency:** {reminder['frequency']}\n"
+                f"**Accountable Buddy:** {reminder['accountable_buddy']}\n\n"
+            )
+        if not reminders_str:
+            reminders_str = "No reminders set."
+        embed = discord.Embed(title="Your Settings and Reminders", color=discord.Color.blue())
+        embed.add_field(name="Timezone", value=timezone, inline=False)
+        embed.add_field(name="Reminders", value=reminders_str, inline=False)
+        await interaction.response.send_message(embed=embed, ephemeral=True)
+    
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
         if message.guild is None and not message.author.bot:
@@ -94,7 +111,7 @@ class MommyMinder(commands.Cog):
         user = message.author
         await user.send("Please use the slash commands to set up your reminders.")
 
-### THE ACTUAL SETUP SHIZ ###
+    ### THE ACTUAL SETUP SHIZ ###
     @app_commands.command(name="setreminder", description="Setup a new reminder.")
     async def set_reminder(self, interaction: discord.Interaction):
         #await ctx.defer()
@@ -104,21 +121,23 @@ class MommyMinder(commands.Cog):
     @app_commands.command(name="setpronouns", description="Add your pronouns.")
     @app_commands.choices(gender=[
          app_commands.Choice(name="Masculine", value="masculine"),
-         app_commands.Choice(name="Feminine", value="faminine"),
+         app_commands.Choice(name="Feminine", value="feminine"),
          app_commands.Choice(name="Neutral", value="neutral"),
          app_commands.Choice(name="Fluid", value="fluid"),
     ])
     async def set_gender(self, interaction: discord.Interaction, gender: app_commands.Choice[str]):
+        await self.config.user(ctx.author).gender.set(gender)
         await interaction.response.send_message(f"Your pronouns have been set to be {gender.value}", ephemeral=True)
         
-    timezone_options = [
-        app_commands.Choice(name=tz, value=tz) for tz in pytz.all_timezones
-    ]
-    @app_commands.command(name="settimezone", description="Set your timezone.")
-    @app_commands.choices(timezone=timezone_options[:25])
-    async def set_timezone(self, interaction: discord.Interaction, timezone: app_commands.Choice[str]):
-        await interaction.response.send_message(f"Your timezone has been set to {timezone.value}", ephemeral=True)
-
+    @app_commands.command(name="settimezone", description="Send your timezone as a tz identifier (google it)")
+    async def set_timezone(self, interaction: discord.Interaction, current_time: str):
+        try:
+            tz = pytz.timezone(timezone)
+            await self.config.user(ctx.author).timezone.set(timezone)
+            await ctx.send(f"Your timezone has been set to {timezone}.")
+        except pytz.UnknownTimeZoneError:
+            await ctx.send("Invalid timezone. Please provide a valid timezone identifier (e.g., 'US/Eastern').")
+        
 class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
     def __init__(self, bot: Red, user: discord.User):
         self.bot = bot
@@ -142,23 +161,36 @@ class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
         time_str = self.time.value
         frequency = self.frequency.values[0]
         buddy_id = int(self.buddy.value)
+        tz_str = await self.config.user(user).timezone
         
+        if frequency not in ["daily", "weekly"]:
+            await interaction.response.send_message("Invalid frequency. Please specify 'Daily' or 'Weekly'.", ephemeral=True)
+            return
         try:
             time_obj = datetime.strptime(time_str, "%H:%M").time()
         except ValueError:
             await interaction.response.send_message("Invalid time format. Please use HH:MM (24-hour).", ephemeral=True)
             return
-
+        try:
+            tz = pytz.timezone(tz_str)
+        except pytz.UnknownTimeZoneError:
+            await interaction.response.send_message("Invalid timezone. Please set your timezone using the settimezone command.", ephemeral=True)
+            return
+        
         now = datetime.now(tz)
         reminder_datetime = datetime.combine(now.date(), time_obj, tz)
+        
         if reminder_datetime < now:
-            reminder_datetime += timedelta(days=1)
-
+            if frequency == "daily":
+                reminder_datetime += timedelta(days=1)
+            else:
+                reminder_datetime += timedelta(days=7)
+            
         reminder = {
             "name": name,
-            "time": reminder_datetime.isoformat(),
+            "remaining": reminder_datetime.isoformat(),
+            "time": time_obj.isoformat(),
             "frequency": frequency,
-            "gender": gender,
             "accountable_buddy": buddy_id
         }
 
