@@ -4,7 +4,6 @@ from discord.ext import tasks
 from datetime import datetime, timedelta
 import pytz
 import discord
-import aiohttp
 
 
 class MommyMinder(commands.Cog):
@@ -21,8 +20,8 @@ class MommyMinder(commands.Cog):
         default_user = {
             "reminders": [],
             "accountable_buddies": [],
-            "timezone": "",
-            "gender": "",
+            "timezone": None,
+            "gender": None,
         }
 
         self.config.register_guild(**default_guild)
@@ -42,10 +41,25 @@ class MommyMinder(commands.Cog):
         for user_id, data in all_users.items():
             reminders = data.get("reminders", [])
             for reminder in reminders:
-                reminder_time = datetime.fromisoformat(reminder["time"])
-                if now >= reminder_time and now < (reminder_time + timedelta(minutes=1)):
+                tz = pytz.timezone(await self.config.user_from_id(user_id).timezone())
+                remaining = datetime.fromisoformat(reminder["remaining"])
+
+                # Check if it's time to send the reminder
+                if now >= remaining:
                     await self.send_reminder(user_id, reminder)
+
+                    # Update the remaining time for the reminder after sending
+                    if reminder["frequency"] == "daily":
+                        next_reminder_datetime = remaining + timedelta(days=1)
+                    elif reminder["frequency"] == "weekly":
+                        next_reminder_datetime = remaining + timedelta(days=7)
+
+                    reminder["remaining"] = next_reminder_datetime.isoformat()
                     
+                    # Save the updated reminder
+                    async with self.config.user_from_id(user_id).reminders() as reminders:
+                        reminders[reminders.index(reminder)] = reminder
+
     async def send_reminder(self, user_id: int, reminder: dict):
         user = self.bot.get_user(user_id)
         if not user:
@@ -58,7 +72,7 @@ class MommyMinder(commands.Cog):
             buddy = self.bot.get_user(accountable_buddy)
             if buddy:
                 await buddy.send(f"{user.name} has a reminder: {reminder['name']}")
-        
+
         # Confirm task completion
         def check(msg):
             return msg.author == user and msg.content.lower() == "done"
@@ -72,11 +86,9 @@ class MommyMinder(commands.Cog):
                     await buddy.send(f"{user.name} did not confirm their reminder: {reminder['name']}")
 
     @commands.group(name="mommyminder")
-    async def ollama(self, ctx):
+    async def mommyminder(self, ctx):
         """MommyMinder configuration commands."""
         pass
-
-    ### SETUP COMMANDS ###
 
     ### GENERAL COMMANDS ###
     
