@@ -156,9 +156,9 @@ class MommyMinder(commands.Cog):
         except pytz.UnknownTimeZoneError:
             await interaction.response.send_message("Invalid timezone. Please provide a valid timezone identifier (e.g., 'US/Eastern').")
         
-class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
-    self.bot = bot
-    self.user = user
+class ReminderSetupModal(self, discord.ui.Modal, title="Set Reminder"):
+    self.bot = Red
+    self.user = discord.User
 
     self.name = discord.ui.TextInput(label="Reminder Name", placeholder="e.g. Take Medication")
     self.add_item(self.name)
