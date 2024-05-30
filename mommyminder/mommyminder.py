@@ -84,6 +84,7 @@ class MommyMinder(commands.Cog):
     async def settings(self, interaction: discord.Interaction):
         user = interaction.user
         user_data = await self.config.user(user).all()
+        gender = user_data.get("gender", "Not set")
         timezone = user_data.get("timezone", "Not set")
         reminders = user_data.get("reminders", [])
         reminders_str = ""
@@ -97,7 +98,8 @@ class MommyMinder(commands.Cog):
             )
         if not reminders_str:
             reminders_str = "No reminders set."
-        embed = discord.Embed(title="Your Settings and Reminders", color=discord.Color.blue())
+        embed = discord.Embed(title="Your Settings and Reminders", color=discord.Color.purple())
+        embed.add_field(name="Gender", value=gender, inline=False)
         embed.add_field(name="Timezone", value=timezone, inline=False)
         embed.add_field(name="Reminders", value=reminders_str, inline=False)
         await interaction.response.send_message(embed=embed, ephemeral=True)
