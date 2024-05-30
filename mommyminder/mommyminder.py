@@ -156,7 +156,7 @@ class MommyMinder(commands.Cog):
                 embed = discord.Embed(title=reminder["name"], color=discord.Color.purple(), description=statement)
                 embed.add_field(name="Time", value=reminder["time"], inline=False)
                 embed.set_image(url=image["results"][0]["url"])
-                await message.edit(embed=embed)
+                await message.edit(embed=embed, view=None)
             
         except TimeoutError:
             accountable_buddy = reminder.get("accountable_buddy")
@@ -227,9 +227,9 @@ class MommyMinder(commands.Cog):
         try:
             tz = pytz.timezone(timezone)
             await self.config.user(interaction.user).timezone.set(timezone)
-            await interaction.response.send_message(f"Your timezone has been set to {timezone}.")
+            await interaction.response.send_message(f"Your timezone has been set to {timezone}.", ephemeral=True)
         except pytz.UnknownTimeZoneError:
-            await interaction.response.send_message("Invalid timezone. Please provide a valid timezone identifier (e.g., 'US/Eastern').")
+            await interaction.response.send_message("Invalid timezone. Please provide a valid timezone identifier (e.g., 'US/Eastern').", ephemeral=True)
      
     @app_commands.command(name="setbuddy", description="Set a default acountability buddy")
     async def set_buddy(self, interaction: discord.Interaction, buddy: discord.Member):
@@ -298,7 +298,7 @@ class ReminderView(discord.ui.View):
 
     def create_reminder_embed(self):
         reminder = self.reminders[self.current_index]
-        embed = discord.Embed(title=f"Reminder {self.current_index + 1}/{len(self.reminders)}", color=discord.Color.blue())
+        embed = discord.Embed(title=f"Reminder {self.current_index + 1}/{len(self.reminders)}", color=discord.Color.purple())
         embed.add_field(name="Name", value=reminder["name"], inline=False)
         embed.add_field(name="Next Reminder", value=reminder["remaining"], inline=False)
         embed.add_field(name="Time", value=reminder["time"], inline=False)
@@ -381,7 +381,7 @@ class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
         async with self.bot.get_cog("MommyMinder").config.user(user).reminders() as reminders:
             reminders.append(reminder)
         print("Set variables.")
-        await interaction.response.send_message(f"Reminder '{name}' set for {time_str} {tz_str} ({frequency}).")
+        await interaction.response.send_message(f"Reminder '{name}' set for {time_str} {tz_str} ({frequency}).", ephemeral=True)
 
 async def setup(bot):
     cog = MommyMinder(bot)
