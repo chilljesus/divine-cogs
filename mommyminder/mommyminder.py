@@ -84,7 +84,7 @@ class MommyMinder(commands.Cog):
     async def testnotify(self, ctx):
         """Testing command to build notifications"""
         async with aiohttp.ClientSession() as session:
-            async with session.get("https://nekos.best/api/v2/neko") as resp:
+            async with session.get("https://nekos.best/api/v2/hug") as resp:
                 image = await resp.json()
         embed = discord.Embed(title="Reminder Name", color=discord.Color.purple(), description="Hey there {name}, something something better do it or ill tell {name} on you!")
         embed.add_field(name="Name", value="Reminder Name", inline=False)
