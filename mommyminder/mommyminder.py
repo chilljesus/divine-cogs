@@ -183,8 +183,8 @@ class ReminderSetupModal(discord.ui.Modal):
         )
         self.add_item(self.gender)
 
-        self.buddy = discord.ui.TextInput(label="Accountable Buddy (User ID)", placeholder="e.g. 123456789012345678")
-        self.add_item(self.buddy)
+        #self.buddy = discord.ui.TextInput(label="Accountable Buddy (User ID)", placeholder="e.g. 123456789012345678")
+        #self.add_item(self.buddy)
 
     async def callback(self, interaction: discord.Interaction):
         user = self.user
