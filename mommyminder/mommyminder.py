@@ -26,6 +26,7 @@ class MommyMinder(commands.Cog):
 
         self.config.register_guild(**default_guild)
         self.config.register_user(**default_user)
+        self.reminder_check.start()
 
     def cog_unload(self):
         self.reminder_check.cancel()
