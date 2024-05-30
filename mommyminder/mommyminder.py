@@ -125,7 +125,7 @@ class MommyMinder(commands.Cog):
 
     async def handle_dm(self, message: discord.Message):
         user = message.author
-        await user.send("Please use the slash commands to set up your reminders.")
+        #await user.send("Please use the slash commands to set up your reminders.")
 
     ### THE ACTUAL SETUP SHIZ ###        
     @app_commands.command(name="setreminder", description="Set a new reminder.")
