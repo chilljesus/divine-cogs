@@ -142,7 +142,7 @@ class MommyMinder(commands.Cog):
         
     @app_commands.command(name="reminders", description="See and edit your reminders")
     async def edit_reminders(self, interaction: discord.Interaction):
-        reminders = await self.config.user(interaction.user).get(reminders)
+        reminders = await self.config.user(interaction.user).reminders
         if not reminders:
             await interaction.response.send_message("You have no reminders set.", ephemeral=True)
             return
