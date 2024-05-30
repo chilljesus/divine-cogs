@@ -146,6 +146,7 @@ class MommyMinder(commands.Cog):
             interaction = await self.bot.wait_for("interaction", timeout=1800.0, check=check)
             if interaction.data['custom_id'] == "confirm":
                 await interaction.response.defer()
+                message.delete
                 confirmation_responses = responses[gender]["confirmation"]
                 selected_response = random.choice(confirmation_responses)
                 statement, action = selected_response
@@ -155,7 +156,7 @@ class MommyMinder(commands.Cog):
                 embed = discord.Embed(title=reminder["name"], color=discord.Color.purple(), description=statement)
                 embed.add_field(name="Time", value=reminder["time"], inline=False)
                 embed.set_image(url=image["results"][0]["url"])
-                await user.send(embed=embed)
+                await message.edit(embed=embed)
             
         except TimeoutError:
             accountable_buddy = reminder.get("accountable_buddy")
