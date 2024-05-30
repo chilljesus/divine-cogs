@@ -153,7 +153,7 @@ class MommyMinder(commands.Cog):
         
         try:
             #await self.bot.wait_for("message", timeout=1800.0, check=check)
-            interaction, button = await client.wait_for('button_click', check=check)
+            interaction, button = await self.bot.wait_for('button_click', check=check)
             if button.custom_id == "confirm":
                 
                 confirmation_responses = responses[gender]["confirmation"]
