@@ -85,20 +85,6 @@ class MommyMinder(commands.Cog):
         await user.send("Please use the slash commands to set up your reminders.")
 
     ### GENERAL COMMANDS ###
-
-#    @commands.admin()
-#    @MommyMinder.commands(name="settings")
-#    async def showsettings(self, ctx):
-#        """Displays the current settings for the guild or DM."""
-#        if ctx.guild is not None:
-#            settings = await self.config.guild(ctx.guild).all()
-#            scope = "Guild"
-#        else:
-#            settings = await self.config.user(ctx.author).all()
-#            scope = "DM"
-#        settings_formatted = "\n".join([f"{key}: {value}" for key, value in settings.items()])
-#        await ctx.send(f"**{scope} Settings:**\n```{settings_formatted}```")
-
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
         if message.guild is None and not message.author.bot:
@@ -108,103 +94,65 @@ class MommyMinder(commands.Cog):
         user = message.author
         await user.send("Please use the slash commands to set up your reminders.")
 
-
-    ### SERVER / DM STUFF ###
-
-#    @commands.admin()
-#    @MommyMinder.command(name="name")
-#    async def set_bot_name(self, ctx, *, name: str):
-#        """Set the bot name."""
-#        if len(name) > 15:
-#            await ctx.send("The bot name must be under 15 characters.")
-#            return
-#        if ctx.guild is not None:
-#            await self.config.guild(ctx.guild).bot_name.set(name)
-#            scope = "Guild"
-#        await ctx.send(f"{scope} bot name updated successfully.")
-
-#    @commands.admin()
-#    @MommyMinder.command(name="avatar")
-#    async def set_bot_avatar(self, ctx, *, url: str):
-#        """Set the bot avatar URL."""
-#        if not url.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')):
-#            await ctx.send("Please provide a valid image URL. Accepted formats: PNG, JPG, JPEG, GIF")
-#            return
-#        if ctx.guild is not None:
-#            await self.config.guild(ctx.guild).bot_avatar.set(url)
-#            scope = "Guild"
-#        await ctx.send(f"{scope} bot avatar updated successfully.")
-
 ### THE ACTUAL SETUP SHIZ ###
+    @app_commands.command(name="setreminder", description="Setup a new reminder.")
+    async def set_reminder(self, interaction: discord.Interaction):
+        #await ctx.defer()
+        modal = ReminderSetupModal(bot=self.bot, user=interaction.user)
+        await interaction.response.send_modal(modal)
+        
+    @app_commands.command(name="setpronouns", description="Add your pronouns.")
+    @app_commands.choices(gender=[
+         app_commands.Choice(name="Masculine", value="masculine"),
+         app_commands.Choice(name="Feminine", value="faminine"),
+         app_commands.Choice(name="Neutral", value="neutral"),
+         app_commands.Choice(name="Fluid", value="fluid"),
+    ])
+    async def set_gender(self, interaction: discord.Interaction, gender: app_commands.Choice[str]):
+        await interaction.response.send_message(f"Your pronouns have been set to be {gender.value}", ephemeral=True)
+        
+    timezone_options = [
+        app_commands.Choice(name=tz, value=tz) for tz in pytz.all_timezones
+    ]
+    @app_commands.command(name="settimezone", description="Set your timezone.")
+    @app_commands.choices(gender=gender_options[:25])
+    async def set_timezone(self, interaction: discord.Interaction, timezone: app_commands.Choice[str]):
+        await interaction.response.send_message(f"Your timezone has been set to {timezone.value}", ephemeral=True)
+        
     @app_commands.command(name="setreminder")
     async def set_reminder(self, interaction: discord.Interaction):
         #await ctx.defer()
         modal = ReminderSetupModal(bot=self.bot, user=interaction.user)
         await interaction.response.send_modal(modal)
 
-class ReminderSetupModal(discord.ui.Modal):
+class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
     def __init__(self, bot: Red, user: discord.User):
         self.bot = bot
         self.user = user
-        super().__init__(title="Set Reminder")
 
         self.name = discord.ui.TextInput(label="Reminder Name", placeholder="e.g. Take Medication")
         self.add_item(self.name)
 
-        self.time = discord.ui.TextInput(label="Reminder Time (HH:MM, 24-hour)", placeholder="e.g. 14:00")
+        self.time = discord.ui.TextInput(label="Reminder Time (HH:MM, 24-hour)", placeholder="e.g. 14:00, 02:30")
         self.add_item(self.time)
 
-        timezone_options = [
-            discord.SelectOption(label=tz, value=tz) for tz in pytz.all_timezones
-        ]
-        self.timezone = discord.ui.Select(
-            placeholder="Select Time Zone",
-            options=timezone_options[:25]  # Limiting to 25 options due to Discord's limit per select menu
-        )
-        self.add_item(self.timezone)
-
-        self.frequency = discord.ui.Select(
-            placeholder="Frequency",
-            options=[
-                discord.SelectOption(label="Daily", value="daily"),
-                discord.SelectOption(label="Weekly", value="weekly")
-            ]
-        )
+        self.frequency = discord.ui.TextInput(label="Frequency (Daily/Weekly)", placeholder="e.g. Daily or Weekly")
         self.add_item(self.frequency)
 
-        self.gender = discord.ui.Select(
-            placeholder="Select Gender",
-            options=[
-                discord.SelectOption(label="Masculine", value="masc"),
-                discord.SelectOption(label="Feminine", value="fem"),
-                discord.SelectOption(label="Neutral", value="neutral"),
-                discord.SelectOption(label="Fluid", value="fluid")
-            ]
-        )
-        self.add_item(self.gender)
-
-        #self.buddy = discord.ui.TextInput(label="Accountable Buddy (User ID)", placeholder="e.g. 123456789012345678")
-        #self.add_item(self.buddy)
+        self.buddy = discord.ui.TextInput(label="Accountable Buddy (User ID)", placeholder="e.g. 123456789012345678")
+        self.add_item(self.buddy)
 
     async def callback(self, interaction: discord.Interaction):
         user = self.user
         name = self.name.value
         time_str = self.time.value
-        tz_str = self.timezone.values[0]
         frequency = self.frequency.values[0]
-        gender = self.gender.values[0]
         buddy_id = int(self.buddy.value)
         
         try:
             time_obj = datetime.strptime(time_str, "%H:%M").time()
         except ValueError:
             await interaction.response.send_message("Invalid time format. Please use HH:MM (24-hour).", ephemeral=True)
-            return
-        
-        try:
-            tz = pytz.timezone(tz_str)
-        except pytz.UnknownTimeZoneError:
-            await interaction.response.send_message("Invalid time zone. Please provide a correct time zone abbreviation.", ephemeral=True)
             return
 
         now = datetime.now(tz)
