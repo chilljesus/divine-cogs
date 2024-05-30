@@ -93,7 +93,7 @@ class MommyMinder(commands.Cog):
     ### GENERAL COMMANDS ###
 
     @commands.admin()
-    @mommyminder.commands(name="settings")
+    @MommyMinder.commands(name="settings")
     async def showsettings(self, ctx):
         """Displays the current settings for the guild or DM."""
         if ctx.guild is not None:
@@ -118,7 +118,7 @@ class MommyMinder(commands.Cog):
     ### SERVER / DM STUFF ###
 
     @commands.admin()
-    @mommyminder.command(name="name")
+    @MommyMinder.command(name="name")
     async def set_bot_name(self, ctx, *, name: str):
         """Set the bot name."""
         if len(name) > 15:
@@ -130,7 +130,7 @@ class MommyMinder(commands.Cog):
         await ctx.send(f"{scope} bot name updated successfully.")
 
     @commands.admin()
-    @mommyminder.command(name="avatar")
+    @MommyMinder.command(name="avatar")
     async def set_bot_avatar(self, ctx, *, url: str):
         """Set the bot avatar URL."""
         if not url.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')):
