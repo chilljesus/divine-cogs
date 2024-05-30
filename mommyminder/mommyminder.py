@@ -4,7 +4,7 @@ from discord.ext import tasks
 from datetime import datetime, timedelta
 import pytz
 import discord
-
+import aiohttp
 
 class MommyMinder(commands.Cog):
     def __init__(self, bot):
