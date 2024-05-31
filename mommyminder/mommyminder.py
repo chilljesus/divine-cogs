@@ -11,44 +11,116 @@ import random
 responses = {
     "masculine": {
         "notification": [
-            ["It's time to get this done, handsome. No more delays.", "wave"],
-            ["You're not going to let this slip by, are you? Get on it, now.", "poke"]
+            ["It's time to get this done, handsome. No more delays. You wouldn't want to disappoint me, would you?", "wave"],
+            ["You're not going to let this slip by, are you? Get on it, now. Remember, I'm watching you.", "poke"],
+            ["Come on, my strong man. Show me how capable you are and get it done.", "smile"],
+            ["Hey there, big guy. It's time to tackle your task and make me proud.", "smug"],
+            ["Let's not waste any more time, darling. I expect you to handle this now.", "thumbsup"],
+            ["You know what you need to do, puppy. Get started and don't keep me waiting.", "wave"],
+            ["I need you to focus and get this done, champ. No excuses.", "poke"],
+            ["It's time to shine, my warrior. Finish this task and show me your strength.", "smile"],
+            ["Don't keep me waiting, my lion. I expect you to finish this promptly.", "smug"],
+            ["Alright, my king. Show me how you conquer this task with your might.", "thumbsup"]
         ],
         "confirmation": [
-            ["Great job! I knew you could do it, champ.", "highfive"],
-            ["Well done, you're making me proud!", "thumbsup"]
+            ["Great job! I knew you could do it, champ. You've made me very proud.", "highfive"],
+            ["Well done, my hero. You're making me proud every single day.", "thumbsup"],
+            ["That's my strong man. You handled that perfectly, just as I knew you would.", "happy"],
+            ["Excellent work, my lion. You've shown me your strength once again.", "pat"],
+            ["You're incredible, my warrior. Keep making me proud.", "smile"],
+            ["Fantastic job, my knight. Your dedication is truly admirable.", "highfive"],
+            ["Bravo, my champion. You've surpassed my expectations once again.", "thumbsup"],
+            ["Amazing work, my king. Your effort is truly commendable.", "happy"],
+            ["You've done wonderfully, my prince. Keep up the great work.", "pat"],
+            ["Outstanding performance, my hero. You never cease to amaze me.", "smile"]
         ],
         "notifybuddy": [
-            ["Hey, your buddy needs a little push. Can you help him out?", "stare"],
-            ["Your friend is slacking off again. Give him a nudge.", "slap"]
+            ["Hey, your buddy needs a little push. Can you help him out? He could use some of your strength.", "stare"],
+            ["Your friend is slacking off again. Give him a nudge, he needs your guidance.", "slap"],
+            ["Looks like your buddy is in need of a reminder. Help him out, will you?", "cry"],
+            ["Your friend is falling behind. A gentle push from you could do wonders.", "pout"],
+            ["He needs your help to stay on track. Give him a reminder.", "stare"],
+            ["Your buddy needs a boost. Can you give him a hand?", "slap"],
+            ["Help your friend out. He's struggling and could use your encouragement.", "cry"],
+            ["Your friend could use a little motivation. Give him a nudge.", "pout"],
+            ["Lend a hand to your buddy. He needs your strength right now.", "stare"],
+            ["Your friend is in need of support. Give him a push to get going.", "slap"]
         ]
     },
     "feminine": {
         "notification": [
-            ["It's time to get this done, beautiful. No more delays.", "smile"],
-            ["You’re not going to let this slip by, are you? Get on it, now.", "poke"]
+            ["It's time to get this done, beautiful. No more delays. You wouldn't want to disappoint me, would you?", "smile"],
+            ["You're not going to let this slip by, are you? Get on it, now. Remember, I'm watching you.", "poke"],
+            ["Come on, my lovely lady. Show me how capable you are and get it done.", "wave"],
+            ["Hey there, gorgeous. It's time to tackle your task and make me proud.", "smug"],
+            ["Let's not waste any more time, sweetheart. I expect you to handle this now.", "thumbsup"],
+            ["You know what you need to do, kitten. Get started and don't keep me waiting.", "wave"],
+            ["I need you to focus and get this done, darling. No excuses.", "poke"],
+            ["It's time to shine, my queen. Finish this task and show me your strength.", "smile"],
+            ["Don't keep me waiting, my lioness. I expect you to finish this promptly.", "smug"],
+            ["Alright, my princess. Show me how you conquer this task with your grace.", "thumbsup"]
         ],
         "confirmation": [
-            ["Great job! I knew you could do it, darling.", "happy"],
-            ["Well done, you're making me proud!", "pat"]
+            ["Great job! I knew you could do it, darling. You've made me very proud.", "highfive"],
+            ["Well done, my heroine. You're making me proud every single day.", "thumbsup"],
+            ["That's my strong woman. You handled that perfectly, just as I knew you would.", "happy"],
+            ["Excellent work, my lioness. You've shown me your strength once again.", "pat"],
+            ["You're incredible, my warrior. Keep making me proud.", "smile"],
+            ["Fantastic job, my knightess. Your dedication is truly admirable.", "highfive"],
+            ["Bravo, my champion. You've surpassed my expectations once again.", "thumbsup"],
+            ["Amazing work, my queen. Your effort is truly commendable.", "happy"],
+            ["You've done wonderfully, my princess. Keep up the great work.", "pat"],
+            ["Outstanding performance, my heroine. You never cease to amaze me.", "smile"]
         ],
         "notifybuddy": [
-            ["Hey, your buddy needs a little push. Can you help her out?", "pout"],
-            ["Your friend is slacking off again. Give her a nudge.", "stare"]
+            ["Hey, your buddy needs a little push. Can you help her out? She could use some of your strength.", "stare"],
+            ["Your friend is slacking off again. Give her a nudge, she needs your guidance.", "slap"],
+            ["Looks like your buddy is in need of a reminder. Help her out, will you?", "cry"],
+            ["Your friend is falling behind. A gentle push from you could do wonders.", "pout"],
+            ["She needs your help to stay on track. Give her a reminder.", "stare"],
+            ["Your buddy needs a boost. Can you give her a hand?", "slap"],
+            ["Help your friend out. She's struggling and could use your encouragement.", "cry"],
+            ["Your friend could use a little motivation. Give her a nudge.", "pout"],
+            ["Lend a hand to your buddy. She needs your strength right now.", "stare"],
+            ["Your friend is in need of support. Give her a push to get going.", "slap"]
         ]
     },
     "neutral": {
         "notification": [
-            ["It's time to get this done, superstar. No more delays.", "wave"],
-            ["You’re not going to let this slip by, are you? Get on it, now.", "smug"]
+            ["It's time to get this done, superstar. No more delays. You wouldn't want to disappoint me, would you?", "wave"],
+            ["You're not going to let this slip by, are you? Get on it, now. Remember, I'm watching you.", "smug"],
+            ["Come on, my capable one. Show me how competent you are and get it done.", "smile"],
+            ["Hey there, champ. It's time to tackle your task and make me proud.", "poke"],
+            ["Let's not waste any more time, dear. I expect you to handle this now.", "thumbsup"],
+            ["You know what you need to do, tiger. Get started and don't keep me waiting.", "wave"],
+            ["I need you to focus and get this done, ace. No excuses.", "poke"],
+            ["It's time to shine, my star. Finish this task and show me your strength.", "smile"],
+            ["Don't keep me waiting, my hero. I expect you to finish this promptly.", "smug"],
+            ["Alright, my warrior. Show me how you conquer this task with your prowess.", "thumbsup"]
         ],
         "confirmation": [
-            ["Great job! I knew you could do it, champ.", "smile"],
-            ["Well done, you're making me proud!", "thumbsup"]
+            ["Great job! I knew you could do it, champ. You've made me very proud.", "highfive"],
+            ["Well done, my champion. You're making me proud every single day.", "thumbsup"],
+            ["That's my strong one. You handled that perfectly, just as I knew you would.", "happy"],
+            ["Excellent work, my hero. You've shown me your strength once again.", "pat"],
+            ["You're incredible, my warrior. Keep making me proud.", "smile"],
+            ["Fantastic job, my ace. Your dedication is truly admirable.", "highfive"],
+            ["Bravo, my champion. You've surpassed my expectations once again.", "thumbsup"],
+            ["Amazing work, my star. Your effort is truly commendable.", "happy"],
+            ["You've done wonderfully, my hero. Keep up the great work.", "pat"],
+            ["Outstanding performance, my champion. You never cease to amaze me.", "smile"]
         ],
         "notifybuddy": [
-            ["Hey, your buddy needs a little push. Can you help them out?", "cry"],
-            ["Your friend is slacking off again. Give them a nudge.", "slap"]
+            ["Hey, your buddy needs a little push. Can you help them out? They could use some of your strength.", "stare"],
+            ["Your friend is slacking off again. Give them a nudge, they need your guidance.", "slap"],
+            ["Looks like your buddy is in need of a reminder. Help them out, will you?", "cry"],
+            ["Your friend is falling behind. A gentle push from you could do wonders.", "pout"],
+            ["They need your help to stay on track. Give them a reminder.", "stare"],
+            ["Your buddy needs a boost. Can you give them a hand?", "slap"],
+            ["Help your friend out. They're struggling and could use your encouragement.", "cry"],
+            ["Your friend could use a little motivation. Give them a nudge.", "pout"],
+            ["Lend a hand to your buddy. They need your strength right now.", "stare"],
+            ["Your friend is in need of support. Give them a push to get going.", "slap"]
         ]
     }
 }
@@ -110,7 +182,7 @@ class MommyMinder(commands.Cog):
         user_data = await self.config.user(user).all()
         gender = user_data.get("gender", "neutral")
         if gender == "fluid":
-            gender = random.choice(["masculine", "feminine"])
+            gender = random.choice(["masculine", "feminine", "neutral"])
         notification_responses = responses[gender]["notification"]
         selected_response = random.choice(notification_responses)
         statement, action = selected_response
@@ -118,7 +190,7 @@ class MommyMinder(commands.Cog):
             async with session.get(f"https://nekos.best/api/v2/{action}") as resp:
                 image = await resp.json()
         embed = discord.Embed(title=reminder["name"], color=discord.Color.purple(), description=statement)
-        embed.add_field(name="Time", value=reminder["time"], inline=False)
+        #embed.add_field(name="Time", value=reminder["time"], inline=False)
         embed.set_image(url=image["results"][0]["url"])
         
         button = Button(style=discord.ButtonStyle.red, label="Done!", custom_id="confirm")
@@ -142,7 +214,7 @@ class MommyMinder(commands.Cog):
                     async with session.get(f"https://nekos.best/api/v2/{action}") as resp:
                         image = await resp.json()
                 embed = discord.Embed(title=reminder["name"], color=discord.Color.purple(), description=statement)
-                embed.add_field(name="Time", value=reminder["time"], inline=False)
+                #embed.add_field(name="Time", value=reminder["time"], inline=False)
                 embed.set_image(url=image["results"][0]["url"])
                 await message.edit(embed=embed, view=None)
             
