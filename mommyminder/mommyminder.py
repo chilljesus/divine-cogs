@@ -247,9 +247,9 @@ class MommyMinder(commands.Cog):
         await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
     def create_reminder_embed(self, reminders, index):
         reminder = reminders[index]
-        if reminder["success"]:
+        try:
             rate = reminder["success"]/reminder["fail"]
-        else:
+        except:
             rate = None
         embed = discord.Embed(title=f"Reminder {index + 1}/{len(reminders)}", color=discord.Color.purple())
         embed.add_field(name="Name", value=reminder["name"], inline=False)
@@ -301,9 +301,9 @@ class ReminderView(discord.ui.View):
 
     def create_reminder_embed(self):
         reminder = self.reminders[self.current_index]
-        if reminder["success"]:
+        try:
             rate = reminder["success"]/reminder["fail"]
-        else:
+        except:
             rate = None
         embed = discord.Embed(title=f"Reminder {self.current_index + 1}/{len(self.reminders)}", color=discord.Color.purple())
         embed.add_field(name="Name", value=reminder["name"], inline=False)
