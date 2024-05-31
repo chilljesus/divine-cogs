@@ -133,6 +133,7 @@ class MommyMinder(commands.Cog):
         try:
             interaction = await self.bot.wait_for("interaction", timeout=1800.0, check=check)
             if interaction.data['custom_id'] == "confirm":
+                # add increment for success rate here im fucking tired of goddamn fucking configs FUCK
                 await interaction.response.defer()
                 confirmation_responses = responses[gender]["confirmation"]
                 selected_response = random.choice(confirmation_responses)
@@ -184,6 +185,14 @@ class MommyMinder(commands.Cog):
                 
     ### GENERAL COMMANDS ###
     
+    @app_commands.command(name="help", description="Get command usage and stuff.")
+    async def help(self, interaction: discord.Interaction):
+        embed = discord.Embed(title="Commands Usage",
+                      description="**/settings**\nDisplays your set timezone, buddy, pronouns\n\n**/setpronouns**\nAllows you to set masculine, feminine, neutral (enby), and fluid (genderfluid). This determines how the bot refers to you.\n\n**/setbuddy**\nSelect someone from the dropdown list in order to automatically put their id into the reminder modal. For both this command and the modal, they must share a server with the bot.\n\n**/settimezone** *(required)*\nSets your timezone using [TZ Identifiers](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) (the long ones), allowing the bot to message you at the appropriate time. This is a required setting for the bot to work.\n\n**/setreminder**\nOpens a modal allowing you to input a new task to complete, the frequency of it (daily / weekly), the time, and who you want to account for you.\n\n**/reminders**\nShows a paginated view of the reminders you have setup, when the next one will be, the buddy used for them, and allows deletion of reminders.",
+                      colour=discord.Color.purple())
+        embed.set_image(url="https://small.fileditchstuff.me/s11/FsVJWkFplszyjIKhmNjt.gif")
+        await interaction.response.send_message(embed=embed, epemeral=True)
+    
     @app_commands.command(name="settings", description="Displays your settings.")
     async def settings(self, interaction: discord.Interaction):
         user = interaction.user
@@ -196,8 +205,7 @@ class MommyMinder(commands.Cog):
         embed.add_field(name="Timezone", value=timezone, inline=False)
         embed.add_field(name="Default Buddy", value=f"<@{buddy}>", inline=False)
         await interaction.response.send_message(embed=embed, ephemeral=True)
-    
-    ### THE ACTUAL SETUP SHIZ ###        
+         
     @app_commands.command(name="setreminder", description="Set a new reminder.")
     async def set_reminder(self, interaction: discord.Interaction):
         try:
@@ -247,16 +255,16 @@ class MommyMinder(commands.Cog):
         await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
     def create_reminder_embed(self, reminders, index):
         reminder = reminders[index]
-        try:
-            print(f"Success: {float(reminder['success'])} & {reminder['success']}, Fail: {float(reminder['fail'])} & {reminder['fail']}")
-            rate = (float(reminder["success"])+float(reminder["fail"]))/float(reminder["success"])
-        except Exception as error:
-            rate = None
-            print(f"Oops: {error}")
+        #try:
+        #    print(f"Success: {float(reminder['success'])} & {reminder['success']}, Fail: {float(reminder['fail'])} & {reminder['fail']}")
+        #    rate = (float(reminder["success"])+float(reminder["fail"]))/float(reminder["success"])
+        #except Exception as error:
+        #    rate = None
+        #    print(f"Oops: {error}")
         embed = discord.Embed(title=f"Reminder {index + 1}/{len(reminders)}", color=discord.Color.purple())
         embed.add_field(name="Name", value=reminder["name"], inline=False)
         embed.add_field(name="Next Reminder", value=datetime.fromisoformat(reminder["remaining"]), inline=False)
-        embed.add_field(name="Success Rate", value=f"{rate}%")
+        #embed.add_field(name="Success Rate", value=f"{rate}%")
         embed.add_field(name="Time", value=reminder["time"], inline=False)
         embed.add_field(name="Frequency", value=reminder["frequency"], inline=False)
         embed.add_field(name="Accountable Buddy", value=f"<@{reminder['accountable_buddy']}>", inline=False)
@@ -303,16 +311,16 @@ class ReminderView(discord.ui.View):
 
     def create_reminder_embed(self):
         reminder = self.reminders[self.current_index]
-        try:
-            print(f"Success: {float(reminder['success'])} & {reminder['success']}, Fail: {float(reminder['fail'])} & {reminder['fail']}")
-            rate = (float(reminder["success"])+float(reminder["fail"]))/float(reminder["success"])
-        except Exception as error:
-            rate = "Error"
-            print(f"Oops: {error}")
+        #try:
+        #    print(f"Success: {float(reminder['success'])} & {reminder['success']}, Fail: {float(reminder['fail'])} & {reminder['fail']}")
+        #    rate = (float(reminder["success"])+float(reminder["fail"]))/float(reminder["success"])
+        #except Exception as error:
+        #    rate = "Error"
+        #    print(f"Oops: {error}")
         embed = discord.Embed(title=f"Reminder {self.current_index + 1}/{len(self.reminders)}", color=discord.Color.purple())
         embed.add_field(name="Name", value=reminder["name"], inline=False)
         embed.add_field(name="Next Reminder", value=datetime.fromisoformat(reminder["remaining"]), inline=False)
-        embed.add_field(name="Success Rate", value=f"{rate}%")
+        #embed.add_field(name="Success Rate", value=f"{rate}%")
         embed.add_field(name="Time", value=reminder["time"], inline=False)
         embed.add_field(name="Frequency", value=reminder["frequency"], inline=False)
         embed.add_field(name="Accountable Buddy", value=f"<@{reminder['accountable_buddy']}>", inline=False)
