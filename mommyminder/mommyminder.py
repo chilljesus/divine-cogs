@@ -238,22 +238,6 @@ class MommyMinder(commands.Cog):
     async def mommyminder(self, ctx):
         """MommyMinder configuration commands."""
         pass
-
-    @commands.command()
-    async def testnotify(self, ctx):
-        """Testing command to build notifications"""
-        user_data = await self.config.user(ctx.author).all()
-        gender = user_data.get("gender", "neutral")
-        notification_responses = responses[gender]["notification"]
-        selected_response = random.choice(notification_responses)
-        statement, action = selected_response
-        async with aiohttp.ClientSession() as session:
-            async with session.get(f"https://nekos.best/api/v2/{action}") as resp:
-                image = await resp.json()
-        embed = discord.Embed(title="Reminder Name", color=discord.Color.purple(), description=statement)
-        embed.add_field(name="Time", value="Reminder Time", inline=False)
-        embed.set_image(url=image["results"][0]["url"])
-        await ctx.send(embed=embed)
                 
     ### GENERAL COMMANDS ###
     
