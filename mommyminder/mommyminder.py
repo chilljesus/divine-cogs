@@ -248,7 +248,7 @@ class MommyMinder(commands.Cog):
     def create_reminder_embed(self, reminders, index):
         reminder = reminders[index]
         try:
-            rate = float(reminder["success"])/float(reminder["fail"])
+            rate = float(reminder["success"])/(float(reminder["success"])+float(reminder["fail"]))
         except Exception as error:
             rate = None
             print(error)
@@ -303,7 +303,7 @@ class ReminderView(discord.ui.View):
     def create_reminder_embed(self):
         reminder = self.reminders[self.current_index]
         try:
-            rate = float(reminder["success"])/float(reminder["fail"])
+            rate = float(reminder["success"])/(float(reminder["success"])+float(reminder["fail"]))
         except Exception as error:
             rate = None
             print(error)
