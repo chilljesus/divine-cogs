@@ -296,9 +296,11 @@ class ReminderView(discord.ui.View):
 
     def create_reminder_embed(self):
         reminder = self.reminders[self.current_index]
+        rate - reminder["success"]/reminder["fail"]
         embed = discord.Embed(title=f"Reminder {self.current_index + 1}/{len(self.reminders)}", color=discord.Color.purple())
         embed.add_field(name="Name", value=reminder["name"], inline=False)
-        embed.add_field(name="Next Reminder", value=reminder["remaining"], inline=False)
+        embed.add_field(name="Next Reminder", value=datetime.data.fromisoformat(reminder["remaining"]), inline=False)
+        embed.add_field(name="Success Rate", value=f"{rate}%")
         embed.add_field(name="Time", value=reminder["time"], inline=False)
         embed.add_field(name="Frequency", value=reminder["frequency"], inline=False)
         embed.add_field(name="Accountable Buddy", value=str(reminder["accountable_buddy"]), inline=False)
@@ -373,7 +375,9 @@ class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
             "remaining": reminder_datetime.isoformat(),
             "time": time_obj.isoformat(),
             "frequency": frequency,
-            "accountable_buddy": buddy_id
+            "accountable_buddy": buddy_id,
+            "success": 0,
+            "fail": 0
         }
 
         # Save the reminder
