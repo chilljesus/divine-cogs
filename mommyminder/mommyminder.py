@@ -249,8 +249,9 @@ class MommyMinder(commands.Cog):
         reminder = reminders[index]
         try:
             rate = float(reminder["success"])/float(reminder["fail"])
-        except:
+        except Exception as error:
             rate = None
+            print(error)
         embed = discord.Embed(title=f"Reminder {index + 1}/{len(reminders)}", color=discord.Color.purple())
         embed.add_field(name="Name", value=reminder["name"], inline=False)
         embed.add_field(name="Next Reminder", value=datetime.fromisoformat(reminder["remaining"]), inline=False)
@@ -303,8 +304,9 @@ class ReminderView(discord.ui.View):
         reminder = self.reminders[self.current_index]
         try:
             rate = float(reminder["success"])/float(reminder["fail"])
-        except:
+        except Exception as error:
             rate = None
+            print(error)
         embed = discord.Embed(title=f"Reminder {self.current_index + 1}/{len(self.reminders)}", color=discord.Color.purple())
         embed.add_field(name="Name", value=reminder["name"], inline=False)
         embed.add_field(name="Next Reminder", value=datetime.fromisoformat(reminder["remaining"]), inline=False)
