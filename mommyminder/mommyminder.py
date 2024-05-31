@@ -247,6 +247,7 @@ class MommyMinder(commands.Cog):
                       description="**/settings**\nDisplays your set timezone, buddy, pronouns\n\n**/setpronouns**\nAllows you to set masculine, feminine, neutral (enby), and fluid (genderfluid). This determines how the bot refers to you.\n\n**/setbuddy**\nSelect someone from the dropdown list in order to automatically put their id into the reminder modal. For both this command and the modal, they must share a server with the bot.\n\n**/settimezone** *(required)*\nSets your timezone using [TZ Identifiers](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) (the long ones), allowing the bot to message you at the appropriate time. This is a required setting for the bot to work.\n\n**/setreminder**\nOpens a modal allowing you to input a new task to complete, the frequency of it (daily / weekly), the time, and who you want to account for you.\n\n**/reminders**\nShows a paginated view of the reminders you have setup, when the next one will be, the buddy used for them, and allows deletion of reminders.",
                       colour=discord.Color.purple())
         embed.set_image(url="https://small.fileditchstuff.me/s11/FsVJWkFplszyjIKhmNjt.gif")
+        embed.set_footer(text="@nekojesus • https://jesus.sh")
         await interaction.response.send_message(embed=embed, ephemeral=True)
     
     @app_commands.command(name="settings", description="Displays your settings.")
