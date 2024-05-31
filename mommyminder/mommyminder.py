@@ -201,7 +201,7 @@ class MommyMinder(commands.Cog):
     @app_commands.command(name="setreminder", description="Set a new reminder.")
     async def set_reminder(self, interaction: discord.Interaction):
         try:
-            modal = ReminderSetupModal(bot=self.bot, user=interaction.user)
+            modal = await ReminderSetupModal(bot=self.bot, user=interaction.user)
             await interaction.response.send_modal(modal)
         except Exception as e:
             print(f"Error sending modal: {e}")
