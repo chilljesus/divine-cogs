@@ -50,20 +50,6 @@ responses = {
             ["Hey, your buddy needs a little push. Can you help them out?", "cry"],
             ["Your friend is slacking off again. Give them a nudge.", "slap"]
         ]
-    },
-    "fluid": {
-        "notification": [
-            ["It's time to get this done, superstar. No more delays.", "smug"],
-            ["You’re not going to let this slip by, are you? Get on it, now.", "thumbsup"]
-        ],
-        "confirmation": [
-            ["Great job! I knew you could do it, champ.", "highfive"],
-            ["Well done, you're making me proud!", "pat"]
-        ],
-        "notifybuddy": [
-            ["Hey, your buddy needs a little push. Can you help them out?", "pout"],
-            ["Your friend is slacking off again. Give them a nudge.", "stare"]
-        ]
     }
 }
 
@@ -123,6 +109,8 @@ class MommyMinder(commands.Cog):
         
         user_data = await self.config.user(user).all()
         gender = user_data.get("gender", "neutral")
+        if gender == "fluid":
+            gender = random.choice(["masculine", "feminine"])
         notification_responses = responses[gender]["notification"]
         selected_response = random.choice(notification_responses)
         statement, action = selected_response
@@ -146,7 +134,6 @@ class MommyMinder(commands.Cog):
             interaction = await self.bot.wait_for("interaction", timeout=1800.0, check=check)
             if interaction.data['custom_id'] == "confirm":
                 await interaction.response.defer()
-                message.delete
                 confirmation_responses = responses[gender]["confirmation"]
                 selected_response = random.choice(confirmation_responses)
                 statement, action = selected_response
@@ -163,7 +150,16 @@ class MommyMinder(commands.Cog):
             if accountable_buddy:
                 buddy = self.bot.get_user(accountable_buddy)
                 if buddy:
-                    await buddy.send(f"{user.name} did not confirm their reminder: {reminder['name']}")
+                    notifybuddy_responses = responses[gender]["notifybuddy"]
+                    selected_response = random.choice(notifybuddy_responses)
+                    statement, action = selected_response
+                    async with aiohttp.ClientSession() as session:
+                        async with session.get(f"https://nekos.best/api/v2/{action}") as resp:
+                            image = await resp.json()
+                    embed = discord.Embed(title=reminder["name"], color=discord.Color.purple(), description=statement)
+                    embed.add_field(name="Time", value=reminder["time"], inline=False)
+                    embed.set_image(url=image["results"][0]["url"])
+                    await buddy.send(embed=embed)
 
     @commands.group(name="mommyminder")
     async def mommyminder(self, ctx):
@@ -232,7 +228,7 @@ class MommyMinder(commands.Cog):
             await interaction.response.send_message("Invalid timezone. Please provide a valid timezone identifier (e.g., 'US/Eastern').", ephemeral=True)
      
     @app_commands.command(name="setbuddy", description="Set a default acountability buddy")
-    async def set_buddy(self, interaction: discord.Interaction, buddy: discord.Member):
+    async def set_buddy(self, interaction: discord.Interaction, buddy: discord.User):
         await self.config.user(interaction.user).buddy.set(buddy.id)
         await interaction.response.send_message(f"Your default buddy has been set to {buddy.display_name}", ephemeral=True)
         
