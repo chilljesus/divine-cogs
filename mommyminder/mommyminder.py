@@ -309,7 +309,7 @@ class ReminderView(discord.ui.View):
 class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
     async def __init__(self, bot: Red, user: discord.User):
         
-        user_data = await self.config.user(interaction.user).all()
+        user_data = await self.config.user(user).all()
         buddy = user_data.get("buddy")
         
         super().__init__(title="Set Reminder")
