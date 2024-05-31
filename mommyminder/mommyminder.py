@@ -157,7 +157,7 @@ class MommyMinder(commands.Cog):
     @tasks.loop(minutes=1.0)
     async def reminder_check(self):
         now = datetime.now(pytz.utc)
-        print(f"Running reminder check at {now}.") 
+        #print(f"Running reminder check at {now}.") 
         all_users = await self.config.all_users()
         for user_id, data in all_users.items():
             reminders = data.get("reminders", [])
@@ -388,7 +388,7 @@ class ReminderView(discord.ui.View):
                     
 class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
     def __init__(self, bot: Red, user: discord.User, buddyid):
-        print(f"Received: {buddyid}")
+        #print(f"Received: {buddyid}")
         super().__init__(title="Set Reminder")
         self.bot = bot
         self.user = user
@@ -413,7 +413,7 @@ class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
         buddy_id = int(self.buddy.value)
         tz_str = await self.bot.get_cog("MommyMinder").config.user(user).timezone()
 
-        print(f"Received modal submission: name={name}, time_str={time_str}, frequency={frequency}, buddy_id={buddy_id}, tz_str={tz_str}")
+        #print(f"Received modal submission: name={name}, time_str={time_str}, frequency={frequency}, buddy_id={buddy_id}, tz_str={tz_str}")
 
         # Check if frequency is valid
         if frequency not in ["daily", "weekly"]:
@@ -459,7 +459,7 @@ class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
         # Save the reminder
         async with self.bot.get_cog("MommyMinder").config.user(user).reminders() as reminders:
             reminders.append(reminder)
-        print("Set variables.")
+        #print("Set variables.")
         await interaction.response.send_message(f"Reminder '{name}' set for {time_str} {tz_str} ({frequency}).", ephemeral=True)
 
 async def setup(bot):
