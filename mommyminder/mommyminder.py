@@ -318,13 +318,14 @@ class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
         self.name = discord.ui.TextInput(label="Reminder Name", placeholder="e.g. Take Medication")
         self.add_item(self.name)
 
-        self.time = discord.ui.TextInput(label="Reminder Time (HH:MM, 24-hour)", placeholder="e.g. 14:00, 02:30")
+        self.time = discord.ui.TextInput(label="Reminder Time (HH:MM, 24-hour)", placeholder="e.g. 14:00, 02:30", min_length=5, max_length=5)
         self.add_item(self.time)
 
-        self.frequency = discord.ui.TextInput(label="Frequency (Daily/Weekly)", placeholder="e.g. Daily or Weekly")
+        self.frequency = discord.ui.TextInput(label="Frequency (Daily/Weekly)", placeholder="e.g. Daily or Weekly", max_length=6)
         self.add_item(self.frequency)
 
         self.buddy = discord.ui.TextInput(label="Accountable Buddy (User ID)", placeholder="e.g. 123456789012345678", value=buddyid)
+        self.buddy.add
         self.add_item(self.buddy)
 
     async def on_submit(self, interaction: discord.Interaction):
