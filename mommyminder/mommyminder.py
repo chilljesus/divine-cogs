@@ -253,7 +253,7 @@ class MommyMinder(commands.Cog):
             rate = None
         embed = discord.Embed(title=f"Reminder {index + 1}/{len(reminders)}", color=discord.Color.purple())
         embed.add_field(name="Name", value=reminder["name"], inline=False)
-        embed.add_field(name="Next Reminder", value=datetime.datetime.fromisoformat(reminder["remaining"]), inline=False)
+        embed.add_field(name="Next Reminder", value=datetime.fromisoformat(reminder["remaining"]), inline=False)
         embed.add_field(name="Success Rate", value=f"{rate}%")
         embed.add_field(name="Time", value=reminder["time"], inline=False)
         embed.add_field(name="Frequency", value=reminder["frequency"], inline=False)
@@ -307,7 +307,7 @@ class ReminderView(discord.ui.View):
             rate = None
         embed = discord.Embed(title=f"Reminder {self.current_index + 1}/{len(self.reminders)}", color=discord.Color.purple())
         embed.add_field(name="Name", value=reminder["name"], inline=False)
-        embed.add_field(name="Next Reminder", value=datetime.datetime.fromisoformat(reminder["remaining"]), inline=False)
+        embed.add_field(name="Next Reminder", value=datetime.fromisoformat(reminder["remaining"]), inline=False)
         embed.add_field(name="Success Rate", value=f"{rate}%")
         embed.add_field(name="Time", value=reminder["time"], inline=False)
         embed.add_field(name="Frequency", value=reminder["frequency"], inline=False)
