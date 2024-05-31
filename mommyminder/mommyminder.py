@@ -194,7 +194,7 @@ class MommyMinder(commands.Cog):
         embed = discord.Embed(title="Your Settings", color=discord.Color.purple())
         embed.add_field(name="Gender", value=gender, inline=False)
         embed.add_field(name="Timezone", value=timezone, inline=False)
-        embed.add_field(name="Default Buddy", value=buddy, inline=False)
+        embed.add_field(name="Default Buddy", value=f"<@{buddy}>", inline=False)
         await interaction.response.send_message(embed=embed, ephemeral=True)
     
     ### THE ACTUAL SETUP SHIZ ###        
@@ -230,7 +230,7 @@ class MommyMinder(commands.Cog):
     @app_commands.command(name="setbuddy", description="Set a default acountability buddy")
     async def set_buddy(self, interaction: discord.Interaction, buddy: discord.User):
         await self.config.user(interaction.user).buddy.set(buddy.id)
-        await interaction.response.send_message(f"Your default buddy has been set to {buddy.display_name}", ephemeral=True)
+        await interaction.response.send_message(f"Your default buddy has been set to <@{buddy.id}", ephemeral=True)
         
     @app_commands.command(name="reminders", description="See and edit your reminders")
     async def edit_reminders(self, interaction: discord.Interaction):
@@ -308,6 +308,10 @@ class ReminderView(discord.ui.View):
                     
 class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
     def __init__(self, bot: Red, user: discord.User):
+        
+        user_data = await self.config.user(user).all()
+        buddy = user_data.get("buddy")
+        
         super().__init__(title="Set Reminder")
         self.bot = bot
         self.user = user
@@ -321,7 +325,7 @@ class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
         self.frequency = discord.ui.TextInput(label="Frequency (Daily/Weekly)", placeholder="e.g. Daily or Weekly")
         self.add_item(self.frequency)
 
-        self.buddy = discord.ui.TextInput(label="Accountable Buddy (User ID)", placeholder="e.g. 123456789012345678")
+        self.buddy = discord.ui.TextInput(label="Accountable Buddy (User ID)", placeholder="e.g. 123456789012345678", value=f"{buddy}")
         self.add_item(self.buddy)
 
     async def on_submit(self, interaction: discord.Interaction):
