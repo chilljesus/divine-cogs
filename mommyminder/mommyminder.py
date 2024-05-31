@@ -307,9 +307,9 @@ class ReminderView(discord.ui.View):
         self.next.disabled = self.current_index == len(self.reminders) - 1
                     
 class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
-    def __init__(self, bot: Red, user: discord.User):
+    async def __init__(self, bot: Red, user: discord.User, buddy):
         
-        user_data = await self.config.user(user).all()
+        user_data = await self.config.user(interaction.user).all()
         buddy = user_data.get("buddy")
         
         super().__init__(title="Set Reminder")
