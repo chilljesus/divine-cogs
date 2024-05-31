@@ -248,7 +248,7 @@ class MommyMinder(commands.Cog):
     def create_reminder_embed(self, reminders, index):
         reminder = reminders[index]
         try:
-            rate = reminder["success"]/reminder["fail"]
+            rate = float(reminder["success"])/float(reminder["fail"])
         except:
             rate = None
         embed = discord.Embed(title=f"Reminder {index + 1}/{len(reminders)}", color=discord.Color.purple())
@@ -257,7 +257,7 @@ class MommyMinder(commands.Cog):
         embed.add_field(name="Success Rate", value=f"{rate}%")
         embed.add_field(name="Time", value=reminder["time"], inline=False)
         embed.add_field(name="Frequency", value=reminder["frequency"], inline=False)
-        embed.add_field(name="Accountable Buddy", value=str(reminder["accountable_buddy"]), inline=False)
+        embed.add_field(name="Accountable Buddy", value=f"<@{reminder['accountable_buddy']}>", inline=False)
         return embed
     
 class ReminderView(discord.ui.View):
@@ -311,7 +311,7 @@ class ReminderView(discord.ui.View):
         embed.add_field(name="Success Rate", value=f"{rate}%")
         embed.add_field(name="Time", value=reminder["time"], inline=False)
         embed.add_field(name="Frequency", value=reminder["frequency"], inline=False)
-        embed.add_field(name="Accountable Buddy", value=str(reminder["accountable_buddy"]), inline=False)
+        embed.add_field(name="Accountable Buddy", value=f"<@{reminder['accountable_buddy']}>", inline=False)
         return embed
 
     def update_buttons(self):
