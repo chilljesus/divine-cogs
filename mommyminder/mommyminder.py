@@ -203,7 +203,7 @@ class MommyMinder(commands.Cog):
         try:
             user_data = await self.config.user(interaction.user).all()
             #buddy = user_data.get("buddy")
-            modal = await ReminderSetupModal(bot=self.bot, user=interaction.user, buddy=user_data.get("buddy"))
+            modal = ReminderSetupModal(bot=self.bot, user=interaction.user, buddy=user_data.get("buddy"))
             await interaction.response.send_modal(modal)
         except Exception as e:
             print(f"Error sending modal: {e}")
@@ -309,7 +309,7 @@ class ReminderView(discord.ui.View):
         self.next.disabled = self.current_index == len(self.reminders) - 1
                     
 class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
-    async def __init__(self, bot: Red, user: discord.User, buddy):
+    def __init__(self, bot: Red, user: discord.User, buddy):
         
         super().__init__(title="Set Reminder")
         self.bot = bot
