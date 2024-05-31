@@ -302,7 +302,7 @@ class ReminderView(discord.ui.View):
     def create_reminder_embed(self):
         reminder = self.reminders[self.current_index]
         try:
-            rate = reminder["success"]/reminder["fail"]
+            rate = float(reminder["success"])/float(reminder["fail"])
         except:
             rate = None
         embed = discord.Embed(title=f"Reminder {self.current_index + 1}/{len(self.reminders)}", color=discord.Color.purple())
