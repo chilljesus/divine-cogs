@@ -203,7 +203,7 @@ class MommyMinder(commands.Cog):
         try:
             user_data = await self.config.user(interaction.user).all()
             #buddy = user_data.get("buddy")
-            modal = ReminderSetupModal(bot=self.bot, user=interaction.user, buddy=user_data.get("buddy"))
+            modal = ReminderSetupModal(bot=self.bot, user=interaction.user, buddyid=user_data.get("buddy"))
             await interaction.response.send_modal(modal)
         except Exception as e:
             print(f"Error sending modal: {e}")
@@ -309,8 +309,8 @@ class ReminderView(discord.ui.View):
         self.next.disabled = self.current_index == len(self.reminders) - 1
                     
 class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
-    def __init__(self, bot: Red, user: discord.User, buddy):
-        
+    def __init__(self, bot: Red, user: discord.User, buddyid):
+        print(f"Received: {buddyid}")
         super().__init__(title="Set Reminder")
         self.bot = bot
         self.user = user
@@ -324,7 +324,7 @@ class ReminderSetupModal(discord.ui.Modal, title="Set Reminder"):
         self.frequency = discord.ui.TextInput(label="Frequency (Daily/Weekly)", placeholder="e.g. Daily or Weekly")
         self.add_item(self.frequency)
 
-        self.buddy = discord.ui.TextInput(label="Accountable Buddy (User ID)", placeholder="e.g. 123456789012345678", Value=buddy)
+        self.buddy = discord.ui.TextInput(label="Accountable Buddy (User ID)", placeholder="e.g. 123456789012345678", value=buddyid)
         self.add_item(self.buddy)
 
     async def on_submit(self, interaction: discord.Interaction):
