@@ -303,9 +303,9 @@ class ReminderView(discord.ui.View):
     def create_reminder_embed(self):
         reminder = self.reminders[self.current_index]
         try:
-            rate = float(reminder["success"])/(float(reminder["success"])+float(reminder["fail"]))
+            rate = (float(reminder["success"])+float(reminder["fail"]))/float(reminder["success"])
         except Exception as error:
-            rate = None
+            rate = "Error"
             print(f"Oops: {error}")
         embed = discord.Embed(title=f"Reminder {self.current_index + 1}/{len(self.reminders)}", color=discord.Color.purple())
         embed.add_field(name="Name", value=reminder["name"], inline=False)
