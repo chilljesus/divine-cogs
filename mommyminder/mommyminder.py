@@ -208,11 +208,12 @@ class MommyMinder(commands.Cog):
                 await self.update_reminder_time(user_id, reminder, index)
             
         except asyncio.TimeoutError:
-            message.edit(embed=embed, view=None)
             accountable_buddy = reminder.get("accountable_buddy")
             if accountable_buddy:
                 buddy = self.bot.get_user(accountable_buddy)
                 if buddy:
+                    embed.set_footer(text=f"I've notified {buddy.username}")
+                    await message.edit(embed=embed, view=None)
                     notifybuddy_responses = responses[gender]["notifybuddy"]
                     selected_response = random.choice(notifybuddy_responses)
                     statement, action = selected_response
