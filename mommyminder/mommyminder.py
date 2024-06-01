@@ -205,16 +205,14 @@ class MommyMinder(commands.Cog):
                 embed = discord.Embed(title=reminder["name"], color=discord.Color.purple(), description=statement)
                 embed.set_image(url=image["results"][0]["url"])
                 await message.edit(embed=embed, view=None)
-                # Update the remaining time after confirmation
                 await self.update_reminder_time(user_id, reminder, index)
             
         except asyncio.TimeoutError:
-            print('Got to timeout')
+            message.edit(embed=embed, view=None)
             accountable_buddy = reminder.get("accountable_buddy")
             if accountable_buddy:
                 buddy = self.bot.get_user(accountable_buddy)
                 if buddy:
-                    print(f"Got a buddy: {accountable_buddy}")
                     notifybuddy_responses = responses[gender]["notifybuddy"]
                     selected_response = random.choice(notifybuddy_responses)
                     statement, action = selected_response
@@ -223,12 +221,10 @@ class MommyMinder(commands.Cog):
                             image = await resp.json()
                     embed = discord.Embed(title=reminder["name"], color=discord.Color.purple(), description=statement)
                     embed.add_field(name="Time", value=reminder["time"], inline=False)
+                    embed.add_field(name="Friend", value=f"<@{user.id}>")
                     embed.set_image(url=image["results"][0]["url"])
                     await buddy.send(embed=embed)
-                    print("Send buddy embed")
-            # Update the remaining time after timeout
             await self.update_reminder_time(user_id, reminder, index)
-            print("Updated reminder")
 
     async def update_reminder_time(self, user_id: int, reminder: dict, index: int):
         remaining = datetime.fromisoformat(reminder["remaining"])
