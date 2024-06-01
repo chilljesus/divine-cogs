@@ -193,7 +193,7 @@ class MommyMinder(commands.Cog):
             return interaction.user == user and interaction.message.id == message.id
 
         try:
-            interaction = await self.bot.wait_for("interaction", timeout=30.0, check=check)
+            interaction = await self.bot.wait_for("interaction", timeout=1800.0, check=check)
             if interaction.data['custom_id'] == "confirm":
                 await interaction.response.defer()
                 confirmation_responses = responses[gender]["confirmation"]
