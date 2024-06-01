@@ -207,7 +207,7 @@ class MommyMinder(commands.Cog):
                 # Update the remaining time after confirmation
                 await self.update_reminder_time(user_id, reminder, index)
             
-        except asyncio.TimeoutError:
+        except TimeoutError:
             accountable_buddy = reminder.get("accountable_buddy")
             if accountable_buddy:
                 buddy = self.bot.get_user(accountable_buddy)
