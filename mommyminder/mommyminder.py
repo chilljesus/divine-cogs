@@ -157,7 +157,6 @@ class MommyMinder(commands.Cog):
     @tasks.loop(minutes=1.0)
     async def reminder_check(self):
         now = datetime.now(pytz.utc)
-        #print(f"Running reminder check at {now}.") 
         all_users = await self.config.all_users()
         for user_id, data in all_users.items():
             reminders = data.get("reminders", [])
@@ -165,16 +164,9 @@ class MommyMinder(commands.Cog):
                 tz = pytz.timezone(await self.config.user_from_id(user_id).timezone())
                 remaining = datetime.fromisoformat(reminder["remaining"])
                 if now >= remaining:
-                    await self.send_reminder(user_id, reminder)
-                    if reminder["frequency"] == "daily":
-                        next_reminder_datetime = remaining + timedelta(days=1)
-                    elif reminder["frequency"] == "weekly":
-                        next_reminder_datetime = remaining + timedelta(weeks=1)
-                    reminder["remaining"] = next_reminder_datetime.isoformat()
-                    async with self.config.user_from_id(user_id).reminders() as user_reminders:
-                        user_reminders[i] = reminder
+                    await self.send_reminder(user_id, reminder, i)
 
-    async def send_reminder(self, user_id: int, reminder: dict):
+    async def send_reminder(self, user_id: int, reminder: dict, index: int):
         user = self.bot.get_user(user_id)
         if not user:
             return
@@ -190,13 +182,10 @@ class MommyMinder(commands.Cog):
             async with session.get(f"https://nekos.best/api/v2/{action}") as resp:
                 image = await resp.json()
         embed = discord.Embed(title=reminder["name"], color=discord.Color.purple(), description=statement)
-        #embed.add_field(name="Time", value=reminder["time"], inline=False)
         embed.set_image(url=image["results"][0]["url"])
-        
         button = Button(style=discord.ButtonStyle.red, label="Done!", custom_id="confirm")
         view = View()
         view.add_item(button)
-        
         message = await user.send(embed=embed, view=view)
            
         def check(interaction: discord.Interaction):
@@ -205,7 +194,6 @@ class MommyMinder(commands.Cog):
         try:
             interaction = await self.bot.wait_for("interaction", timeout=1800.0, check=check)
             if interaction.data['custom_id'] == "confirm":
-                # add increment for success rate here im fucking tired of goddamn fucking configs FUCK
                 await interaction.response.defer()
                 confirmation_responses = responses[gender]["confirmation"]
                 selected_response = random.choice(confirmation_responses)
@@ -214,11 +202,12 @@ class MommyMinder(commands.Cog):
                     async with session.get(f"https://nekos.best/api/v2/{action}") as resp:
                         image = await resp.json()
                 embed = discord.Embed(title=reminder["name"], color=discord.Color.purple(), description=statement)
-                #embed.add_field(name="Time", value=reminder["time"], inline=False)
                 embed.set_image(url=image["results"][0]["url"])
                 await message.edit(embed=embed, view=None)
+                # Update the remaining time after confirmation
+                await self.update_reminder_time(user_id, reminder, index)
             
-        except TimeoutError:
+        except asyncio.TimeoutError:
             accountable_buddy = reminder.get("accountable_buddy")
             if accountable_buddy:
                 buddy = self.bot.get_user(accountable_buddy)
@@ -233,7 +222,20 @@ class MommyMinder(commands.Cog):
                     embed.add_field(name="Time", value=reminder["time"], inline=False)
                     embed.set_image(url=image["results"][0]["url"])
                     await buddy.send(embed=embed)
+            # Update the remaining time after timeout
+            await self.update_reminder_time(user_id, reminder, index)
 
+    async def update_reminder_time(self, user_id: int, reminder: dict, index: int):
+        remaining = datetime.fromisoformat(reminder["remaining"])
+        if reminder["frequency"] == "daily":
+            next_reminder_datetime = remaining + timedelta(days=1)
+        elif reminder["frequency"] == "weekly":
+            next_reminder_datetime = remaining + timedelta(weeks=1)
+        reminder["remaining"] = next_reminder_datetime.isoformat()
+        
+        async with self.config.user_from_id(user_id).reminders() as user_reminders:
+            user_reminders[index] = reminder
+            
     @commands.group(name="mommyminder")
     async def mommyminder(self, ctx):
         """MommyMinder configuration commands."""
