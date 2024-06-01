@@ -301,7 +301,7 @@ class MommyMinder(commands.Cog):
     @app_commands.command(name="setbuddy", description="Set a default acountability buddy")
     async def set_buddy(self, interaction: discord.Interaction, buddy: discord.User):
         await self.config.user(interaction.user).buddy.set(buddy.id)
-        buddyobj = self.bot.get_user(buddy)
+        buddyobj = self.bot.get_user(buddy.id)
         if buddyobj:
             await buddyobj.send_message(f"Hey, just a heads up! <@{interaction.user} has set you as their default accountability.")
             await interaction.response.send_message(f"Your default buddy has been set to <@{buddy.id}>", ephemeral=True)
