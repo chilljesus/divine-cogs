@@ -301,7 +301,10 @@ class MommyMinder(commands.Cog):
     @app_commands.command(name="setbuddy", description="Set a default acountability buddy")
     async def set_buddy(self, interaction: discord.Interaction, buddy: discord.User):
         await self.config.user(interaction.user).buddy.set(buddy.id)
-        await interaction.response.send_message(f"Your default buddy has been set to <@{buddy.id}>", ephemeral=True)
+        buddyobj = self.bot.get_user(buddy)
+        if buddyobj:
+            await buddyobj.send_message(f"Hey, just a heads up! <@{interaction.user} has set you as their default accountability.")
+            await interaction.response.send_message(f"Your default buddy has been set to <@{buddy.id}>", ephemeral=True)
         
     @app_commands.command(name="reminders", description="See and edit your reminders")
     async def edit_reminders(self, interaction: discord.Interaction):
