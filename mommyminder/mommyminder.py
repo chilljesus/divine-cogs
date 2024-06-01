@@ -303,7 +303,7 @@ class MommyMinder(commands.Cog):
         await self.config.user(interaction.user).buddy.set(buddy.id)
         buddyobj = self.bot.get_user(buddy.id)
         if buddyobj:
-            await buddyobj.send(f"Hey, just a heads up! <@{interaction.user} has set you as their default accountability.")
+            await buddyobj.send(f"Hey, just a heads up! <@{interaction.user.id}> has set you as their default accountability.")
             await interaction.response.send_message(f"Your default buddy has been set to <@{buddy.id}>", ephemeral=True)
         
     @app_commands.command(name="reminders", description="See and edit your reminders")
