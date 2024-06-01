@@ -212,7 +212,7 @@ class MommyMinder(commands.Cog):
             if accountable_buddy:
                 buddy = self.bot.get_user(accountable_buddy)
                 if buddy:
-                    embed.set_footer(text=f"I've notified {buddy.username}")
+                    embed.set_footer(text=f"I've notified {buddy.name}")
                     await message.edit(embed=embed, view=None)
                     notifybuddy_responses = responses[gender]["notifybuddy"]
                     selected_response = random.choice(notifybuddy_responses)
