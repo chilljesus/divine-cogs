@@ -183,18 +183,23 @@ class SearchPaginator(View):
         for passage in paginated_passages:
             formatted_text = clean_and_format_scripture(
                 passage['text'],
-                passage['name']
+                passage['name'],
+                self.urls
             )
             embed.add_field(name=f"{passage['name']} {passage['ref']}", value=formatted_text, inline=False)
         
         return embed
 
-def clean_and_format_scripture(text, book):
+def clean_and_format_scripture(text, book, urls=None):
     clean = re.compile('<.*?>')
     cleaned_text = re.sub(clean, '', text)
     def replace_number_with_link(match):
         number = match.group(1)
-        return f"[**{number}**](https://othergospels.com/{book}/#{number})"
+        if urls and book in urls:
+            url = f"https://othergospels.com/{urls[book]}/#{number}"
+        else:
+            url = f"https://othergospels.com/{book}/#{number}"
+        return f"[**{number}**]({url})"
     formatted_text = re.sub(r"\*\*(\d+)\.\*\*", replace_number_with_link, cleaned_text)
     return formatted_text
 
