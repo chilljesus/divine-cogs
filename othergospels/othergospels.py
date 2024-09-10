@@ -18,7 +18,7 @@ class OtherGospels(commands.Cog):
         """OtherGospels configuration commands."""
         pass
 
-    @commands.command(name="help")
+    @app_commands.command(name="help")
     async def help_command(self, ctx):
         embed = discord.Embed(title="OtherGospels Commands", description="Available commands:")
         embed.add_field(name="/books", value="Get a list of available books.")
@@ -27,7 +27,7 @@ class OtherGospels(commands.Cog):
         embed.add_field(name="/search", value="Search for specific scriptures.")
         await ctx.send(embed=embed)
 
-    @commands.command(name="books")
+    @app_commands.command(name="books")
     async def books_command(self, ctx):
         async with self.session.get("https://othergospels.com/api/books") as resp:
             if resp.status == 200:
@@ -38,15 +38,15 @@ class OtherGospels(commands.Cog):
             else:
                 await ctx.send("Failed to fetch books from the API.")
 
-    @commands.command(name="daily")
+    @app_commands.command(name="daily")
     async def daily_command(self, ctx):
         await self.send_scripture(ctx, "https://othergospels.com/api/daily", "Daily Scripture")
 
-    @commands.command(name="random")
+    @app_commands.command(name="random")
     async def random_command(self, ctx):
         await self.send_scripture(ctx, "https://othergospels.com/api/random", "Random Scripture")
 
-    @commands.command(name="search")
+    @app_commands.command(name="search")
     async def search_command(self, ctx, query: str, exclude_options: Optional[str] = None):
         search_url = await self.build_search_query(query, exclude_options)
         async with self.session.get(search_url) as resp:
