@@ -84,8 +84,7 @@ def clean_and_format_scripture(text, book):
 def format_books_text(books, max_lines=15):
     lines = []
     for book in books:
-        full_name = book.get("fullName")
-        print(f"Working on {full_name}")
+        display_name = book.get("fullName", book.get("name"))
         url = f"https://othergospels.com/{book['url']}"
         categories = []
         if book.get("gnostic"):
@@ -96,17 +95,15 @@ def format_books_text(books, max_lines=15):
             categories.append("Bible")
         categories_str = ', '.join(categories) if categories else 'Unknown'
         other_names_list = []
-        if book.get("name"):
+        if book.get("name") and book.get("name") != display_name:
             other_names_list.append(book["name"])
         if book.get("aka"):
-            other_names_list.append(book["aka"])
+            other_names_list.extend(book["aka"])
         other_names = f"(Other names: {', '.join(other_names_list)})" if other_names_list else ""
-        line = f"[{full_name}]({url}) - {categories_str} {other_names}"
+        line = f"[{display_name}]({url}) - {categories_str} {other_names}"
         lines.append(line)
-        print("Finished, next")
         if len(lines) >= max_lines:
             break
-    print("\n".join(lines))
     return "\n".join(lines)
 
 async def setup(bot):
