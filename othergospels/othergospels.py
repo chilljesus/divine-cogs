@@ -91,7 +91,7 @@ class OtherGospels(commands.Cog):
         if include_options and exclude_options:
             await interaction.response.send_message("You can only choose to either include or exclude traditions, not both.", ephemeral=True)
             return
-        include_list = [include_options] if include_options else ["gnostic"]
+        include_list = [include_options] if include_options else []
         exclude_list = [exclude_options] if exclude_options else []
         search_url = await build_search_query(query, include_list, exclude_list)
 
