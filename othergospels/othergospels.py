@@ -76,9 +76,18 @@ class OtherGospels(commands.Cog):
                 await ctx.send(f"Failed to fetch {title.lower()}.")
 
     def clean_and_format_scripture(self, text, book, urls=None):
-        """Format scripture text and replace numbers with links"""
-        text = re.sub(r"<.*?>", "", text)
-        return re.sub(r"\*\*(\d+)\.\*\*", lambda match: f"[**{match.group(1)}**](<https://othergospels.com/{book}/{match.group(1)}>)", text)
+        """Clean and format the scripture text, replacing numbers with links"""
+        clean = re.compile('<.*?>')
+        cleaned_text = re.sub(clean, '', text)
+        def replace_number_with_link(match):
+            number = match.group(1)
+            if urls and book in urls:
+                url = f"https://othergospels.com/{urls[book]}/#{number}"
+            else:
+                url = f"https://othergospels.com/{book}/#{number}"
+            return f"[**{number}**](<{url}>)"
+        formatted_text = re.sub(r"\*\*(\d+)\.\*\*", replace_number_with_link, cleaned_text)
+        return formatted_text
 
     def format_books_text(self, books):
         """Format the list of books, including alternative names (aka)"""
