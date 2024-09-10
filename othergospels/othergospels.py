@@ -192,7 +192,7 @@ class SearchPaginator(View):
         self.next_page.disabled = self.page >= self.total_pages - 1
 
     def create_embed(self):
-        embed = discord.Embed(title=f"Search Results (Page {self.page + 1}/{self.total_pages})")
+        embed = discord.Embed(title=f"{self.passage_name} {self.passage_ref} (Page {self.page + 1}/{self.total_pages})")
         if self.paginate_by_verses:
             start_idx = self.page * self.verses_per_page
             end_idx = start_idx + self.verses_per_page
@@ -203,11 +203,12 @@ class SearchPaginator(View):
                 self.passage_name,
                 self.urls
             )
-            embed.add_field(
-                name=f"{self.passage_name} {self.passage_ref} - {self.title}",
-                value=formatted_text,
-                inline=False
-            )
+            embed.description = formatted_text
+            #embed.add_field(
+            #    name=f"{self.passage_name} {self.passage_ref} - {self.title}",
+            #    value=formatted_text,
+            #    inline=False
+            #)
         else:
             start_idx = self.page * self.passages_per_page
             end_idx = start_idx + self.passages_per_page
@@ -218,7 +219,8 @@ class SearchPaginator(View):
                     passage['name'],
                     self.urls
                 )
-                embed.add_field(name=f"{passage['name']} {passage['ref']}", value=formatted_text, inline=False)
+                embed.description = formatted_text
+                #embed.add_field(name=f"{passage['name']} {passage['ref']}", value=formatted_text, inline=False)
         return embed
 
 def clean_and_format_scripture(text, book, urls=None):
