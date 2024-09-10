@@ -216,7 +216,7 @@ class SearchPaginator(View):
                     self.urls
                 )
                 embed.description = formatted_text
-        embed.footer =  f"Powered by othergospels.com | Page {self.page + 1}/{self.total_pages}"
+        embed.set_footer(f"Powered by othergospels.com | Page {self.page + 1}/{self.total_pages}")
         return embed
 
 def clean_and_format_scripture(text, book, urls=None):
