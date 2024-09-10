@@ -35,11 +35,11 @@ class OtherGospels(commands.Cog):
         async with self.session.get("https://othergospels.com/api/books") as resp:
             if resp.status == 200:
                 data = await resp.json()
-                books_text = format_books_text(data, max_lines=15)
-                embed = discord.Embed(title="Available Scriptures")
-                embed.description = books_text
-                embed.set_footer(text="Showing the first 15 books.")
-                await interaction.response.send_message(embed=embed)
+                books_per_page = 10
+                total_pages = math.ceil(len(data) / books_per_page)
+                embed = format_books_text(data, page=1, books_per_page=books_per_page)
+                view = BooksPaginator(data, books_per_page=books_per_page, total_pages=total_pages)
+                await interaction.response.send_message(embed=view.create_embed(), view=view)
             else:
                 await interaction.response.send_message("Failed to fetch books from the API.", ephemeral=True)
 
@@ -72,6 +72,35 @@ class OtherGospels(commands.Cog):
             else:
                 await interaction.response.send_message("Failed to fetch random scripture.")
 
+class BooksPaginator(View):
+    def __init__(self, data, books_per_page=10, total_pages=1):
+        super().__init__()
+        self.data = data
+        self.books_per_page = books_per_page
+        self.total_pages = total_pages
+        self.page = 1
+
+    @discord.ui.button(label="Next", style=discord.ButtonStyle.primary)
+    async def next_page(self, interaction: discord.Interaction, button: Button):
+        if self.page < self.total_pages:
+            self.page += 1
+            embed = self.create_embed()
+            await interaction.response.edit_message(embed=embed, view=self)
+
+    @discord.ui.button(label="Previous", style=discord.ButtonStyle.primary, disabled=True)
+    async def prev_page(self, interaction: discord.Interaction, button: Button):
+        if self.page > 1:
+            self.page -= 1
+            embed = self.create_embed()
+            await interaction.response.edit_message(embed=embed, view=self)
+
+    def create_embed(self):
+        books_text = format_books_text(self.data, page=self.page, books_per_page=self.books_per_page)
+        embed = discord.Embed(title="Available Scriptures")
+        embed.description = books_text
+        embed.set_footer(text=f"Page {self.page}/{self.total_pages}")
+        return embed
+
 def clean_and_format_scripture(text, book):
     clean = re.compile('<.*?>')
     cleaned_text = re.sub(clean, '', text)
@@ -81,9 +110,13 @@ def clean_and_format_scripture(text, book):
     formatted_text = re.sub(r"\*\*(\d+)\*\*", replace_number_with_link, cleaned_text)
     return formatted_text
 
-def format_books_text(books, max_lines=15):
+def format_books_text(books, page=1, books_per_page=10):
     lines = []
-    for book in books:
+    start_idx = (page - 1) * books_per_page
+    end_idx = start_idx + books_per_page
+    paginated_books = books[start_idx:end_idx]
+
+    for book in paginated_books:
         display_name = book.get("fullName", book.get("name"))
         url = f"https://othergospels.com/{book['url']}"
         categories = []
@@ -102,8 +135,6 @@ def format_books_text(books, max_lines=15):
         other_names = f"(Other names: {', '.join(other_names_list)})" if other_names_list else ""
         line = f"[{display_name}]({url}) - {categories_str} {other_names}"
         lines.append(line)
-        if len(lines) >= max_lines:
-            break
     return "\n".join(lines)
 
 async def setup(bot):
