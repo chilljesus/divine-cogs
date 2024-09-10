@@ -67,7 +67,7 @@ class OtherGospels(commands.Cog):
                     formatted_text = self.clean_and_format_scripture(passage['text'], passage['name'], passage['ref'], urls)
                     for page in pagify(formatted_text, page_length=1024):
                         field_title = f"{passage['name']} {passage['ref']}"
-                        if len(current_embed.fields) >= 25 or char_count + len(page) >= 6000:
+                        if len(current_embed.fields) >= 7 or char_count + len(page) >= 2500:
                             embeds.append(current_embed)
                             current_embed = discord.Embed(title="Search Results")
                             char_count = 0
