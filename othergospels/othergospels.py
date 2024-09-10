@@ -14,7 +14,7 @@ class OtherGospels(commands.Cog):
     def cog_unload(self):
         self.bot.loop.create_task(self.session.close())
 
-    @commands.hybrid_command(name="help")
+    @commands.hybrid_command(name="ogospels")
     async def help_command(self, ctx):
         embed = discord.Embed(title="OtherGospels Commands", description="Available commands:")
         embed.add_field(name="/books", value="Get a list of available books.")
