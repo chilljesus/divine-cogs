@@ -64,10 +64,10 @@ class OtherGospels(commands.Cog):
                 current_embed = discord.Embed(title="Search Results")
                 char_count = 0
                 for passage in passages:
-                    formatted_text = self.clean_and_format_scripture(passage['text'], passage['name'], urls)
+                    formatted_text = self.clean_and_format_scripture(passage['text'], passage['name'], urls, passage['cite'])
                     for page in pagify(formatted_text, page_length=1024):
                         field_title = f"{passage['name']} {passage['ref']}"
-                        if len(current_embed.fields) >= 25 or char_count + len(page) >= 2500:
+                        if len(current_embed.fields) >= 7 or char_count + len(page) >= 2500:
                             embeds.append(current_embed)
                             current_embed = discord.Embed(title="Search Results")
                             char_count = 0                       
@@ -90,16 +90,22 @@ class OtherGospels(commands.Cog):
             else:
                 await ctx.send(f"Failed to fetch {title.lower()}.")
 
-    def clean_and_format_scripture(self, text, book, urls=None):
+    def clean_and_format_scripture(self, text, book, urls=None, cite):
         """Clean and format the scripture text, replacing numbers with links"""
         clean = re.compile('<.*?>')
         cleaned_text = re.sub(clean, '', text)
         def replace_number_with_link(match):
             number = match.group(1)
             if urls and book in urls:
-                url = f"https://othergospels.com/{urls[book]}/#{number}"
+                if cite:
+                    url = f"https://othergospels.com/{urls[book]}/#{cite}"
+                else:
+                    url = f"https://othergospels.com/{urls[book]}/#{number}"
             else:
-                url = f"https://othergospels.com/{book}/#{number}"
+                if cite:
+                    url = f"https://othergospels.com/{book}/#{cite}"
+                else:
+                    url = f"https://othergospels.com/{book}/#{number}"
             return f"[**{number}**](<{url}>)"
         formatted_text = re.sub(r"\*\*(\d+)\.\*\*", replace_number_with_link, cleaned_text)
         return formatted_text
