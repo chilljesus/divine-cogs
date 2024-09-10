@@ -63,7 +63,6 @@ class OtherGospels(commands.Cog):
                     return
                 embeds = []
                 char_count = 0
-                # Initialize current_embed outside of the loop
                 current_embed = None
                 char_count = 0
 
@@ -145,13 +144,15 @@ class OtherGospels(commands.Cog):
         )
 
     async def build_search_query(self, query, exclude_options):
-        """Build the search query with exclude options"""
+        """Build the search query and exclude any options specified"""
         params = {"gnostic": "true", "orthodox": "true", "bible": "true"}
         if exclude_options:
             for opt in exclude_options:
-                params[opt] = "false"
+                if opt in params:
+                    del params[opt]
         param_str = "&".join([f"{key}={value}" for key, value in params.items()])
         return f"https://othergospels.com/api/search?query={query}&{param_str}"
+
 
 async def setup(bot):
     bot.add_cog(OtherGospels(bot))
