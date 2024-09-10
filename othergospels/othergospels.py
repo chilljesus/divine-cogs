@@ -144,6 +144,7 @@ class OtherGospels(commands.Cog):
         )
 
     async def build_search_query(self, query, exclude_options):
+        print(exclude_options)
         """Build the search query and exclude any options specified"""
         params = {"gnostic": "true", "orthodox": "true", "bible": "true"}
         if exclude_options:
