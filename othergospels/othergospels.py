@@ -61,7 +61,7 @@ class OtherGospels(commands.Cog):
                     await ctx.send("No results found.")
                     return
                 embeds = []
-                current_embed = discord.Embed(title="Search Results")
+                #current_embed = discord.Embed(title="Search Results")
                 char_count = 0
                 for passage in passages:
                     formatted_text = self.clean_and_format_scripture(passage['text'], passage['name'], passage['ref'], urls)
