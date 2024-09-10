@@ -82,19 +82,25 @@ class BooksPaginator(View):
         self.total_pages = total_pages
         self.page = 1
 
-    @discord.ui.button(label="Next", style=discord.ButtonStyle.primary)
-    async def next_page(self, interaction: discord.Interaction, button: Button):
-        if self.page < self.total_pages:
-            self.page += 1
-            embed = self.create_embed()
-            await interaction.response.edit_message(embed=embed, view=self)
-
     @discord.ui.button(label="Previous", style=discord.ButtonStyle.primary, disabled=True)
     async def prev_page(self, interaction: discord.Interaction, button: Button):
         if self.page > 1:
             self.page -= 1
             embed = self.create_embed()
+            self.update_buttons()
             await interaction.response.edit_message(embed=embed, view=self)
+
+    @discord.ui.button(label="Next", style=discord.ButtonStyle.primary)
+    async def next_page(self, interaction: discord.Interaction, button: Button):
+        if self.page < self.total_pages:
+            self.page += 1
+            embed = self.create_embed()
+            self.update_buttons()
+            await interaction.response.edit_message(embed=embed, view=self)
+
+    def update_buttons(self):
+        self.prev_page.disabled = self.page == 1
+        self.next_page.disabled = self.page == self.total_pages
 
     def create_embed(self):
         books_text = format_books_text(self.data, page=self.page, books_per_page=self.books_per_page)
@@ -112,7 +118,7 @@ def clean_and_format_scripture(text, book):
     formatted_text = re.sub(r"\*\*(\d+)\*\*", replace_number_with_link, cleaned_text)
     return formatted_text
 
-def format_books_text(books, page=1, books_per_page=10):
+def format_books_text(books, page=1, books_per_page=15):
     lines = []
     start_idx = (page - 1) * books_per_page
     end_idx = start_idx + books_per_page
