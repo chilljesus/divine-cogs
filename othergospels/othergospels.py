@@ -145,7 +145,7 @@ class BooksPaginator(View):
         return embed
 
 class SearchPaginator(View):
-    def __init__(self, data, urls, passages_per_page=5):
+    def __init__(self, data, urls, passages_per_page=8):
         super().__init__()
         self.data = data
         self.urls = urls
@@ -157,12 +157,16 @@ class SearchPaginator(View):
             self.passage_ref = data[0]['ref']
             self.passage_url = urls.get(self.passage_name, '')
             self.numbered_sections = re.split(r"(\*\*\d+\.\*\*)", self.passage_text)
-            self.sections = ["".join(self.numbered_sections[i:i+2]) for i in range(0, len(self.numbered_sections), 2)]
-            self.sections_per_page = 5
-            self.total_pages = math.ceil(len(self.sections) / self.sections_per_page)
-            self.paginate_by_numbers = True
+            self.sections = [
+                f"{self.numbered_sections[i]}{self.numbered_sections[i+1]}"
+                for i in range(0, len(self.numbered_sections) - 1, 2)
+            ]
+            self.title = self.sections.pop(0).strip()
+            self.verses_per_page = 8
+            self.total_pages = math.ceil(len(self.sections) / self.verses_per_page)
+            self.paginate_by_verses = True
         else:
-            self.paginate_by_numbers = False
+            self.paginate_by_verses = False
             self.passages_per_page = passages_per_page
             self.total_pages = math.ceil(len(data) / passages_per_page)
 
@@ -190,10 +194,9 @@ class SearchPaginator(View):
 
     def create_embed(self):
         embed = discord.Embed(title=f"Search Results (Page {self.page + 1}/{self.total_pages})")
-
-        if self.paginate_by_numbers:
-            start_idx = self.page * self.sections_per_page
-            end_idx = start_idx + self.sections_per_page
+        if self.paginate_by_verses:
+            start_idx = self.page * self.verses_per_page
+            end_idx = start_idx + self.verses_per_page
             paginated_sections = self.sections[start_idx:end_idx]
             formatted_text = "".join(paginated_sections)
             formatted_text = clean_and_format_scripture(
@@ -201,9 +204,8 @@ class SearchPaginator(View):
                 self.passage_name,
                 self.urls
             )
-
             embed.add_field(
-                name=f"{self.passage_name} {self.passage_ref}",
+                name=f"{self.passage_name} {self.passage_ref} - {self.title}",
                 value=formatted_text,
                 inline=False
             )
@@ -218,8 +220,9 @@ class SearchPaginator(View):
                     passage['name'],
                     self.urls
                 )
-                embed.add_field(name=f"{passage['name']} {passage['ref']}", value=formatted_text, inline=False)
+                embed.add_field(name=f"{passage['name']} {passage['ref']}", value=formatted_text, inline=False)        
         return embed
+
 
 def clean_and_format_scripture(text, book, urls=None):
     clean = re.compile('<.*?>')
