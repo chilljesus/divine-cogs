@@ -3,7 +3,7 @@ import discord
 import aiohttp
 from discord import app_commands
 import re
-from discord.ui import View, Button
+from discord.ui import View, Button, Select
 import math
 
 class OtherGospels(commands.Cog):
@@ -55,7 +55,7 @@ class OtherGospels(commands.Cog):
                 book = data.get("book", "")
                 scripture_text_formatted = clean_and_format_scripture(scripture_text, book)
                 embed = discord.Embed(title=f"{data.get('name')} {data.get('cite')}", description=scripture_text_formatted)
-                #embed.set_footer(text=f"{data.get('name')} {data.get('cite')}")
+                embed.set_footer(text="Powered by othergospels.com")
                 await interaction.response.send_message(embed=embed)
             else:
                 await interaction.response.send_message("Failed to fetch daily scripture.")
@@ -69,10 +69,26 @@ class OtherGospels(commands.Cog):
                 book = data.get("book", "")
                 scripture_text_formatted = clean_and_format_scripture(scripture_text, book)
                 embed = discord.Embed(title=f"{data.get('name')} {data.get('cite')}", description=scripture_text_formatted)
-                #embed.set_footer(text=f"{data.get('name')} {data.get('cite')}")
+                embed.set_footer(text="Powered by othergospels.com")
                 await interaction.response.send_message(embed=embed)
             else:
                 await interaction.response.send_message("Failed to fetch random scripture.")
+
+    @app_commands.command(name="search", description="Search scriptures with the option to include or exclude traditions.")
+    async def search_command(self, interaction: discord.Interaction, query: str):
+        view = SearchTraditionView()
+        await interaction.response.send_message("Select the traditions to include or exclude in the search:", view=view)
+        await view.wait_for_selection()
+        search_url = await build_search_query(query, view.selected_includes, view.selected_excludes)
+        async with self.session.get(search_url) as resp:
+            if resp.status == 200:
+                data = await resp.json()
+                embed = discord.Embed(title=f"Search results for '{query}'")
+                for result in data.get("results", []):
+                    embed.add_field(name=result.get("title", "No Title"), value=result.get("snippet", "No Snippet"), inline=False)
+                await interaction.followup.send(embed=embed)
+            else:
+                await interaction.followup.send("Failed to fetch search results from the API.")
 
 class BooksPaginator(View):
     def __init__(self, data, books_per_page=15, total_pages=1):
@@ -106,8 +122,51 @@ class BooksPaginator(View):
         books_text = format_books_text(self.data, page=self.page, books_per_page=self.books_per_page)
         embed = discord.Embed(title="Available Scriptures")
         embed.description = books_text
-        embed.set_footer(text=f"Page {self.page}/{self.total_pages}")
+        embed.set_footer(text=f"Powered by othergospels.com | Page {self.page}/{self.total_pages}")
         return embed
+
+class SearchTraditionView(View):
+    def __init__(self):
+        super().__init__()
+        self.selected_includes = []
+        self.selected_excludes = []
+        self.include_menu.disabled = False
+        self.exclude_menu.disabled = False
+
+    @discord.ui.select(
+        placeholder="Select traditions to include...",
+        min_values=0,
+        max_values=3,
+        options=[
+            discord.SelectOption(label="Gnostic", value="gnostic_true", description="Include Gnostic tradition"),
+            discord.SelectOption(label="Bible", value="bible_true", description="Include Bible tradition"),
+            discord.SelectOption(label="Orthodox", value="orthodox_true", description="Include Orthodox tradition")
+        ]
+    )
+
+    async def include_menu(self, select: Select, interaction: discord.Interaction):
+        self.selected_includes = select.values
+        self.exclude_menu.disabled = True
+        await interaction.response.edit_message(content=f"Including: {', '.join([opt.label for opt in select.options if opt.value in select.values])}", view=self)
+
+    @discord.ui.select(
+        placeholder="Select traditions to exclude...",
+        min_values=0,
+        max_values=3,
+        options=[
+            discord.SelectOption(label="Gnostic", value="gnostic_false", description="Exclude Gnostic tradition"),
+            discord.SelectOption(label="Bible", value="bible_false", description="Exclude Bible tradition"),
+            discord.SelectOption(label="Orthodox", value="orthodox_false", description="Exclude Orthodox tradition")
+        ]
+    )
+
+    async def exclude_menu(self, select: Select, interaction: discord.Interaction):
+        self.selected_excludes = select.values
+        self.include_menu.disabled = True
+        await interaction.response.edit_message(content=f"Excluding: {', '.join([opt.label for opt in select.options if opt.value in select.values])}", view=self)
+
+    async def wait_for_selection(self):
+        await self.wait()
 
 def clean_and_format_scripture(text, book):
     clean = re.compile('<.*?>')
@@ -144,6 +203,16 @@ def format_books_text(books, page=1, books_per_page=15):
         line = f"[{display_name}]({url}) - {categories_str} {other_names}"
         lines.append(line)
     return "\n".join(lines)
+
+async def build_search_query(query, selected_includes, selected_excludes):
+    base_url = f"https://othergospels.com/api/search?query={query}"
+    params = []
+    for option in selected_includes + selected_excludes:
+        key, value = option.split("_")
+        params.append(f"{key}={value}")
+    if params:
+        base_url += "&" + "&".join(params)
+    return base_url
 
 async def setup(bot):
     cog = OtherGospels(bot)
