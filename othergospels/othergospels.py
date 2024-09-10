@@ -56,7 +56,7 @@ class OtherGospels(commands.Cog):
                 book = data.get("book", "")
                 scripture_text_formatted = clean_and_format_scripture(scripture_text, book)
                 embed = discord.Embed(title=f"{data.get('name')} {data.get('cite')}", description=scripture_text_formatted)
-                embed.set_footer(text="Powered by othergospels.com")
+                embed.set_footer(text="Powered by othergospels.com", icon_url="https://othergospels.com/favicon-32x32.png")
                 await interaction.response.send_message(embed=embed)
             else:
                 await interaction.response.send_message("Failed to fetch daily scripture.")
@@ -70,7 +70,7 @@ class OtherGospels(commands.Cog):
                 book = data.get("book", "")
                 scripture_text_formatted = clean_and_format_scripture(scripture_text, book)
                 embed = discord.Embed(title=f"{data.get('name')} {data.get('cite')}", description=scripture_text_formatted)
-                embed.set_footer(text="Powered by othergospels.com")
+                embed.set_footer(text="Powered by othergospels.com", icon_url="https://othergospels.com/favicon-32x32.png")
                 await interaction.response.send_message(embed=embed)
             else:
                 await interaction.response.send_message("Failed to fetch random scripture.")
@@ -141,7 +141,7 @@ class BooksPaginator(View):
         books_text = format_books_text(self.data, page=self.page, books_per_page=self.books_per_page)
         embed = discord.Embed(title="Available Scriptures")
         embed.description = books_text
-        embed.set_footer(text=f"Powered by othergospels.com | Page {self.page}/{self.total_pages}")
+        embed.set_footer(text=f"Powered by othergospels.com | Page {self.page}/{self.total_pages}", icon_url="https://othergospels.com/favicon-32x32.png")
         return embed
 
 class SearchPaginator(View):
@@ -216,7 +216,7 @@ class SearchPaginator(View):
                     self.urls
                 )
                 embed.description = formatted_text
-        embed.set_footer(f"Powered by othergospels.com | Page {self.page + 1}/{self.total_pages}")
+        embed.set_footer(text=f"Powered by othergospels.com | Page {self.page + 1}/{self.total_pages}", icon_url="https://othergospels.com/favicon-32x32.png")
         return embed
 
 def clean_and_format_scripture(text, book, urls=None):
