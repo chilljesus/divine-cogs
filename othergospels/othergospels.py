@@ -2,7 +2,6 @@ from redbot.core import commands, Config
 import discord
 import aiohttp
 from discord import app_commands, Interaction
-from discord.ext import commands
 import re
 from discord.ui import View, Button, Select
 import math
