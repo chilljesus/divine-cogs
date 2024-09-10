@@ -78,14 +78,15 @@ class OtherGospels(commands.Cog):
     def clean_and_format_scripture(self, text, book, urls=None):
         """Format scripture text and replace numbers with links"""
         text = re.sub(r"<.*?>", "", text)
-        return re.sub(r"\*\*(\d+)\.\*\*", lambda match: f"[**{match.group(1)}**](https://othergospels.com/{book}/{match.group(1)})", text)
+        return re.sub(r"\*\*(\d+)\.\*\*", lambda match: f"[**{match.group(1)}**](<https://othergospels.com/{book}/{match.group(1)}>)", text)
 
     def format_books_text(self, books):
-        """Format the list of books"""
+        """Format the list of books, including alternative names (aka)"""
         return "\n".join(
             f"[{book.get('fullName', book.get('name'))}]"
-            f"(https://othergospels.com/{book['url']})"
+            f"(<https://othergospels.com/{book['url']}>)"
             f" - {', '.join([cat for cat in ['Gnostic', 'Orthodox', 'Bible'] if book.get(cat.lower())])}"
+            f"{' (Other names: ' + ', '.join(book['aka']) + ')' if 'aka' in book and book['aka'] else ''}"
             for book in books
         )
 
