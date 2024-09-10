@@ -55,7 +55,7 @@ class OtherGospels(commands.Cog):
         async with self.session.get(search_url) as resp:
             if resp.status == 200:
                 data = await resp.json()
-                passages = "\n\n".join([self.clean_and_format_scripture(p['text'], p['name']) for p in data.get("passages", [])])
+                passages = "\n\n".join([self.clean_and_format_scripture(p['text'], p['name'], data['urls']) for p in data.get("passages", [])])
                 pages = list(pagify(passages, page_length=1024))
                 if len(pages) > 1:
                     await SimpleMenu(pages).start(ctx)
