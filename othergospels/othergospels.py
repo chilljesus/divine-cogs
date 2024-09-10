@@ -149,9 +149,21 @@ class SearchPaginator(View):
         super().__init__()
         self.data = data
         self.urls = urls
-        self.passages_per_page = passages_per_page
+        
+        if len(data) == 1:
+            self.passage_lines = data[0]['text'].splitlines()  # Split passage text by lines
+            self.lines_per_page = 15
+            self.passage_name = data[0]['name']
+            self.passage_ref = data[0]['ref']
+            self.passage_url = urls.get(self.passage_name, '')
+            self.total_pages = math.ceil(len(self.passage_lines) / self.lines_per_page)
+            self.paginate_by_lines = True
+        else:
+            self.paginate_by_lines = False
+            self.passages_per_page = passages_per_page
+            self.total_pages = math.ceil(len(data) / passages_per_page)
+
         self.page = 0
-        self.total_pages = math.ceil(len(data) / passages_per_page)
         self.update_buttons()
 
     @discord.ui.button(label="Previous", style=discord.ButtonStyle.primary, disabled=True)
@@ -176,18 +188,32 @@ class SearchPaginator(View):
 
     def create_embed(self):
         embed = discord.Embed(title=f"Search Results (Page {self.page + 1}/{self.total_pages})")
-        start_idx = self.page * self.passages_per_page
-        end_idx = start_idx + self.passages_per_page
-        paginated_passages = self.data[start_idx:end_idx]
-
-        for passage in paginated_passages:
+        if self.paginate_by_lines:
+            start_idx = self.page * self.lines_per_page
+            end_idx = start_idx + self.lines_per_page
+            paginated_lines = self.passage_lines[start_idx:end_idx]
+            formatted_text = "\n".join(paginated_lines)
             formatted_text = clean_and_format_scripture(
-                passage['text'],
-                passage['name'],
+                formatted_text,
+                self.passage_name,
                 self.urls
             )
-            embed.add_field(name=f"{passage['name']} {passage['ref']}", value=formatted_text, inline=False)
-        
+            embed.add_field(
+                name=f"{self.passage_name} {self.passage_ref}",
+                value=formatted_text,
+                inline=False
+            )
+        else:
+            start_idx = self.page * self.passages_per_page
+            end_idx = start_idx + self.passages_per_page
+            paginated_passages = self.data[start_idx:end_idx]
+            for passage in paginated_passages:
+                formatted_text = clean_and_format_scripture(
+                    passage['text'],
+                    passage['name'],
+                    self.urls
+                )
+                embed.add_field(name=f"{passage['name']} {passage['ref']}", value=formatted_text, inline=False)
         return embed
 
 def clean_and_format_scripture(text, book, urls=None):
