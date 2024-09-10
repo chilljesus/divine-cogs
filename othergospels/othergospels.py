@@ -52,6 +52,7 @@ class OtherGospels(commands.Cog):
     async def search_command(self, ctx, query: str, exclude_options: Optional[str] = None):
         """Search for scriptures and display passages per page in fields or embed descriptions based on ref format"""
         search_url = await self.build_search_query(query, exclude_options)
+        print(search_url)
         async with self.session.get(search_url) as resp:
             if resp.status == 200:
                 data = await resp.json()
@@ -70,18 +71,23 @@ class OtherGospels(commands.Cog):
                             current_embed = discord.Embed(title=f"{passage['name']} {passage['ref']}")
                             current_embed.description = page
                             embeds.append(current_embed)
-                            char_count = 0 
+                            char_count = 0
                     else:
-                        current_embed = discord.Embed(title="Search Results")
+                        if not current_embed or char_count == 0:
+                            current_embed = discord.Embed(title="Search Results")
                         for page in pagify(formatted_text, page_length=2500):
                             if len(current_embed.fields) >= 7 or char_count + len(page) >= 2500:
-                                embeds.append(current_embed)
+                                if current_embed.fields:
+                                    embeds.append(current_embed)
                                 current_embed = discord.Embed(title="Search Results")
                                 char_count = 0
                             current_embed.add_field(name=field_title, value=page, inline=False)
                             char_count += len(page)
-                if current_embed:
+                        if current_embed.fields:
+                            embeds.append(current_embed)
+                if current_embed and current_embed.fields:
                     embeds.append(current_embed)
+
 
                 if len(current_embed.fields) > 0 or current_embed.description:
                     embeds.append(current_embed)
