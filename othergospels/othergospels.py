@@ -71,6 +71,8 @@ class OtherGospels(commands.Cog):
                     formatted_text = self.clean_and_format_scripture(passage['text'], passage['name'], passage['ref'], urls)
                     field_title = f"{passage['name']} {passage['ref']}"
                     if ':' not in passage['ref']:
+                        formatted_text_lines = formatted_text.split("\n")
+                        formatted_text = "\n".join(formatted_text_lines[1:])
                         for page in pagify(formatted_text, page_length=2500):
                             if current_embed is None:
                                 current_embed = discord.Embed(title=f"{passage['name']} {passage['ref']}")
