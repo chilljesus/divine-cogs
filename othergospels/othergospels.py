@@ -86,8 +86,8 @@ class OtherGospels(commands.Cog):
         self,
         interaction: Interaction,
         query: str,
-        include_options: Optional[app_commands.Choices] = None,
-        exclude_options: Optional[app_commands.Choices] = None
+        include_options: Optional[str] = None,
+        exclude_options: Optional[str] = None
     ):
         if include_options and exclude_options:
             await interaction.response.send_message("You can only choose to either include or exclude traditions, not both.", ephemeral=True)
