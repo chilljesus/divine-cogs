@@ -99,6 +99,7 @@ class OtherGospels(commands.Cog):
         async with self.session.get(search_url) as resp:
             if resp.status == 200:
                 data = await resp.json()
+                print(data)
                 embed = discord.Embed(title=f"Search results for '{query}'")
                 for result in data.get("results", []):
                     embed.add_field(name=result.get("title", "No Title"), value=result.get("snippet", "No Snippet"), inline=False)
@@ -187,6 +188,7 @@ async def build_search_query(query, include_options, exclude_options):
         params = []
     if params:
         base_url += "&" + "&".join(params)
+    print(base_url)
     return base_url
 
 async def setup(bot):
