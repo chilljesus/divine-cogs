@@ -37,9 +37,9 @@ class OtherGospels(commands.Cog):
         async with self.session.get("https://othergospels.com/api/books") as resp:
             if resp.status == 200:
                 data = await resp.json()
-                books_per_page = 10
+                books_per_page = 15
                 total_pages = math.ceil(len(data) / books_per_page)
-                embed = format_books_text(data, page=1, books_per_page=books_per_page)
+                #embed = format_books_text(data, page=1, books_per_page=books_per_page)
                 view = BooksPaginator(data, books_per_page=books_per_page, total_pages=total_pages)
                 await interaction.response.send_message(embed=view.create_embed(), view=view)
             else:
@@ -75,7 +75,7 @@ class OtherGospels(commands.Cog):
                 await interaction.response.send_message("Failed to fetch random scripture.")
 
 class BooksPaginator(View):
-    def __init__(self, data, books_per_page=10, total_pages=1):
+    def __init__(self, data, books_per_page=15, total_pages=1):
         super().__init__()
         self.data = data
         self.books_per_page = books_per_page
