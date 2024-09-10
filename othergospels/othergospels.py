@@ -73,20 +73,20 @@ class OtherGospels(commands.Cog):
                             embeds.append(current_embed)
                             char_count = 0
                     else:
-                        if not current_embed or char_count == 0:
-                            current_embed = discord.Embed(title="Search Results")
+                        current_embed = None
                         for page in pagify(formatted_text, page_length=2500):
-                            if len(current_embed.fields) >= 7 or char_count + len(page) >= 2500:
-                                if current_embed.fields:
+                            if current_embed is None or len(current_embed.fields) >= 7 or char_count + len(page) >= 2500:
+                                if current_embed and current_embed.fields:
                                     embeds.append(current_embed)
                                 current_embed = discord.Embed(title="Search Results")
                                 char_count = 0
                             current_embed.add_field(name=field_title, value=page, inline=False)
                             char_count += len(page)
-                        if current_embed.fields:
+                        if current_embed and current_embed.fields:
                             embeds.append(current_embed)
                 if current_embed and current_embed.fields:
                     embeds.append(current_embed)
+
 
 
                 if len(current_embed.fields) > 0 or current_embed.description:
