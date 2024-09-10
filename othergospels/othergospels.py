@@ -94,7 +94,7 @@ class OtherGospels(commands.Cog):
 
         include_list = [include_options] if include_options else ["gnostic"]
         exclude_list = [exclude_options] if exclude_options else []
-        search_url = await self.build_search_query(query, include_list, exclude_list)
+        search_url = await build_search_query(query, include_list, exclude_list)
 
         async with self.session.get(search_url) as resp:
             if resp.status == 200:
@@ -177,7 +177,7 @@ def format_books_text(books, page=1, books_per_page=15):
         lines.append(line)
     return "\n".join(lines)
 
-async def build_search_query(self, query, include_options, exclude_options):
+async def build_search_query(query, include_options, exclude_options):
     base_url = f"https://othergospels.com/api/search?query={query}"
     if include_options:
         params = [f"{opt}=true" for opt in include_options]
