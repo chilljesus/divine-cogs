@@ -67,26 +67,29 @@ class OtherGospels(commands.Cog):
                     formatted_text = self.clean_and_format_scripture(passage['text'], passage['name'], passage['ref'], urls)
                     field_title = f"{passage['name']} {passage['ref']}"
                     if ':' not in passage['ref']:
-                        for page in pagify(formatted_text, page_length=2500):
+                        if current_embed is None:
                             current_embed = discord.Embed(title=f"{passage['name']} {passage['ref']}")
-                            current_embed.description = page
-                            embeds.append(current_embed)
                             char_count = 0
-                    else:
-                        current_embed = None
                         for page in pagify(formatted_text, page_length=2500):
-                            if current_embed is None or len(current_embed.fields) >= 7 or char_count + len(page) >= 2500:
-                                if current_embed and current_embed.fields:
-                                    embeds.append(current_embed)
+                            if char_count + len(page) > 2500:
+                                embeds.append(current_embed)
+                                current_embed = discord.Embed(title=f"{passage['name']} {passage['ref']}")
+                                char_count = 0
+                            current_embed.description = (current_embed.description or "") + page
+                            char_count += len(page)
+                    else:
+                        if current_embed is None:
+                            current_embed = discord.Embed(title="Search Results")
+                            char_count = 0
+                        for page in pagify(formatted_text, page_length=2500):
+                            if len(current_embed.fields) >= 7 or char_count + len(page) >= 2500:
+                                embeds.append(current_embed)
                                 current_embed = discord.Embed(title="Search Results")
                                 char_count = 0
                             current_embed.add_field(name=field_title, value=page, inline=False)
                             char_count += len(page)
-                        if current_embed and current_embed.fields:
-                            embeds.append(current_embed)
-                if current_embed and current_embed.fields:
+                if current_embed and (current_embed.fields or current_embed.description):
                     embeds.append(current_embed)
-
 
 
                 if len(current_embed.fields) > 0 or current_embed.description:
