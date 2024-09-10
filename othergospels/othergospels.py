@@ -78,22 +78,22 @@ class OtherGospels(commands.Cog):
     @app_commands.command(name="search", description="Search scriptures with options to include or exclude traditions.")
     @app_commands.describe(
         query="The search query (e.g., a phrase, word, or reference)",
-        include_options="Traditions to include in the search",
+        #include_options="Traditions to include in the search",
         exclude_options="Traditions to exclude from the search"
     )
     async def search_command(
         self,
         interaction: Interaction,
         query: str,
-        include_options: Optional[str] = None,
+        #include_options: Optional[str] = None,
         exclude_options: Optional[str] = None
     ):
-        if include_options and exclude_options:
-            await interaction.response.send_message("You can only choose to either include or exclude traditions, not both.", ephemeral=True)
-            return
-        include_list = [include_options] if include_options else []
+        #if include_options and exclude_options:
+        #    await interaction.response.send_message("You can only choose to either include or exclude traditions, not both.", ephemeral=True)
+        #    return
+        #include_list = [include_options] if include_options else []
         exclude_list = [exclude_options] if exclude_options else []
-        search_url = await build_search_query(query, include_list, exclude_list)
+        search_url = await build_search_query(query, exclude_list)
 
         async with self.session.get(search_url) as resp:
             if resp.status == 200:
@@ -230,16 +230,20 @@ def format_books_text(books, page=1, books_per_page=15):
         lines.append(line)
     return "\n".join(lines)
 
-async def build_search_query(query, include_options, exclude_options):
+async def build_search_query(query, exclude_options):
+    params = {
+        "gnostic": "true",
+        "orthodox": "true",
+        "bible": "true"
+    }
+    if exclude_options:
+        for opt in exclude_options:
+            if opt in params:
+                params[opt] = "false"
     base_url = f"https://othergospels.com/api/search?query={query}"
-    if include_options:
-        params = [f"{opt}=true" for opt in include_options]
-    elif exclude_options:
-        params = [f"{opt}=false" for opt in exclude_options]
-    else:
-        params = []
-    if params:
-        base_url += "&" + "&".join(params)
+    param_str = "&".join([f"{key}={value}" for key, value in params.items()])
+    base_url += "&" + param_str
+
     print(base_url)
     return base_url
 
