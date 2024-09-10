@@ -48,36 +48,36 @@ class OtherGospels(commands.Cog):
         """Get a random scripture"""
         await self.send_scripture(ctx, "https://othergospels.com/api/random", "Random Scripture")
 
-    @commands.hybrid_command(name="search")
-    async def search_command(self, ctx, query: str, exclude_options: Optional[str] = None):
-        """Search for scriptures and display multiple passages per page"""
-        search_url = await self.build_search_query(query, exclude_options)
-        async with self.session.get(search_url) as resp:
-            if resp.status == 200:
-                data = await resp.json()
-                passages = data.get("passages", [])
-                urls = data.get("urls", {})
-                if not passages:
-                    await ctx.send("No results found.")
-                    return
-                embeds = []
-                current_embed = discord.Embed(title="Search Results")
-                char_count = 0
-                for passage in passages:
-                    formatted_text = self.clean_and_format_scripture(passage['text'], passage['name'], urls, passage['cite'])
-                    for page in pagify(formatted_text, page_length=1024):
-                        field_title = f"{passage['name']} {passage['ref']}"
-                        if len(current_embed.fields) >= 7 or char_count + len(page) >= 2500:
-                            embeds.append(current_embed)
-                            current_embed = discord.Embed(title="Search Results")
-                            char_count = 0                       
-                        current_embed.add_field(name=field_title, value=page, inline=False)
-                        char_count += len(page)
-                if len(current_embed.fields) > 0:
-                    embeds.append(current_embed)
-                await SimpleMenu(embeds).start(ctx)
-            else:
-                await ctx.send("Failed to fetch search results from the API.")
+@commands.hybrid_command(name="search")
+async def search_command(self, ctx, query: str, exclude_options: Optional[str] = None):
+    """Search for scriptures and display multiple passages per page"""
+    search_url = await self.build_search_query(query, exclude_options)
+    async with self.session.get(search_url) as resp:
+        if resp.status == 200:
+            data = await resp.json()
+            passages = data.get("passages", [])
+            urls = data.get("urls", {})
+            if not passages:
+                await ctx.send("No results found.")
+                return
+            embeds = []
+            current_embed = discord.Embed(title="Search Results")
+            char_count = 0
+            for passage in passages:
+                formatted_text = self.clean_and_format_scripture(passage['text'], passage['name'], passage['ref'], urls)
+                for page in pagify(formatted_text, page_length=1024):
+                    field_title = f"{passage['name']} {passage['ref']}"
+                    if len(current_embed.fields) >= 25 or char_count + len(page) >= 6000:
+                        embeds.append(current_embed)
+                        current_embed = discord.Embed(title="Search Results")
+                        char_count = 0
+                    current_embed.add_field(name=field_title, value=page, inline=False)
+                    char_count += len(page)
+            if len(current_embed.fields) > 0:
+                embeds.append(current_embed)
+            await SimpleMenu(embeds).start(ctx)
+        else:
+            await ctx.send("Failed to fetch search results from the API.")
 
     async def send_scripture(self, ctx, url, title):
         """Helper function to fetch and send scripture"""
@@ -85,27 +85,25 @@ class OtherGospels(commands.Cog):
             if resp.status == 200:
                 data = await resp.json()
                 formatted_text = self.clean_and_format_scripture(data.get("text", ""), data.get("book", ""))
-                embed = discord.Embed(title=f"{data.get('name')} {data.get('cite')}", description=formatted_text)
+                embed = discord.Embed(title=f"{data.get('name')} {data.get('ref')}", description=formatted_text)
                 await ctx.send(embed=embed)
             else:
                 await ctx.send(f"Failed to fetch {title.lower()}.")
 
-    def clean_and_format_scripture(self, text, book, urls=None, cite=None):
-        """Clean and format the scripture text, replacing numbers with links"""
+    def clean_and_format_scripture(self, text, book, ref, urls=None):
+        """Clean and format the scripture text, replacing numbers with links using the ref"""
         clean = re.compile('<.*?>')
         cleaned_text = re.sub(clean, '', text)
         def replace_number_with_link(match):
             number = match.group(1)
-            if urls and book in urls:
-                if cite:
-                    url = f"https://othergospels.com/{urls[book]}/#{cite}"
-                else:
-                    url = f"https://othergospels.com/{urls[book]}/#{number}"
+            if ':' in ref:
+                link_ref = ref
             else:
-                if cite:
-                    url = f"https://othergospels.com/{book}/#{cite}"
-                else:
-                    url = f"https://othergospels.com/{book}/#{number}"
+                link_ref = f"{ref}:{number}"
+            if urls and book in urls:
+                url = f"https://othergospels.com/{urls[book]}/#{link_ref}"
+            else:
+                url = f"https://othergospels.com/{book}/#{link_ref}"
             return f"[**{number}**](<{url}>)"
         formatted_text = re.sub(r"\*\*(\d+)\.\*\*", replace_number_with_link, cleaned_text)
         return formatted_text
