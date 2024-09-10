@@ -81,30 +81,18 @@ class OtherGospels(commands.Cog):
         include_options="Traditions to include in the search",
         exclude_options="Traditions to exclude from the search"
     )
-    @app_commands.choices(
-        include_options=[
-            app_commands.Choice(name="Gnostic", value="gnostic"),
-            app_commands.Choice(name="Bible", value="bible"),
-            app_commands.Choice(name="Orthodox", value="orthodox")
-        ],
-        exclude_options=[
-            app_commands.Choice(name="Gnostic", value="gnostic"),
-            app_commands.Choice(name="Bible", value="bible"),
-            app_commands.Choice(name="Orthodox", value="orthodox")
-        ]
-    )
     async def search_command(
         self,
         interaction: Interaction,
         query: str,
-        include_options: list[app_commands.Choice[str]] = None,
-        exclude_options: list[app_commands.Choice[str]] = None
+        include_options: Optional[app_commands.Choices] = None,
+        exclude_options: Optional[app_commands.Choices] = None
     ):
         if include_options and exclude_options:
             await interaction.response.send_message("You can only choose to either include or exclude traditions, not both.", ephemeral=True)
             return
 
-        include_list = [opt.value for opt in include_options] if include_options else ["gnostic"]
+        include_list = [opt.value for opt in include_options] if include_options else []
         exclude_list = [opt.value for opt in exclude_options] if exclude_options else []
         search_url = await self.build_search_query(query, include_list, exclude_list)
 
