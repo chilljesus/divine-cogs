@@ -1,0 +1,16 @@
+{
+    "author": ["NekoJesus"],
+    "install_msg": "A cog for integrating with the https://othergospels.com api.",
+    "name": "OtherGospels",
+    "disabled": false,
+    "short": "Quickly get Gnostic scripture.",
+    "description": "Powered by othergospels.com, this cog can get gnostic scripture.",
+    "tags": [
+        "bible",
+        "religion",
+        "utility"
+    ],
+    "required_cogs": {},
+    "requirements": [],
+    "type": "COG"
+}
