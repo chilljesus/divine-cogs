@@ -54,8 +54,8 @@ class OtherGospels(commands.Cog):
                 scripture_text = data.get("text", "")
                 book = data.get("book", "")
                 scripture_text_formatted = clean_and_format_scripture(scripture_text, book)
-                embed = discord.Embed(title="Daily Scripture", description=scripture_text_formatted)
-                embed.set_footer(text=f"{data.get('name')} {data.get('cite')}")
+                embed = discord.Embed(title=f"{data.get('name')} {data.get('cite')}", description=scripture_text_formatted)
+                #embed.set_footer(text=f"{data.get('name')} {data.get('cite')}")
                 await interaction.response.send_message(embed=embed)
             else:
                 await interaction.response.send_message("Failed to fetch daily scripture.")
@@ -68,8 +68,8 @@ class OtherGospels(commands.Cog):
                 scripture_text = data.get("text", "")
                 book = data.get("book", "")
                 scripture_text_formatted = clean_and_format_scripture(scripture_text, book)
-                embed = discord.Embed(title="Random Scripture", description=scripture_text_formatted)
-                embed.set_footer(text=f"{data.get('name')} {data.get('cite')}")
+                embed = discord.Embed(title=f"{data.get('name')} {data.get('cite')}", description=scripture_text_formatted)
+                #embed.set_footer(text=f"{data.get('name')} {data.get('cite')}")
                 await interaction.response.send_message(embed=embed)
             else:
                 await interaction.response.send_message("Failed to fetch random scripture.")
@@ -115,7 +115,7 @@ def clean_and_format_scripture(text, book):
     def replace_number_with_link(match):
         number = match.group(1)
         return f"[**{number}**](https://othergospels.com/{book}/{number})"
-    formatted_text = re.sub(r"\*\*(\d+)\*\*", replace_number_with_link, cleaned_text)
+    formatted_text = re.sub(r"\*\*(\d+)\.\*\*", replace_number_with_link, cleaned_text)
     return formatted_text
 
 def format_books_text(books, page=1, books_per_page=15):
