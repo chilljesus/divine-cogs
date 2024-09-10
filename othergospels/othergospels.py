@@ -85,6 +85,7 @@ def format_books_text(books, max_lines=15):
     lines = []
     for book in books:
         full_name = book.get("fullName")
+        print(f"Working on {full_name}")
         url = f"https://othergospels.com/{book['url']}"
         categories = []
         if book.get("gnostic"):
@@ -102,8 +103,10 @@ def format_books_text(books, max_lines=15):
         other_names = f"(Other names: {', '.join(other_names_list)})" if other_names_list else ""
         line = f"[{full_name}]({url}) - {categories_str} {other_names}"
         lines.append(line)
+        print("Finished, next")
         if len(lines) >= max_lines:
             break
+    print("\n".join(lines))
     return "\n".join(lines)
 
 async def setup(bot):
