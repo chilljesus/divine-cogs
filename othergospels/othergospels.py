@@ -6,6 +6,7 @@ from discord.ext import commands
 import re
 from discord.ui import View, Button, Select
 import math
+from typing import Optional
 
 class OtherGospels(commands.Cog):
     def __init__(self, bot):
