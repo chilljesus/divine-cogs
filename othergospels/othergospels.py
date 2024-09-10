@@ -50,17 +50,24 @@ class OtherGospels(commands.Cog):
 
     @commands.hybrid_command(name="search")
     async def search_command(self, ctx, query: str, exclude_options: Optional[str] = None):
-        """Search for scriptures with options to exclude traditions"""
+        """Search for scriptures and display them as paginated embeds"""
         search_url = await self.build_search_query(query, exclude_options)
         async with self.session.get(search_url) as resp:
             if resp.status == 200:
                 data = await resp.json()
-                passages = f"\n{data.get('fullName')} {data.get('cite')}".join([self.clean_and_format_scripture(p['text'], p['name'], data['urls']) for p in data.get("passages", [])])
-                pages = list(pagify(passages, page_length=1024))
-                if len(pages) > 1:
-                    await SimpleMenu(pages).start(ctx)
-                else:
-                    await ctx.send(pages[0])
+                passages = data.get("passages", [])
+                urls = data.get("urls", {})
+                if not passages:
+                    await ctx.send("No results found.")
+                    return
+                embeds = []
+                for passage in passages:
+                    formatted_text = self.clean_and_format_scripture(passage['text'], passage['name'], urls)
+                    for page in pagify(formatted_text, page_length=1024):
+                        embed = discord.Embed(title=f"{passage['name']} {passage['ref']}")
+                        embed.add_field(name=f"{passage['name']} {passage['ref']}", value=page, inline=False)
+                        embeds.append(embed)
+                await SimpleMenu(embeds).start(ctx)
             else:
                 await ctx.send("Failed to fetch search results from the API.")
 
