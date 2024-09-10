@@ -150,7 +150,6 @@ class SearchPaginator(View):
         self.data = data
         self.urls = urls
         self.page = 0
-
         if len(data) == 1:
             self.passage_text = data[0]['text']
             self.passage_name = data[0]['name']
@@ -159,9 +158,9 @@ class SearchPaginator(View):
             self.numbered_sections = re.split(r"(\*\*\d+\.\*\*)", self.passage_text)
             self.sections = [
                 f"{self.numbered_sections[i]}{self.numbered_sections[i+1]}"
-                for i in range(0, len(self.numbered_sections) - 1, 2)
+                for i in range(1, len(self.numbered_sections) - 1, 2)
             ]
-            self.title = self.sections.pop(0).strip()
+            self.title = re.sub(r'\*\*\d+\.\*\*', '', self.numbered_sections[0]).strip()
             self.verses_per_page = 8
             self.total_pages = math.ceil(len(self.sections) / self.verses_per_page)
             self.paginate_by_verses = True
@@ -213,16 +212,14 @@ class SearchPaginator(View):
             start_idx = self.page * self.passages_per_page
             end_idx = start_idx + self.passages_per_page
             paginated_passages = self.data[start_idx:end_idx]
-
             for passage in paginated_passages:
                 formatted_text = clean_and_format_scripture(
                     passage['text'],
                     passage['name'],
                     self.urls
                 )
-                embed.add_field(name=f"{passage['name']} {passage['ref']}", value=formatted_text, inline=False)        
+                embed.add_field(name=f"{passage['name']} {passage['ref']}", value=formatted_text, inline=False)
         return embed
-
 
 def clean_and_format_scripture(text, book, urls=None):
     clean = re.compile('<.*?>')
