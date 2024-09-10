@@ -3,6 +3,8 @@ import discord
 import aiohttp
 from discord import app_commands
 import re
+from discord.ui import View, Button
+import math
 
 class OtherGospels(commands.Cog):
     def __init__(self, bot):
