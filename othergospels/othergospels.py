@@ -50,7 +50,7 @@ class OtherGospels(commands.Cog):
 
     @commands.hybrid_command(name="search")
     async def search_command(self, ctx, query: str, exclude_options: Optional[str] = None):
-        """Search for scriptures and display multiple passages per page"""
+        """Search for scriptures and display passages per page in fields or embed descriptions based on ref format"""
         search_url = await self.build_search_query(query, exclude_options)
         async with self.session.get(search_url) as resp:
             if resp.status == 200:
@@ -65,19 +65,29 @@ class OtherGospels(commands.Cog):
                 char_count = 0
                 for passage in passages:
                     formatted_text = self.clean_and_format_scripture(passage['text'], passage['name'], passage['ref'], urls)
-                    for page in pagify(formatted_text, page_length=1024):
-                        field_title = f"{passage['name']} {passage['ref']}"
-                        if len(current_embed.fields) >= 7 or char_count + len(page) >= 2500:
-                            embeds.append(current_embed)
-                            current_embed = discord.Embed(title="Search Results")
-                            char_count = 0
-                        current_embed.add_field(name=field_title, value=page, inline=False)
-                        char_count += len(page)
-                if len(current_embed.fields) > 0:
+                    field_title = f"{passage['name']} {passage['ref']}"
+                    if ':' not in passage['ref']:
+                        for page in pagify(formatted_text, page_length=1024):
+                            if char_count + len(page) > 6000:
+                                embeds.append(current_embed)
+                                current_embed = discord.Embed(title=f"{passage['fullName']} {passage['ref']}")
+                                char_count = 0
+                            current_embed.description = page
+                            char_count += len(page)
+                    else:
+                        for page in pagify(formatted_text, page_length=1024):
+                            if len(current_embed.fields) >= 25 or char_count + len(page) >= 6000:
+                                embeds.append(current_embed)
+                                current_embed = discord.Embed(title="Search Results")
+                                char_count = 0
+                            current_embed.add_field(name=field_title, value=page, inline=False)
+                            char_count += len(page)
+                if len(current_embed.fields) > 0 or current_embed.description:
                     embeds.append(current_embed)
                 await SimpleMenu(embeds).start(ctx)
             else:
                 await ctx.send("Failed to fetch search results from the API.")
+
 
     async def send_scripture(self, ctx, url, title):
         """Helper function to fetch and send scripture"""
