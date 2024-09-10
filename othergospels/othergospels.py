@@ -70,10 +70,9 @@ class OtherGospels(commands.Cog):
                             current_embed = discord.Embed(title=f"{passage['name']} {passage['ref']}")
                             current_embed.description = page
                             embeds.append(current_embed)
-                            char_count = 0  # Reset after adding the embed
+                            char_count = 0 
                     else:
-                        if not current_embed:
-                            current_embed = discord.Embed(title="Search Results")
+                        current_embed = discord.Embed(title="Search Results")
                         for page in pagify(formatted_text, page_length=2500):
                             if len(current_embed.fields) >= 7 or char_count + len(page) >= 2500:
                                 embeds.append(current_embed)
