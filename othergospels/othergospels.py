@@ -192,8 +192,8 @@ class SearchPaginator(View):
         self.next_page.disabled = self.page >= self.total_pages - 1
 
     def create_embed(self):
-        embed = discord.Embed(title=f"{self.passage_name} {self.passage_ref} (Page {self.page + 1}/{self.total_pages})")
         if self.paginate_by_verses:
+            embed = discord.Embed(title=f"{self.passage_name} {self.passage_ref} (Page {self.page + 1}/{self.total_pages})")
             start_idx = self.page * self.verses_per_page
             end_idx = start_idx + self.verses_per_page
             paginated_sections = self.sections[start_idx:end_idx]
@@ -214,6 +214,7 @@ class SearchPaginator(View):
             end_idx = start_idx + self.passages_per_page
             paginated_passages = self.data[start_idx:end_idx]
             for passage in paginated_passages:
+                embed = discord.Embed(title=f"{passage['name']} {passage['ref']} (Page {self.page + 1}/{self.total_pages})")
                 formatted_text = clean_and_format_scripture(
                     passage['text'],
                     passage['name'],
