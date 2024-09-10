@@ -68,7 +68,7 @@ class OtherGospels(commands.Cog):
                     field_title = f"{passage['name']} {passage['ref']}"
                     if ':' not in passage['ref']:
                         for page in pagify(formatted_text, page_length=1024):
-                            if char_count + len(page) > 2500:
+                            if char_count + len(page) > 5000:
                                 embeds.append(current_embed)
                                 current_embed = discord.Embed(title=f"{passage['name']} {passage['ref']}")
                                 char_count = 0
