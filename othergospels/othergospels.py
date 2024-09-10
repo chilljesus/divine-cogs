@@ -91,7 +91,6 @@ class OtherGospels(commands.Cog):
         if include_options and exclude_options:
             await interaction.response.send_message("You can only choose to either include or exclude traditions, not both.", ephemeral=True)
             return
-
         include_list = [include_options] if include_options else ["gnostic"]
         exclude_list = [exclude_options] if exclude_options else []
         search_url = await build_search_query(query, include_list, exclude_list)
@@ -99,11 +98,14 @@ class OtherGospels(commands.Cog):
         async with self.session.get(search_url) as resp:
             if resp.status == 200:
                 data = await resp.json()
-                print(data)
-                embed = discord.Embed(title=f"Search results for '{query}'")
-                for result in data.get("results", []):
-                    embed.add_field(name=result.get("title", "No Title"), value=result.get("snippet", "No Snippet"), inline=False)
-                await interaction.response.send_message(embed=embed)
+                passages = data.get("passages", [])
+                urls = data.get("urls", {})
+                if not passages:
+                    await interaction.response.send_message("No results found.", ephemeral=True)
+                    return
+                view = SearchPaginator(passages, urls)
+                embed = view.create_embed()
+                await interaction.response.send_message(embed=embed, view=view)
             else:
                 await interaction.response.send_message("Failed to fetch search results from the API.", ephemeral=True)
 
@@ -140,6 +142,51 @@ class BooksPaginator(View):
         embed = discord.Embed(title="Available Scriptures")
         embed.description = books_text
         embed.set_footer(text=f"Powered by othergospels.com | Page {self.page}/{self.total_pages}")
+        return embed
+
+class SearchPaginator(View):
+    def __init__(self, data, urls, passages_per_page=5):
+        super().__init__()
+        self.data = data
+        self.urls = urls
+        self.passages_per_page = passages_per_page
+        self.page = 0
+        self.total_pages = math.ceil(len(data) / passages_per_page)
+        self.update_buttons()
+
+    @discord.ui.button(label="Previous", style=discord.ButtonStyle.primary, disabled=True)
+    async def prev_page(self, interaction: discord.Interaction, button: Button):
+        if self.page > 0:
+            self.page -= 1
+            embed = self.create_embed()
+            self.update_buttons()
+            await interaction.response.edit_message(embed=embed, view=self)
+
+    @discord.ui.button(label="Next", style=discord.ButtonStyle.primary)
+    async def next_page(self, interaction: discord.Interaction, button: Button):
+        if self.page < self.total_pages - 1:
+            self.page += 1
+            embed = self.create_embed()
+            self.update_buttons()
+            await interaction.response.edit_message(embed=embed, view=self)
+
+    def update_buttons(self):
+        self.prev_page.disabled = self.page == 0
+        self.next_page.disabled = self.page >= self.total_pages - 1
+
+    def create_embed(self):
+        embed = discord.Embed(title=f"Search Results (Page {self.page + 1}/{self.total_pages})")
+        start_idx = self.page * self.passages_per_page
+        end_idx = start_idx + self.passages_per_page
+        paginated_passages = self.data[start_idx:end_idx]
+
+        for passage in paginated_passages:
+            formatted_text = clean_and_format_scripture(
+                passage['text'],
+                passage['name']
+            )
+            embed.add_field(name=f"{passage['name']} {passage['ref']}", value=formatted_text, inline=False)
+        
         return embed
 
 def clean_and_format_scripture(text, book):
