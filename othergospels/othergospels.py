@@ -90,7 +90,7 @@ class OtherGospels(commands.Cog):
             else:
                 await ctx.send(f"Failed to fetch {title.lower()}.")
 
-    def clean_and_format_scripture(self, text, book, urls=None, cite):
+    def clean_and_format_scripture(self, text, book, urls=None, cite=None):
         """Clean and format the scripture text, replacing numbers with links"""
         clean = re.compile('<.*?>')
         cleaned_text = re.sub(clean, '', text)
