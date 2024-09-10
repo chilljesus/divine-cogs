@@ -158,7 +158,7 @@ class SearchPaginator(View):
             self.passage_url = urls.get(self.passage_name, '')
             self.numbered_sections = re.split(r"(\*\*\d+\.\*\*)", self.passage_text)
             self.sections = ["".join(self.numbered_sections[i:i+2]) for i in range(0, len(self.numbered_sections), 2)]
-            self.sections_per_page = 10
+            self.sections_per_page = 5
             self.total_pages = math.ceil(len(self.sections) / self.sections_per_page)
             self.paginate_by_numbers = True
         else:
