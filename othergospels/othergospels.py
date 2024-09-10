@@ -114,7 +114,7 @@ def clean_and_format_scripture(text, book):
     cleaned_text = re.sub(clean, '', text)
     def replace_number_with_link(match):
         number = match.group(1)
-        return f"[**{number}**](https://othergospels.com/{book}/{number})"
+        return f"[**{number}**](https://othergospels.com/{book}/#{number})"
     formatted_text = re.sub(r"\*\*(\d+)\.\*\*", replace_number_with_link, cleaned_text)
     return formatted_text
 
