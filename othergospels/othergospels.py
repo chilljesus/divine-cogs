@@ -126,6 +126,7 @@ class OtherGospels(commands.Cog):
         """Clean and format the scripture text, replacing numbers with links using the ref"""
         clean = re.compile('<.*?>')
         cleaned_text = re.sub(clean, '', text)
+        print(ref)
         def replace_number_with_link(match):
             number = match.group(1)
             if ':' in ref:
@@ -136,7 +137,8 @@ class OtherGospels(commands.Cog):
                 url = f"https://othergospels.com/{urls[book]}/#{link_ref}"
             else:
                 url = f"https://othergospels.com/{book}/#{link_ref}"
-            return f"[**{number}**](<{url}>)"
+            print(url)
+            return f"[**{number}.**](<{url}>)"
         formatted_text = re.sub(r"\*\*(\d+)\.\*\*", replace_number_with_link, cleaned_text)
         return formatted_text
 
