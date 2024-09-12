@@ -77,6 +77,7 @@ class OtherGospels(commands.Cog):
                 for passage in passages:
                     formatted_text = self.clean_and_format_scripture(passage['text'], passage['name'], passage['ref'], urls)
                     field_title = f"{passage['name']} {passage['ref']}"
+                    print(passage['ref'])
                     if ':' not in passage['ref']:
                         #formatted_text_lines = formatted_text.split("\n")
                         #formatted_text = "\n".join(formatted_text_lines)
