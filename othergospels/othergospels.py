@@ -117,7 +117,7 @@ class OtherGospels(commands.Cog):
         async with self.session.get(url) as resp:
             if resp.status == 200:
                 data = await resp.json()
-                formatted_text = self.clean_and_format_scripture(data.get("text", ""), data.get("book", ""))
+                formatted_text = self.clean_and_format_scripture(data.get("text", ""), data.get("book", ""), data.get("ref", ""))
                 embed = discord.Embed(title=f"{data.get('name')} {data.get('ref')}", description=formatted_text)
                 await ctx.send(embed=embed)
             else:
