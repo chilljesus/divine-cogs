@@ -5,6 +5,8 @@ import re
 from redbot.core.utils.chat_formatting import pagify
 from redbot.core.utils.menus import SimpleMenu
 from typing import Optional
+from discord import app_commands
+from discord.ext import commands
 
 class OtherGospels(commands.Cog):
     def __init__(self, bot):
@@ -48,6 +50,13 @@ class OtherGospels(commands.Cog):
         """Get a random scripture"""
         await self.send_scripture(ctx, "https://othergospels.com/api/random", "Random Scripture")
 
+    @app_commands.choices(
+        exclude_options=[
+            app_commands.Choice(name="gnostic", value="gnostic"),
+            app_commands.Choice(name="orthodox", value="orthodox"),
+            app_commands.Choice(name="bible", value="bible")
+        ]
+    )
     @commands.hybrid_command(name="search")
     async def search_command(self, ctx, query: str, exclude_options: Optional[str] = None):
         """Search for scriptures and display passages per page in fields or embed descriptions based on ref format"""
@@ -70,8 +79,8 @@ class OtherGospels(commands.Cog):
                     formatted_text = self.clean_and_format_scripture(passage['text'], passage['name'], passage['ref'], urls)
                     field_title = f"{passage['name']} {passage['ref']}"
                     if ':' not in passage['ref']:
-                        formatted_text_lines = formatted_text.split("\n")
-                        formatted_text = "\n".join(formatted_text_lines[1:])
+                        #formatted_text_lines = formatted_text.split("\n")
+                        #formatted_text = "\n".join(formatted_text_lines)
                         for page in pagify(formatted_text, page_length=2500):
                             if current_embed is None:
                                 current_embed = discord.Embed(title=f"{passage['name']} {passage['ref']}")
@@ -95,7 +104,6 @@ class OtherGospels(commands.Cog):
                             char_count += len(page)
                 if current_embed and (current_embed.fields or current_embed.description):
                     embeds.append(current_embed)
-
 
                 if len(current_embed.fields) > 0 or current_embed.description:
                     embeds.append(current_embed)
