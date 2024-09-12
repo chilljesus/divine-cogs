@@ -6,7 +6,6 @@ from redbot.core.utils.chat_formatting import pagify
 from redbot.core.utils.menus import SimpleMenu
 from typing import Optional
 from discord import app_commands
-from discord.ext import commands
 
 class OtherGospels(commands.Cog):
     def __init__(self, bot):
